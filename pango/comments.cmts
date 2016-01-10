@@ -1,8 +1,25 @@
-=! ./src/widgets/rectangle.rs
-=! ./src/widgets/item.rs
-=! ./src/widgets/glyph_string.rs
-=! ./src/widgets/matrix.rs
 =! ./src/pango.rs
 =/ /*!
 =/ Bindings and wrappers for __PANGO__
 =/ */
+=/ 
+=! ./src/widgets/rectangle.rs
+=| trait Rectangle
+/// The PangoRectangle structure represents a rectangle. It is frequently used to represent the
+/// logical or ink extents of a single glyph or section of text. (See, for instance,
+/// pango_font_get_glyph_extents()).
+=! ./src/widgets/glyph_string.rs
+=| struct GlyphString
+/// The PangoGlyphString structure is used to store strings of glyphs with geometry and visual
+/// attribute information. The storage for the glyph information is owned by the structure which
+/// simplifies memory management.
+=! ./src/widgets/item.rs
+=| struct Item
+/// The PangoItem structure stores information about a segment of text.
+=! ./src/widgets/matrix.rs
+=| trait Matrix
+/// A structure specifying a transformation between user-space coordinates and device coordinates.
+/// The transformation is given by:
+/// 
+/// x_device = x_user * matrix->xx + y_user * matrix->xy + matrix->x0;
+/// y_device = x_user * matrix->yx + y_user * matrix->yy + matrix->y0;

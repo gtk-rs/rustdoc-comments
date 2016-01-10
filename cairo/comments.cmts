@@ -1,304 +1,169 @@
-=! ./cairo-sys-rs/src/enums.rs
-=| enum Status§variant Success
-    /// no error has occurred (Since 1.0)
-=| enum Status§variant NoMemory,
-    /// out of memory (Since 1.0)
-=| enum Status§variant InvalidRestore,
-    /// `Context::restore()` called without matching `Context::save()` (Since 1.0)
-=| enum Status§variant InvalidPopGroup,
-    /// no saved group to pop, i.e. `Context::pop_group()` without matching
-    /// `Context::push_group()` (Since 1.0)
-=| enum Status§variant NoCurrentPoint,
-    /// no current point defined (Since 1.0)
-=| enum Status§variant InvalidMatrix,
-    /// invalid matrix (not invertible) (Since 1.0)
-=| enum Status§variant InvalidStatus,
-    /// invalid value for an input `Status` (Since 1.0)
-=| enum Status§variant NullPointer,
-    /// NULL pointer (Since 1.0)
-=| enum Status§variant InvalidString,
-    /// input string not valid UTF-8 (Since 1.0)
-=| enum Status§variant InvalidPathData,
-    /// input path data not valid (Since 1.0)
-=| enum Status§variant ReadError,
-    /// error while reading from input stream (Since 1.0)
-=| enum Status§variant WriteError,
-    /// error while writing to output stream (Since 1.0)
-=| enum Status§variant SurfaceFinished,
-    /// target surface has been finished (Since 1.0)
-=| enum Status§variant SurfaceTypeMismatch,
-    /// the surface type is not appropriate for the operation (Since 1.0)
-=| enum Status§variant PatternTypeMismatch,
-    /// the pattern type is not appropriate for the operation (Since 1.0)
-=| enum Status§variant InvalidContent,
-    /// invalid value for an input `Content` (Since 1.0)
-=| enum Status§variant InvalidFormat,
-    /// invalid value for an input `Format` (Since 1.0)
-=| enum Status§variant InvalidVisual,
-    /// invalid value for an input Visual* (Since 1.0)
-=| enum Status§variant FileNotFound,
-    /// file not found (Since 1.0)
-=| enum Status§variant InvalidDash,
-    /// invalid value for a dash setting (Since 1.0)
-=| enum Status§variant InvalidDscComment,
-    /// invalid value for a DSC comment (Since 1.2)
-=| enum Status§variant InvalidIndex,
-    /// invalid index passed to getter (Since 1.4)
-=| enum Status§variant ClipNotRepresentable,
-    /// clip region not representable in desired format (Since 1.4)
-=| enum Status§variant TempFileError,
-    /// error creating or writing to a temporary file (Since 1.6)
-=| enum Status§variant InvalidStride,
-    /// invalid value for stride (Since 1.6)
-=| enum Status§variant FontTypeMismatch,
-    /// the font type is not appropriate for the operation (Since 1.8)
-=| enum Status§variant UserFontImmutable,
-    /// the user-font is immutable (Since 1.8)
-=| enum Status§variant UserFontError,
-    /// error occurred in a user-font callback function (Since 1.8)
-=| enum Status§variant NegativeCount,
-    /// negative number used where it is not allowed (Since 1.8)
-=| enum Status§variant InvalidClusters,
-    /// input clusters do not represent the accompanying text and glyph array (Since 1.8)
-=| enum Status§variant InvalidSlant,
-    /// invalid value for an input `FontSlant` (Since 1.8)
-=| enum Status§variant InvalidWeight,
-    /// invalid value for an input `FontWeight` (Since 1.8)
-=| enum Status§variant InvalidSize,
-    /// invalid value (typically too big) for the size of the input (surface, pattern,
-    /// etc.) (Since 1.10)
-=| enum Status§variant UserFontNotImplemented,
-    /// user-font method not implemented (Since 1.10)
-=| enum Status§variant DeviceTypeMismatch,
-    /// the device type is not appropriate for the operation (Since 1.10)
-=| enum Status§variant DeviceError,
-    /// an operation to the device caused an unspecified error (Since 1.10)
-=| enum Status§variant InvalidMeshConstruction,
-    /// a mesh pattern construction operation was used outside of a
-    /// `Context::mesh_pattern_begin_patch()`/`Context::mesh_pattern_end_patch()`
-    /// pair (Since 1.12)
-=| enum Status§variant DeviceFinished,
-    /// target device has been finished (Since 1.12)
-=| enum Status§variant LastStatus
-    /// this is a special value indicating the number of status values defined in this
-    /// enumeration. When using this value, note that the version of cairo at run-time
-    /// may have additional status values defined than the value of this symbol at
-    /// compile-time. (Since 1.10)
-=| enum Antialias§variant Default,
-    /// Use the default antialiasing for the subsystem and target device, since 1.0
-=| enum Antialias§variant None,
-    /// Use a bilevel alpha mask, since 1.0
-=| enum Antialias§variant Gray,
-    /// Perform single-color antialiasing (using shades of gray for black text on a white
-    /// background, for example), since 1.0
-=| enum Antialias§variant Subpixel,
-    /// Perform antialiasing by taking advantage of the order of subpixel elements on devices
-    /// such as LCD panels, since 1.0
-=| enum Antialias§variant Fast,
-    /// Hint that the backend should perform some antialiasing but prefer speed over quality,
-    /// since 1.12
-=| enum Antialias§variant Good,
-    /// The backend should balance quality against performance, since 1.12
-=| enum Antialias§variant Best
-    /// Hint that the backend should render at the highest quality, sacrificing speed if
-    /// necessary, since 1.12
-=| enum FillRule§variant Winding,
-    /// If the path crosses the ray from left-to-right, counts +1. If the path crosses the ray
-    /// from right to left, counts -1. (Left and right are determined from the perspective of
-    /// looking along the ray from the starting point.) If the total count is non-zero, the point
-    /// will be filled. (Since 1.0)
-=| enum FillRule§variant EvenOdd
-    /// Counts the total number of intersections, without regard to the orientation of the contour.
-    /// If the total number of intersections is odd, the point will be filled. (Since 1.0)
-=| enum LineCap§variant Butt,
-    /// start(stop) the line exactly at the start(end) point (Since 1.0)
-=| enum LineCap§variant Round,
-    /// use a round ending, the center of the circle is the end point (Since 1.0)
-=| enum LineCap§variant Square
-    /// use squared ending, the center of the square is the end point (Since 1.0)
-=| enum LineJoin§variant Miter,
-    /// use a sharp (angled) corner, see `Context::set_miter_limit()` (Since 1.0)
-=| enum LineJoin§variant Round,
-    /// use a rounded join, the center of the circle is the joint point (Since 1.0)
-=| enum LineJoin§variant nBevel
-    /// use a cut-off join, the join is cut off at half the line width from the
-    /// joint point (Since 1.0)
-=| enum Operator§variant Clear,
-    /// clear destination layer (bounded) (Since 1.0)
-=| enum Operator§variant Source,
-    /// replace destination layer (bounded) (Since 1.0)
-=| enum Operator§variant Over,
-    /// draw source layer on top of destination layer (bounded) (Since 1.0)
-=| enum Operator§variant In,
-    /// draw source where there was destination content (unbounded) (Since 1.0)
-=| enum Operator§variant Out,
-    /// draw source where there was no destination content (unbounded) (Since 1.0)
-=| enum Operator§variant Atop,
-    /// draw source on top of destination content and only there (Since 1.0)
-=| enum Operator§variant Dest,
-    /// ignore the source (Since 1.0)
-=| enum Operator§variant DestOver,
-    /// draw destination on top of source (Since 1.0)
-=| enum Operator§variant DestIn,
-    /// leave destination only where there was source content (unbounded) (Since 1.0)
-=| enum Operator§variant DestOut,
-    /// leave destination only where there was no source content (Since 1.0)
-=| enum Operator§variant DestAtop,
-    /// leave destination on top of source content and only there (unbounded) (Since 1.0)
-=| enum Operator§variant Xor,
-    /// source and destination are shown where there is only one of them (Since 1.0)
-=| enum Operator§variant Add,
-    /// source and destination layers are accumulated (Since 1.0)
-=| enum Operator§variant Saturate,
-    /// like over, but assuming source and dest are disjoint geometries (Since 1.0)
-=| enum Operator§variant Multiply,
-    /// source and destination layers are multiplied. This causes the result to be at
-    /// least as dark as the darker inputs. (Since 1.10)
-=| enum Operator§variant Screen,
-    /// source and destination are complemented and multiplied. This causes the result
-    /// to be at least as light as the lighter inputs. (Since 1.10)
-=| enum Operator§variant Overlay,
-    /// multiplies or screens, depending on the lightness of the destination color.
-    /// (Since 1.10)
-=| enum Operator§variant Darken,
-    /// replaces the destination with the source if it is darker, otherwise keeps the
-    /// source. (Since 1.10)
-=| enum Operator§variant Lighten,
-    /// replaces the destination with the source if it is lighter, otherwise keeps the
-    /// source. (Since 1.10)
-=| enum Operator§variant ColorDodge,
-    /// brightens the destination color to reflect the source color. (Since 1.10)
-=| enum Operator§variant ColorBurn,
-    /// darkens the destination color to reflect the source color. (Since 1.10)
-=| enum Operator§variant HardLight,
-    /// Multiplies or screens, dependent on source color. (Since 1.10)
-=| enum Operator§variant SoftLight,
-    /// Darkens or lightens, dependent on source color. (Since 1.10)
-=| enum Operator§variant Difference,
-    /// Takes the difference of the source and destination color. (Since 1.10)
-=| enum Operator§variant Exclusion,
-    /// Produces an effect similar to difference, but with lower contrast. (Since 1.10)
-=| enum Operator§variant HslHue,
-    /// Creates a color with the hue of the source and the saturation and luminosity of
-    /// the target. (Since 1.10)
-=| enum Operator§variant HslSaturation,
-    /// Creates a color with the saturation of the source and the hue and luminosity of
-    /// the target. Painting with this mode onto a gray area produces no change. (Since 1.10)
-=| enum Operator§variant HslColor,
-    /// Creates a color with the hue and saturation of the source and the luminosity of the
-    /// target. This preserves the gray levels of the target and is useful for coloring
-    /// monochrome images or tinting color images. (Since 1.10)
-=| enum Operator§variant HslLuminosity
-    /// Creates a color with the luminosity of the source and the hue and saturation of the
-    /// target. This produces an inverse effect to `HslColor`. (Since 1.10)
-=| enum PathDataType§variant MoveTo,
-    /// A move-to operation, since 1.0
-=| enum PathDataType§variant LineTo,
-    /// A line-to operation, since 1.0
-=| enum PathDataType§variant CurveTo,
-    /// A curve-to operation, since 1.0
-=| enum PathDataType§variant ClosePath
-    /// A close-path operation, since 1.0
-=| enum Content§variant Color
-    /// The surface will hold color content only. (Since 1.0)
-=| enum Content§variant Alpha
-    /// The surface will hold alpha content only. (Since 1.0)
-=| enum Content§variant ColorAlpha
-    /// The surface will hold color and alpha content. (Since 1.0)
-=| enum Extend§variant None,
-    /// pixels outside of the source pattern are fully transparent (Since 1.0)
-=| enum Extend§variant Repeat,
-    /// the pattern is tiled by repeating (Since 1.0)
-=| enum Extend§variant Reflect,
-    /// the pattern is tiled by reflecting at the edges (Since 1.0; but only implemented
-    /// for surface patterns since 1.6)
-=| enum Extend§variant Pad
-    /// pixels outside of the pattern copy the closest pixel from the source (Since 1.2;
-    /// but only implemented for surface patterns since 1.6)
-=| enum Filter§variant Fast,
-    /// A high-performance filter, with quality similar to `Nearest` (Since 1.0)
-=| enum Filter§variant Good,
-    /// A reasonable-performance filter, with quality similar to `Bilinear` (Since 1.0)
-=| enum Filter§variant Best,
-    /// The highest-quality available, performance may not be suitable for interactive
-    /// use. (Since 1.0)
-=| enum Filter§variant Nearest,
-    /// Nearest-neighbor filtering (Since 1.0)
-=| enum Filter§variant Bilinear,
-    /// Linear interpolation in two dimensions (Since 1.0)
-=| enum Filter§variant Gaussian
-    /// This filter value is currently unimplemented, and should not be used in current
-    /// code. (Since 1.0)
-=| enum PatternType§variant Solid,
-    /// The pattern is a solid (uniform) color. It may be opaque or translucent, since 1.2.
-=| enum PatternType§variant Surface,
-    /// The pattern is a based on a surface (an image), since 1.2.
-=| enum PatternType§variant LinearGradient,
-    /// The pattern is a linear gradient, since 1.2.
-=| enum PatternType§variant RadialGradient,
-    /// The pattern is a radial gradient, since 1.2.
-=| enum PatternType§variant Mesh,
-    /// The pattern is a mesh, since 1.12.
-=| enum PatternType§variant RasterSource
-    /// The pattern is a user pattern providing raster data, since 1.12.
-=| enum FontSlant§variant Normal,
-    /// Upright font style, since 1.0
-=| enum FontSlant§variant Italic,
-    /// Italic font style, since 1.0
-=| enum FontSlant§variant Oblique
-    /// Oblique font style, since 1.0
-=| enum FontWeight§variant Normal,
-    /// Normal font weight, since 1.0
-=| enum FontWeight§variant Bold
-    /// Bold font weight, since 1.0
-=| enum TextClusterFlags§variant Backward
-    /// The clusters in the cluster array map to glyphs in the glyph array from end
-    /// to start. (Since 1.8)
-=| enum FontType§variant FontTypeToy,
-    /// The font was created using cairo's toy font api (Since: 1.2)
-=| enum FontType§variant FontTypeFt,
-    /// The font is of type FreeType (Since: 1.2)
-=| enum FontType§variant FontTypeWin32,
-    /// The font is of type Win32 (Since: 1.2)
-=| enum FontType§variant FontTypeQuartz,
-    /// The font is of type Quartz (Since: 1.6, in 1.2 and 1.4 it was named
-    /// CAIRO_FONT_TYPE_ATSUI)
-=| enum FontType§variant FontTypeUser
-    /// The font was create using cairo's user font api (Since: 1.8)
-=| enum SubpixelOrder§variant Default,
-    /// Use the default subpixel order for for the target device, since 1.0
-=| enum SubpixelOrder§variant Rgb,
-    /// Subpixel elements are arranged horizontally with red at the left, since 1.0
-=| enum SubpixelOrder§variant Bgr,
-    /// Subpixel elements are arranged horizontally with blue at the left, since 1.0
-=| enum SubpixelOrder§variant Vrgb,
-    /// Subpixel elements are arranged vertically with red at the top, since 1.0
-=| enum SubpixelOrder§variant Vbgr
-    /// Subpixel elements are arranged vertically with blue at the top, since 1.0
-=| enum HintStyle§variant Default,
-    /// Use the default hint style for font backend and target device, since 1.0
-=| enum HintStyle§variant None,
-    /// Do not hint outlines, since 1.0
-=| enum HintStyle§variant Slight,
-    /// Hint outlines slightly to improve contrast while retaining good fidelity to the
-    /// original shapes, since 1.0
-=| enum HintStyle§variant Medium,
-    /// Hint outlines with medium strength giving a compromise between fidelity to the
-    /// original shapes and contrast, since 1.0
-=| enum HintStyle§variant Full
-    /// Hint outlines to maximize contrast, since 1.0
-=| enum HintMetrics§variant Default,
-    /// Hint metrics in the default manner for the font backend and target device, since 1.0
-=| enum HintMetrics§variant Off,
-    /// Do not hint font metrics, since 1.0
-=| enum HintMetrics§variant On
-    /// Hint font metrics, since 1.0
-=! ./src/lib.rs
-=/ /*!
-=/     Bindings and wrappers for __Cairo__
-=/ */
+=! ./src/fonts.rs
+=/ //! FontOptions: How a font should be rendered.
+=/ //!
+=/ //! FontFace: Base class for font faces.
+=/ //!
+=/ //! ScaledFont: Font face at particular size and options.
+=/ 
+=| impl FontOptions
+/// The font options specify how fonts should be rendered. Most of the time the font options
+/// implied by a surface are just right and do not need any changes, but for pixel-based targets
+/// tweaking font options may result in superior output on a particular display.
+=| impl FontOptions§fn new
+    /// Allocates a new font options object with all options initialized to default values.
+=| impl FontOptions§fn ensure_status
+    /// Checks whether an error has previously occurred for this font options object.
+=| impl FontOptions§fn merge
+    /// Merges non-default options from other into self, replacing existing values.
+    /// This operation can be thought of as somewhat similar to compositing other onto
+    /// self with the operation of Operator::Over.
+=| impl FontOptions§fn hash
+    /// Compute a hash for the font options object; this value will be useful when
+    /// storing an object containing a FontOptions in a hash table.
+=| impl FontOptions§fn set_antialias
+    /// Sets the antialiasing mode for the font options object. This specifies the type
+    /// of antialiasing to do when rendering text.
+=| impl FontOptions§fn get_antialias
+    /// Gets the antialiasing mode for the font options object.
+=| impl FontOptions§fn set_subpixel_order
+    /// Sets the subpixel order for the font options object. The subpixel order specifies
+    /// the order of color elements within each pixel on the display device when rendering
+    /// with an antialiasing mode of Antialias::Subpixel. See the documentation for
+    /// SubpixelOrder for full details.
+=| impl FontOptions§fn get_subpixel_order
+    /// Gets the subpixel order for the font options object. See the documentation for
+    /// SubpixelOrder for full details.
+=| impl FontOptions§fn set_hint_style
+    /// Sets the hint style for font outlines for the font options object. This controls
+    /// whether to fit font outlines to the pixel grid, and if so, whether to optimize
+    /// for fidelity or contrast. See the documentation for HintStyle for full
+    /// details.
+=| impl FontOptions§fn get_hint_style
+    /// Gets the hint style for font outlines for the font options object. See the
+    /// documentation for HintStyle for full details.
+=| impl FontOptions§fn set_hint_metrics
+    /// Sets the metrics hinting mode for the font options object. This controls
+    /// whether metrics are quantized to integer values in device units. See the
+    /// documentation for HintMetrics for full details.
+=| impl FontOptions§fn get_hint_metrics
+    /// Gets the metrics hinting mode for the font options object. See the documentation
+    /// for HintMetrics for full details.
+=| impl PartialEq for FontOptions§fn eq
+    /// Compares two font options objects for equality.
+=| struct FontFace
+/// FontFace represents a particular font at a particular weight, slant, and other
+/// characteristic but no size, transformation, or size.
+///
+/// Font faces are created using font-backend-specific constructors, typically of the
+/// form Context::backend_font_face_create(), or implicitly using the toy text API by
+/// way of Context::select_font_face(). The resulting face can be accessed using
+/// Context::get_font_face().
+=| impl FontFace§fn toy_create
+    /// Creates a font face from a triplet of family, slant, and weight. These font faces
+    /// are used in implementation of the the cairo "toy" font API.
+    ///
+    /// If family is the zero-length string "", the platform-specific default family is assumed.
+    /// The default family then can be queried using FontFace::toy_get_family().
+    ///
+    /// The Context::select_font_face() function uses this to create font faces. See that
+    /// function for limitations and other details of toy font faces.
+=| impl FontFace§fn toy_get_family
+    /// Gets the familly name of a toy font.
+=| impl FontFace§fn toy_get_slant
+    /// Gets the slant a toy font.
+=| impl FontFace§fn toy_get_weight
+    /// Gets the weight a toy font.
+=| impl FontFace§fn ensure_status
+    /// Checks whether an error has previously occurred for this font face.
+=| impl FontFace§fn get_type
+    /// This function returns the type of the backend used to create a font face. See
+    /// FontType for available types.
+=| impl FontFace§fn get_reference_count
+    /// Returns the current reference count of self.
+=| impl FontFace§fn reference
+    /// Increases the reference count on self by one. This prevents self from being
+    /// destroyed until a matching call to FontFace drop trait is made.
+    ///
+    /// The number of references to a FontFace can be get using
+    /// FontFace::get_reference_count().
+=| struct ScaledFont
+/// ScaledFont represents a realization of a font face at a particular size and
+/// transformation and a certain set of font options.
+=| impl ScaledFont§fn new
+    /// Creates a ScaledFont object from a font face and matrices that describe the
+    /// size of the font and the environment in which it will be used.
+=| impl ScaledFont§fn ensure_status
+    /// Checks whether an error has previously occurred for this ScaledFont.
+=| impl ScaledFont§fn get_type
+    /// This function returns the type of the backend used to create a scaled font.
+    /// See FontType for available types. However, this function never returns
+    /// FontType::Toy.
+=| impl ScaledFont§fn get_reference_count
+    /// Returns the current reference count of self.
+=| impl ScaledFont§fn reference
+    /// Increases the reference count on self by one. This prevents self from being
+    /// destroyed until a matching call to ScaledFont drop trait is made.
+    ///
+    /// The number of references to a cairo_scaled_font_t can be get using
+    /// ScaledFont::get_reference_count().
+=! ./src/matrices.rs
+=/ //! Generic matrix operations
+=/ 
+=| impl MatrixTrait for Matrix§fn null
+    /// Creates a new Matrix filled with zeroes
+=| impl MatrixTrait for Matrix§fn new
+    /// Creates a new matrix and fills it with given values
+=| impl MatrixTrait for Matrix§fn multiply
+    /// Multiplies the affine transformations in a and b together and stores the result in
+    /// the returned Matrix. The effect of the resulting transformation is to first apply
+    /// the transformation in left to the coordinates and then apply the transformation in
+    /// right to the coordinates.
+    /// 
+    /// It is allowable for the returned Matrix to be identical to either a or  .
+=| impl MatrixTrait for Matrix§fn identity
+    /// Returns a new matrix after modifying it to be an identity transformation.
+=| impl MatrixTrait for Matrix§fn init
+    /// Sets self to be the affine transformation given by xx , yx , xy , yy , x0 , y0. The
+    /// transformation is given by:
+    ///
+    /// ```ignore
+    /// x_new = xx * x + xy * y + x0;
+    /// y_new = yx * x + yy * y + y0;
+    /// ```
+=| impl MatrixTrait for Matrix§fn translate
+    /// Applies a translation by tx, ty to the transformation in self. The effect of the new
+    /// transformation is to first translate the coordinates by tx and ty, then apply the
+    /// original transformation to the coordinates.
+=| impl MatrixTrait for Matrix§fn scale
+    /// Applies scaling by sx, sy to the transformation in self. The effect of the new
+    /// transformation is to first scale the coordinates by sx and sy, then apply the original
+    /// transformation to the coordinates.
+=| impl MatrixTrait for Matrix§fn rotate
+    /// Applies rotation by radians to the transformation in self. The effect of the new
+    /// transformation is to first rotate the coordinates by radians , then apply the original
+    /// transformation to the coordinates.
+=| impl MatrixTrait for Matrix§fn invert
+    /// Changes self to be the inverse of its original value. Not all transformation matrices
+    /// have inverses; if the matrix collapses points together (it is degenerate), then it has
+    /// no inverse and this function will fail.
+=| impl MatrixTrait for Matrix§fn transform_distance
+    /// Transforms the distance vector (dx, dy) by self. This is similar to
+    /// Matrix::transform_point() except that the translation components of the transformation
+    /// are ignored. The calculation of the returned vector is as follows:
+    ///
+    /// ```ignore
+    /// dx2 = dx1 * a + dy1 * c;
+    /// dy2 = dx1 * b + dy1 * d;
+    /// ```
+    ///
+    /// Affine transformations are position invariant, so the same vector always transforms to
+    /// the same vector. If (x1 ,y1 ) transforms to (x2 ,y2 ) then (x1 +dx1 ,y1 +dy1 ) will
+    /// transform to (x1 + dx2, y1 + dy2) for all values of x1 and x2 .
+=| impl MatrixTrait for Matrix§fn transform_point
+    /// Transforms the point (x , y) by self.
 =! ./src/patterns.rs
 =/ //! Sources for drawing
+=/ 
 =| trait Pattern§fn status
     /// Checks whether an error has previously occurred for this pattern.
 =| trait Pattern§fn get_reference_count
@@ -636,6 +501,7 @@
     /// patch_num can range from 0 to n-1 where n is the number returned by Mesh::get_patch_count().
 =! ./src/context.rs
 =/ //! The cairo drawing context
+=/ 
 =| impl Context§fn new<T
     /// Creates a new Context with all graphics state parameters set to default values
     /// and with target as a target surface. The target surface should be constructed
@@ -1364,155 +1230,447 @@
     /// 
     /// It is an error to call this function with no current point. Doing so will
     /// cause self to shutdown with a status of Status::NoCurrenPoint.
+=! ./src/lib.rs
+=/ /*!
+=/     Bindings and wrappers for __Cairo__
+=/ */
+=/ 
 =! ./src/paths.rs
 =/ //! Creating paths and manipulating path data
-=! ./src/matrices.rs
-=/ //! Generic matrix operations
-=| impl MatrixTrait for Matrix§fn null
-    /// Creates a new Matrix filled with zeroes
-=| impl MatrixTrait for Matrix§fn new
-    /// Creates a new matrix and fills it with given values
-=| impl MatrixTrait for Matrix§fn multiply
-    /// Multiplies the affine transformations in a and b together and stores the result in
-    /// the returned Matrix. The effect of the resulting transformation is to first apply
-    /// the transformation in left to the coordinates and then apply the transformation in
-    /// right to the coordinates.
-    /// 
-    /// It is allowable for the returned Matrix to be identical to either a or  .
-=| impl MatrixTrait for Matrix§fn identity
-    /// Returns a new matrix after modifying it to be an identity transformation.
-=| impl MatrixTrait for Matrix§fn init
-    /// Sets self to be the affine transformation given by xx , yx , xy , yy , x0 , y0. The
-    /// transformation is given by:
-    ///
-    /// ```ignore
-    /// x_new = xx * x + xy * y + x0;
-    /// y_new = yx * x + yy * y + y0;
-    /// ```
-=| impl MatrixTrait for Matrix§fn translate
-    /// Applies a translation by tx, ty to the transformation in self. The effect of the new
-    /// transformation is to first translate the coordinates by tx and ty, then apply the
-    /// original transformation to the coordinates.
-=| impl MatrixTrait for Matrix§fn scale
-    /// Applies scaling by sx, sy to the transformation in self. The effect of the new
-    /// transformation is to first scale the coordinates by sx and sy, then apply the original
-    /// transformation to the coordinates.
-=| impl MatrixTrait for Matrix§fn rotate
-    /// Applies rotation by radians to the transformation in self. The effect of the new
-    /// transformation is to first rotate the coordinates by radians , then apply the original
-    /// transformation to the coordinates.
-=| impl MatrixTrait for Matrix§fn invert
-    /// Changes self to be the inverse of its original value. Not all transformation matrices
-    /// have inverses; if the matrix collapses points together (it is degenerate), then it has
-    /// no inverse and this function will fail.
-=| impl MatrixTrait for Matrix§fn transform_distance
-    /// Transforms the distance vector (dx, dy) by self. This is similar to
-    /// Matrix::transform_point() except that the translation components of the transformation
-    /// are ignored. The calculation of the returned vector is as follows:
-    ///
-    /// ```ignore
-    /// dx2 = dx1 * a + dy1 * c;
-    /// dy2 = dx1 * b + dy1 * d;
-    /// ```
-    ///
-    /// Affine transformations are position invariant, so the same vector always transforms to
-    /// the same vector. If (x1 ,y1 ) transforms to (x2 ,y2 ) then (x1 +dx1 ,y1 +dy1 ) will
-    /// transform to (x1 + dx2, y1 + dy2) for all values of x1 and x2 .
-=| impl MatrixTrait for Matrix§fn transform_point
-    /// Transforms the point (x , y) by self.
-=! ./src/fonts.rs
-=/ //! FontOptions: How a font should be rendered.
-=/ //!
-=/ //! FontFace: Base class for font faces.
-=/ //!
-=/ //! ScaledFont: Font face at particular size and options.
-=| impl FontOptions
-/// The font options specify how fonts should be rendered. Most of the time the font options
-/// implied by a surface are just right and do not need any changes, but for pixel-based targets
-/// tweaking font options may result in superior output on a particular display.
-=| impl FontOptions§fn new
-    /// Allocates a new font options object with all options initialized to default values.
-=| impl FontOptions§fn ensure_status
-    /// Checks whether an error has previously occurred for this font options object.
-=| impl FontOptions§fn merge
-    /// Merges non-default options from other into self, replacing existing values.
-    /// This operation can be thought of as somewhat similar to compositing other onto
-    /// self with the operation of Operator::Over.
-=| impl FontOptions§fn hash
-    /// Compute a hash for the font options object; this value will be useful when
-    /// storing an object containing a FontOptions in a hash table.
-=| impl FontOptions§fn set_antialias
-    /// Sets the antialiasing mode for the font options object. This specifies the type
-    /// of antialiasing to do when rendering text.
-=| impl FontOptions§fn get_antialias
-    /// Gets the antialiasing mode for the font options object.
-=| impl FontOptions§fn set_subpixel_order
-    /// Sets the subpixel order for the font options object. The subpixel order specifies
-    /// the order of color elements within each pixel on the display device when rendering
-    /// with an antialiasing mode of Antialias::Subpixel. See the documentation for
-    /// SubpixelOrder for full details.
-=| impl FontOptions§fn get_subpixel_order
-    /// Gets the subpixel order for the font options object. See the documentation for
-    /// SubpixelOrder for full details.
-=| impl FontOptions§fn set_hint_style
-    /// Sets the hint style for font outlines for the font options object. This controls
-    /// whether to fit font outlines to the pixel grid, and if so, whether to optimize
-    /// for fidelity or contrast. See the documentation for HintStyle for full
-    /// details.
-=| impl FontOptions§fn get_hint_style
-    /// Gets the hint style for font outlines for the font options object. See the
-    /// documentation for HintStyle for full details.
-=| impl FontOptions§fn set_hint_metrics
-    /// Sets the metrics hinting mode for the font options object. This controls
-    /// whether metrics are quantized to integer values in device units. See the
-    /// documentation for HintMetrics for full details.
-=| impl FontOptions§fn get_hint_metrics
-    /// Gets the metrics hinting mode for the font options object. See the documentation
-    /// for HintMetrics for full details.
-=| impl PartialEq for FontOptions§fn eq
-    /// Compares two font options objects for equality.
-=| impl FontFace§fn toy_create
-    /// Creates a font face from a triplet of family, slant, and weight. These font faces
-    /// are used in implementation of the the cairo "toy" font API.
-    ///
-    /// If family is the zero-length string "", the platform-specific default family is assumed.
-    /// The default family then can be queried using FontFace::toy_get_family().
-    ///
-    /// The Context::select_font_face() function uses this to create font faces. See that
-    /// function for limitations and other details of toy font faces.
-=| impl FontFace§fn toy_get_family
-    /// Gets the familly name of a toy font.
-=| impl FontFace§fn toy_get_slant
-    /// Gets the slant a toy font.
-=| impl FontFace§fn toy_get_weight
-    /// Gets the weight a toy font.
-=| impl FontFace§fn ensure_status
-    /// Checks whether an error has previously occurred for this font face.
-=| impl FontFace§fn get_type
-    /// This function returns the type of the backend used to create a font face. See
-    /// FontType for available types.
-=| impl FontFace§fn get_reference_count
-    /// Returns the current reference count of self.
-=| impl FontFace§fn reference
-    /// Increases the reference count on self by one. This prevents self from being
-    /// destroyed until a matching call to FontFace drop trait is made.
-    ///
-    /// The number of references to a FontFace can be get using
-    /// FontFace::get_reference_count().
-=| impl ScaledFont§fn new
-    /// Creates a ScaledFont object from a font face and matrices that describe the
-    /// size of the font and the environment in which it will be used.
-=| impl ScaledFont§fn ensure_status
-    /// Checks whether an error has previously occurred for this ScaledFont.
-=| impl ScaledFont§fn get_type
-    /// This function returns the type of the backend used to create a scaled font.
-    /// See FontType for available types. However, this function never returns
-    /// FontType::Toy.
-=| impl ScaledFont§fn get_reference_count
-    /// Returns the current reference count of self.
-=| impl ScaledFont§fn reference
-    /// Increases the reference count on self by one. This prevents self from being
-    /// destroyed until a matching call to ScaledFont drop trait is made.
-    ///
-    /// The number of references to a cairo_scaled_font_t can be get using
-    /// ScaledFont::get_reference_count().
+=/ 
+=| struct Path
+/// Paths are the most basic drawing tools and are primarily used to implicitly generate simple masks.
+=! ./cairo-sys-rs/src/enums.rs
+=| enum Status
+/// Status is used to indicate errors that can occur when using Cairo. In some cases it is
+/// returned directly by functions, but when using `Context`, the last error, if any, is
+/// stored in the context and can be retrieved with `Context::status()`.
+///
+/// New entries may be added in future versions. Use `Context::status_to_string()` to get a
+/// human-readable representation of an error message.
+=| enum Status§variant Success
+    /// no error has occurred (Since 1.0)
+=| enum Status§variant NoMemory,
+    /// out of memory (Since 1.0)
+=| enum Status§variant InvalidRestore,
+    /// `Context::restore()` called without matching `Context::save()` (Since 1.0)
+=| enum Status§variant InvalidPopGroup,
+    /// no saved group to pop, i.e. `Context::pop_group()` without matching
+    /// `Context::push_group()` (Since 1.0)
+=| enum Status§variant NoCurrentPoint,
+    /// no current point defined (Since 1.0)
+=| enum Status§variant InvalidMatrix,
+    /// invalid matrix (not invertible) (Since 1.0)
+=| enum Status§variant InvalidStatus,
+    /// invalid value for an input `Status` (Since 1.0)
+=| enum Status§variant NullPointer,
+    /// NULL pointer (Since 1.0)
+=| enum Status§variant InvalidString,
+    /// input string not valid UTF-8 (Since 1.0)
+=| enum Status§variant InvalidPathData,
+    /// input path data not valid (Since 1.0)
+=| enum Status§variant ReadError,
+    /// error while reading from input stream (Since 1.0)
+=| enum Status§variant WriteError,
+    /// error while writing to output stream (Since 1.0)
+=| enum Status§variant SurfaceFinished,
+    /// target surface has been finished (Since 1.0)
+=| enum Status§variant SurfaceTypeMismatch,
+    /// the surface type is not appropriate for the operation (Since 1.0)
+=| enum Status§variant PatternTypeMismatch,
+    /// the pattern type is not appropriate for the operation (Since 1.0)
+=| enum Status§variant InvalidContent,
+    /// invalid value for an input `Content` (Since 1.0)
+=| enum Status§variant InvalidFormat,
+    /// invalid value for an input `Format` (Since 1.0)
+=| enum Status§variant InvalidVisual,
+    /// invalid value for an input Visual* (Since 1.0)
+=| enum Status§variant FileNotFound,
+    /// file not found (Since 1.0)
+=| enum Status§variant InvalidDash,
+    /// invalid value for a dash setting (Since 1.0)
+=| enum Status§variant InvalidDscComment,
+    /// invalid value for a DSC comment (Since 1.2)
+=| enum Status§variant InvalidIndex,
+    /// invalid index passed to getter (Since 1.4)
+=| enum Status§variant ClipNotRepresentable,
+    /// clip region not representable in desired format (Since 1.4)
+=| enum Status§variant TempFileError,
+    /// error creating or writing to a temporary file (Since 1.6)
+=| enum Status§variant InvalidStride,
+    /// invalid value for stride (Since 1.6)
+=| enum Status§variant FontTypeMismatch,
+    /// the font type is not appropriate for the operation (Since 1.8)
+=| enum Status§variant UserFontImmutable,
+    /// the user-font is immutable (Since 1.8)
+=| enum Status§variant UserFontError,
+    /// error occurred in a user-font callback function (Since 1.8)
+=| enum Status§variant NegativeCount,
+    /// negative number used where it is not allowed (Since 1.8)
+=| enum Status§variant InvalidClusters,
+    /// input clusters do not represent the accompanying text and glyph array (Since 1.8)
+=| enum Status§variant InvalidSlant,
+    /// invalid value for an input `FontSlant` (Since 1.8)
+=| enum Status§variant InvalidWeight,
+    /// invalid value for an input `FontWeight` (Since 1.8)
+=| enum Status§variant InvalidSize,
+    /// invalid value (typically too big) for the size of the input (surface, pattern,
+    /// etc.) (Since 1.10)
+=| enum Status§variant UserFontNotImplemented,
+    /// user-font method not implemented (Since 1.10)
+=| enum Status§variant DeviceTypeMismatch,
+    /// the device type is not appropriate for the operation (Since 1.10)
+=| enum Status§variant DeviceError,
+    /// an operation to the device caused an unspecified error (Since 1.10)
+=| enum Status§variant InvalidMeshConstruction,
+    /// a mesh pattern construction operation was used outside of a
+    /// `Context::mesh_pattern_begin_patch()`/`Context::mesh_pattern_end_patch()`
+    /// pair (Since 1.12)
+=| enum Status§variant DeviceFinished,
+    /// target device has been finished (Since 1.12)
+=| enum Status§variant LastStatus
+    /// this is a special value indicating the number of status values defined in this
+    /// enumeration. When using this value, note that the version of cairo at run-time
+    /// may have additional status values defined than the value of this symbol at
+    /// compile-time. (Since 1.10)
+=| enum Antialias
+/// Specifies the type of antialiasing to do when rendering text or shapes.
+///
+/// As it is not necessarily clear from the above what advantages a particular antialias method
+/// provides, since 1.12, there is also a set of hints:
+/// `Fast`: Allow the backend to degrade raster quality for speed.
+/// `Good`: A balance between speed and quality.
+/// `Best`: A high-fidelity, but potentially slow, raster mode.
+///
+/// These make no guarantee on how the backend will perform its rasterisation (if it even
+/// rasterises!), nor that they have any differing effect other than to enable some form of
+/// antialiasing. In the case of glyph rendering, `Fast` and `Good` will be mapped to `Gray`, with
+/// `Best` being equivalent to `Subpixel`.
+///
+/// The interpretation of `Default` is left entirely up to the backend, typically this will be
+/// similar to `Good`.
+=| enum Antialias§variant Default,
+    /// Use the default antialiasing for the subsystem and target device, since 1.0
+=| enum Antialias§variant None,
+    /// Use a bilevel alpha mask, since 1.0
+=| enum Antialias§variant Gray,
+    /// Perform single-color antialiasing (using shades of gray for black text on a white
+    /// background, for example), since 1.0
+=| enum Antialias§variant Subpixel,
+    /// Perform antialiasing by taking advantage of the order of subpixel elements on devices
+    /// such as LCD panels, since 1.0
+=| enum Antialias§variant Fast,
+    /// Hint that the backend should perform some antialiasing but prefer speed over quality,
+    /// since 1.12
+=| enum Antialias§variant Good,
+    /// The backend should balance quality against performance, since 1.12
+=| enum Antialias§variant Best
+    /// Hint that the backend should render at the highest quality, sacrificing speed if
+    /// necessary, since 1.12
+=| enum FillRule
+/// `FillRule` is used to select how paths are filled. For both fill rules, whether or not
+/// a point is included in the fill is determined by taking a ray from that point to infinity
+/// and looking at intersections with the path. The ray can be in any direction, as long as
+/// it doesn't pass through the end point of a segment or have a tricky intersection such as
+/// intersecting tangent to the path. (Note that filling is not actually implemented in this
+/// way. This is just a description of the rule that is applied.)
+///
+/// The default fill rule is `Winding`.
+///
+/// New entries may be added in future versions.
+=| enum FillRule§variant Winding,
+    /// If the path crosses the ray from left-to-right, counts +1. If the path crosses the ray
+    /// from right to left, counts -1. (Left and right are determined from the perspective of
+    /// looking along the ray from the starting point.) If the total count is non-zero, the point
+    /// will be filled. (Since 1.0)
+=| enum FillRule§variant EvenOdd
+    /// Counts the total number of intersections, without regard to the orientation of the contour.
+    /// If the total number of intersections is odd, the point will be filled. (Since 1.0)
+=| enum LineCap
+/// Specifies how to render the endpoints of the path when stroking.
+///
+/// The default line cap style is `Butt`.
+=| enum LineCap§variant Butt,
+    /// start(stop) the line exactly at the start(end) point (Since 1.0)
+=| enum LineCap§variant Round,
+    /// use a round ending, the center of the circle is the end point (Since 1.0)
+=| enum LineCap§variant Square
+    /// use squared ending, the center of the square is the end point (Since 1.0)
+=| enum LineJoin
+/// Specifies how to render the junction of two lines when stroking.
+///
+/// The default line join style is `Miter`.
+=| enum LineJoin§variant Miter,
+    /// use a sharp (angled) corner, see `Context::set_miter_limit()` (Since 1.0)
+=| enum LineJoin§variant Round,
+    /// use a rounded join, the center of the circle is the joint point (Since 1.0)
+=| enum LineJoin§variant nBevel
+    /// use a cut-off join, the join is cut off at half the line width from the
+    /// joint point (Since 1.0)
+=| enum Operator
+/// `Operator` is used to set the compositing operator for all cairo drawing operations.
+///
+/// The default operator is `Over`.
+///
+/// The operators marked as unbounded modify their destination even outside of the mask layer
+/// (that is, their effect is not bound by the mask layer). However, their effect can still be
+/// limited by way of clipping.
+///
+/// To keep things simple, the operator descriptions here document the behavior for when both
+/// source and destination are either fully transparent or fully opaque. The actual implementation
+/// works for translucent layers too. For a more detailed explanation of the effects of each
+/// operator, including the mathematical definitions, see http://cairographics.org/operators/.
+=| enum Operator§variant Clear,
+    /// clear destination layer (bounded) (Since 1.0)
+=| enum Operator§variant Source,
+    /// replace destination layer (bounded) (Since 1.0)
+=| enum Operator§variant Over,
+    /// draw source layer on top of destination layer (bounded) (Since 1.0)
+=| enum Operator§variant In,
+    /// draw source where there was destination content (unbounded) (Since 1.0)
+=| enum Operator§variant Out,
+    /// draw source where there was no destination content (unbounded) (Since 1.0)
+=| enum Operator§variant Atop,
+    /// draw source on top of destination content and only there (Since 1.0)
+=| enum Operator§variant Dest,
+    /// ignore the source (Since 1.0)
+=| enum Operator§variant DestOver,
+    /// draw destination on top of source (Since 1.0)
+=| enum Operator§variant DestIn,
+    /// leave destination only where there was source content (unbounded) (Since 1.0)
+=| enum Operator§variant DestOut,
+    /// leave destination only where there was no source content (Since 1.0)
+=| enum Operator§variant DestAtop,
+    /// leave destination on top of source content and only there (unbounded) (Since 1.0)
+=| enum Operator§variant Xor,
+    /// source and destination are shown where there is only one of them (Since 1.0)
+=| enum Operator§variant Add,
+    /// source and destination layers are accumulated (Since 1.0)
+=| enum Operator§variant Saturate,
+    /// like over, but assuming source and dest are disjoint geometries (Since 1.0)
+=| enum Operator§variant Multiply,
+    /// source and destination layers are multiplied. This causes the result to be at
+    /// least as dark as the darker inputs. (Since 1.10)
+=| enum Operator§variant Screen,
+    /// source and destination are complemented and multiplied. This causes the result
+    /// to be at least as light as the lighter inputs. (Since 1.10)
+=| enum Operator§variant Overlay,
+    /// multiplies or screens, depending on the lightness of the destination color.
+    /// (Since 1.10)
+=| enum Operator§variant Darken,
+    /// replaces the destination with the source if it is darker, otherwise keeps the
+    /// source. (Since 1.10)
+=| enum Operator§variant Lighten,
+    /// replaces the destination with the source if it is lighter, otherwise keeps the
+    /// source. (Since 1.10)
+=| enum Operator§variant ColorDodge,
+    /// brightens the destination color to reflect the source color. (Since 1.10)
+=| enum Operator§variant ColorBurn,
+    /// darkens the destination color to reflect the source color. (Since 1.10)
+=| enum Operator§variant HardLight,
+    /// Multiplies or screens, dependent on source color. (Since 1.10)
+=| enum Operator§variant SoftLight,
+    /// Darkens or lightens, dependent on source color. (Since 1.10)
+=| enum Operator§variant Difference,
+    /// Takes the difference of the source and destination color. (Since 1.10)
+=| enum Operator§variant Exclusion,
+    /// Produces an effect similar to difference, but with lower contrast. (Since 1.10)
+=| enum Operator§variant HslHue,
+    /// Creates a color with the hue of the source and the saturation and luminosity of
+    /// the target. (Since 1.10)
+=| enum Operator§variant HslSaturation,
+    /// Creates a color with the saturation of the source and the hue and luminosity of
+    /// the target. Painting with this mode onto a gray area produces no change. (Since 1.10)
+=| enum Operator§variant HslColor,
+    /// Creates a color with the hue and saturation of the source and the luminosity of the
+    /// target. This preserves the gray levels of the target and is useful for coloring
+    /// monochrome images or tinting color images. (Since 1.10)
+=| enum Operator§variant HslLuminosity
+    /// Creates a color with the luminosity of the source and the hue and saturation of the
+    /// target. This produces an inverse effect to `HslColor`. (Since 1.10)
+=| enum PathDataType
+/// `PathData` is used to describe the type of one portion of a path when represented as a `Path`.
+/// See `PathData` for details.
+=| enum PathDataType§variant MoveTo,
+    /// A move-to operation, since 1.0
+=| enum PathDataType§variant LineTo,
+    /// A line-to operation, since 1.0
+=| enum PathDataType§variant CurveTo,
+    /// A curve-to operation, since 1.0
+=| enum PathDataType§variant ClosePath
+    /// A close-path operation, since 1.0
+=| enum Content
+/// `Content` is used to describe the content that a surface will contain, whether color
+/// information, alpha information (translucence vs. opacity), or both.
+///
+/// Note: The large values here are designed to keep `Content` values distinct from `Format`
+/// values so that the implementation can detect the error if users confuse the two types.
+=| enum Content§variant Color
+    /// The surface will hold color content only. (Since 1.0)
+=| enum Content§variant Alpha
+    /// The surface will hold alpha content only. (Since 1.0)
+=| enum Content§variant ColorAlpha
+    /// The surface will hold color and alpha content. (Since 1.0)
+=| enum Extend
+/// `Extend` is used to describe how pattern color/alpha will be determined for areas
+/// "outside" the pattern's natural area, (for example, outside the surface bounds or
+/// outside the gradient geometry).
+///
+/// Mesh patterns are not affected by the extend mode.
+///
+/// The default extend mode is `None` for surface patterns and `Pad` for gradient
+/// patterns.
+///
+/// New entries may be added in future versions.
+=| enum Extend§variant None,
+    /// pixels outside of the source pattern are fully transparent (Since 1.0)
+=| enum Extend§variant Repeat,
+    /// the pattern is tiled by repeating (Since 1.0)
+=| enum Extend§variant Reflect,
+    /// the pattern is tiled by reflecting at the edges (Since 1.0; but only implemented
+    /// for surface patterns since 1.6)
+=| enum Extend§variant Pad
+    /// pixels outside of the pattern copy the closest pixel from the source (Since 1.2;
+    /// but only implemented for surface patterns since 1.6)
+=| enum Filter
+/// `Filter` is used to indicate what filtering should be applied when reading pixel values
+/// from patterns. See `Pattern::set_filter()` for indicating the desired filter to be used
+/// with a particular pattern.
+=| enum Filter§variant Fast,
+    /// A high-performance filter, with quality similar to `Nearest` (Since 1.0)
+=| enum Filter§variant Good,
+    /// A reasonable-performance filter, with quality similar to `Bilinear` (Since 1.0)
+=| enum Filter§variant Best,
+    /// The highest-quality available, performance may not be suitable for interactive
+    /// use. (Since 1.0)
+=| enum Filter§variant Nearest,
+    /// Nearest-neighbor filtering (Since 1.0)
+=| enum Filter§variant Bilinear,
+    /// Linear interpolation in two dimensions (Since 1.0)
+=| enum Filter§variant Gaussian
+    /// This filter value is currently unimplemented, and should not be used in current
+    /// code. (Since 1.0)
+=| enum PatternType
+/// `PatternType` is used to describe the type of a given pattern.
+///
+/// The type of a pattern is determined by the function used to create it. The
+/// `Pattern::create_rgb()` and `Pattern::create_rgba()` functions create `Solid` patterns.
+/// The remaining cairo_pattern_create functions map to pattern types in obvious ways.
+///
+/// The pattern type can be queried with `Pattern::get_type()`.
+///
+/// Most `Pattern` functions can be called with a pattern of any type, (though trying to
+/// change the extend or filter for a solid pattern will have no effect). A notable exception
+/// is `Pattern::add_color_stop_rgb()` and `Pattern::add_color_stop_rgba()` which must only be
+/// called with gradient patterns (either `Linear` or `Radial`). Otherwise the pattern will be
+/// shutdown and put into an error state.
+///
+/// New entries may be added in future versions.
+=| enum PatternType§variant Solid,
+    /// The pattern is a solid (uniform) color. It may be opaque or translucent, since 1.2.
+=| enum PatternType§variant Surface,
+    /// The pattern is a based on a surface (an image), since 1.2.
+=| enum PatternType§variant LinearGradient,
+    /// The pattern is a linear gradient, since 1.2.
+=| enum PatternType§variant RadialGradient,
+    /// The pattern is a radial gradient, since 1.2.
+=| enum PatternType§variant Mesh,
+    /// The pattern is a mesh, since 1.12.
+=| enum PatternType§variant RasterSource
+    /// The pattern is a user pattern providing raster data, since 1.12.
+=| enum FontSlant
+/// Specifies variants of a font face based on their slant.
+=| enum FontSlant§variant Normal,
+    /// Upright font style, since 1.0
+=| enum FontSlant§variant Italic,
+    /// Italic font style, since 1.0
+=| enum FontSlant§variant Oblique
+    /// Oblique font style, since 1.0
+=| enum FontWeight
+/// Specifies variants of a font face based on their weight.
+=| enum FontWeight§variant Normal,
+    /// Normal font weight, since 1.0
+=| enum FontWeight§variant Bold
+    /// Bold font weight, since 1.0
+=| enum TextClusterFlags
+/// Specifies properties of a text cluster mapping.
+=| enum TextClusterFlags§variant Backward
+    /// The clusters in the cluster array map to glyphs in the glyph array from end
+    /// to start. (Since 1.8)
+=| enum FontType
+/// `FontType` is used to describe the type of a given font face or scaled font. The
+/// font types are also known as "font backends" within cairo.
+///
+/// The type of a font face is determined by the function used to create it, which will
+/// generally be of the form `Context::type_font_face_create()`. The font face type can
+/// be queried with `Context::font_face_get_type()`.
+///
+/// The various cairo_font_face_t functions can be used with a font face of any type.
+///
+/// The type of a scaled font is determined by the type of the font face passed to
+/// `Context::scaled_font_create()`. The scaled font type can be queried with
+/// `Context::scaled_font_get_type()`.
+///
+/// The various `ScaledFont` functions can be used with scaled fonts of any type, but some
+/// font backends also provide type-specific functions that must only be called with a
+/// scaled font of the appropriate type. These functions have names that begin with
+/// `Context::type_scaled_font()` such as `Context::ft_scaled_font_lock_face()`.
+///
+/// The behavior of calling a type-specific function with a scaled font of the wrong type
+/// is undefined.
+///
+/// New entries may be added in future versions.
+=| enum FontType§variant FontTypeToy,
+    /// The font was created using cairo's toy font api (Since: 1.2)
+=| enum FontType§variant FontTypeFt,
+    /// The font is of type FreeType (Since: 1.2)
+=| enum FontType§variant FontTypeWin32,
+    /// The font is of type Win32 (Since: 1.2)
+=| enum FontType§variant FontTypeQuartz,
+    /// The font is of type Quartz (Since: 1.6, in 1.2 and 1.4 it was named
+    /// CAIRO_FONT_TYPE_ATSUI)
+=| enum FontType§variant FontTypeUser
+    /// The font was create using cairo's user font api (Since: 1.8)
+=| enum SubpixelOrder
+/// The subpixel order specifies the order of color elements within each pixel on the display
+/// device when rendering with an antialiasing mode of `Antialias::Subpixel`.
+=| enum SubpixelOrder§variant Default,
+    /// Use the default subpixel order for for the target device, since 1.0
+=| enum SubpixelOrder§variant Rgb,
+    /// Subpixel elements are arranged horizontally with red at the left, since 1.0
+=| enum SubpixelOrder§variant Bgr,
+    /// Subpixel elements are arranged horizontally with blue at the left, since 1.0
+=| enum SubpixelOrder§variant Vrgb,
+    /// Subpixel elements are arranged vertically with red at the top, since 1.0
+=| enum SubpixelOrder§variant Vbgr
+    /// Subpixel elements are arranged vertically with blue at the top, since 1.0
+=| enum HintStyle
+/// Specifies the type of hinting to do on font outlines. Hinting is the process of fitting
+/// outlines to the pixel grid in order to improve the appearance of the result. Since hinting
+/// outlines involves distorting them, it also reduces the faithfulness to the original outline
+/// shapes. Not all of the outline hinting styles are supported by all font backends.
+///
+/// New entries may be added in future versions.
+=| enum HintStyle§variant Default,
+    /// Use the default hint style for font backend and target device, since 1.0
+=| enum HintStyle§variant None,
+    /// Do not hint outlines, since 1.0
+=| enum HintStyle§variant Slight,
+    /// Hint outlines slightly to improve contrast while retaining good fidelity to the
+    /// original shapes, since 1.0
+=| enum HintStyle§variant Medium,
+    /// Hint outlines with medium strength giving a compromise between fidelity to the
+    /// original shapes and contrast, since 1.0
+=| enum HintStyle§variant Full
+    /// Hint outlines to maximize contrast, since 1.0
+=| enum HintMetrics
+/// Specifies whether to hint font metrics; hinting font metrics means quantizing them so
+/// that they are integer values in device space. Doing this improves the consistency of
+/// letter and line spacing, however it also means that text will be laid out differently
+/// at different zoom factors
+=| enum HintMetrics§variant Default,
+    /// Hint metrics in the default manner for the font backend and target device, since 1.0
+=| enum HintMetrics§variant Off,
+    /// Do not hint font metrics, since 1.0
+=| enum HintMetrics§variant On
+    /// Hint font metrics, since 1.0

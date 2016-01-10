@@ -1,5 +1,9 @@
 =! ./src/value.rs
 =/ //! Generic values — A polymorphic type that can hold values of any other type
+=/ 
+=| struct Value
+/// Possible improvement : store a function pointer inside the struct and make the struct
+/// templated
 =| impl Value§fn init
     /// Initializes value with the default value of type .
 =| impl Value§fn reset
@@ -15,12 +19,9 @@
     /// Check whether g_value_transform() is able to transform values of type src_type into
     /// values of type dest_type . Note that for the types to be transformable, they must be
     /// compatible and a transform function must be registered.
-=! ./src/lib.rs
-=/ /*!
-=/ Bindings and wrappers for __GLib__
-=/ */
 =! ./src/date.rs
 =/ //! Date and Time Functions — calendrical calculations and miscellaneous time stuff
+=/ 
 =| impl Date§fn new
     /// Allocates a GDate and initializes it to a sane state. The new date will be cleared
     /// (as if you'd called g_date_clear()) but invalid (it won't represent an existing day).
@@ -154,6 +155,12 @@
     /// Returns TRUE if the GDate represents an existing day. The date must not contain
     /// garbage; it should have been initialized with g_date_clear() if it wasn't allocated
     /// by one of the g_date_new() variants.
+=| struct TimeVal
+/// Represents a precise time, with seconds and microseconds. Similar to the struct timeval returned by the gettimeofday() UNIX
+/// system call.
+/// 
+/// GLib is attempting to unify around the use of 64bit integers to represent microsecond-precision time. As such, this type
+/// will be removed from a future version of GLib.
 =| struct TimeVal§variant tv_sec
     /// seconds
 =| struct TimeVal§variant tv_usec
@@ -184,9 +191,159 @@
     /// 
     /// Use g_date_time_format() or g_strdup_printf() if a different variation of ISO 8601 format
     /// is required.
+=| fn get_current_time
+/// Equivalent to the UNIX gettimeofday() function, but portable.
+/// 
+/// You may find g_get_real_time() to be more convenient.
+=| fn usleep
+/// Pauses the current thread for the given number of microseconds.
+/// 
+/// There are 1 million microseconds per second (represented by the
+/// G_USEC_PER_SEC macro). g_usleep() may have limited precision, depending
+/// on hardware and operating system; don't rely on the exact length of
+/// the sleep.
+=| fn get_monotonic_time
+/// Queries the system monotonic time.
+/// 
+/// The monotonic clock will always increase and doesn't suffer discontinuities
+/// when the user (or NTP) changes the system time. It may or may not continue
+/// to tick during times where the machine is suspended.
+/// 
+/// We try to use the clock that corresponds as closely as possible to the passage
+/// of time as measured by system calls such as poll() but it may not always be
+/// possible to do this.
+/// 
+/// Returns the monotonic time, in microseconds
+=| fn get_real_time
+/// Queries the system wall-clock time.
+/// 
+/// This call is functionally equivalent to g_get_current_time() except that
+/// the return value is often more convenient than dealing with a GTimeVal.
+/// 
+/// You should only use this call if you are actually interested in the real
+/// wall-clock time. g_get_monotonic_time() is probably more useful for measuring
+/// intervals.
+/// 
+/// Returns the number of microseconds since January 1, 1970 UTC.
+=| fn get_days_in_month
+/// Returns the number of days in a month, taking leap years into account.
+=| fn is_leap_year
+/// Returns TRUE if the year is a leap year.
+/// 
+/// For the purposes of this function, leap year is every year divisible by 4 unless
+/// that year is divisible by 100. If it is divisible by 100 it would be a leap year
+/// only if that year is also divisible by 400.
+=| fn get_monday_weeks_in_year
+/// Returns the number of weeks in the year, where weeks are taken to start on Monday.
+/// Will be 52 or 53. The date must be valid. (Years always have 52 7-day periods,
+/// plus 1 or 2 extra days depending on whether it's a leap year. This function is
+/// basically telling you how many Mondays are in the year, i.e. there are 53 Mondays
+/// if one of the extra days happens to be a Monday.)
+=| fn get_sunday_weeks_in_year
+/// Returns the number of weeks in the year, where weeks are taken to start on Sunday.
+/// Will be 52 or 53. The date must be valid. (Years always have 52 7-day periods, plus
+/// 1 or 2 extra days depending on whether it's a leap year. This function is basically
+/// telling you how many Sundays are in the year, i.e. there are 53 Sundays if one of
+/// the extra days happens to be a Sunday.)
+=| fn is_valid_day
+/// Returns true if the day of the month is valid (a day is valid if it's between 1 and
+/// 31 inclusive).
+=| fn is_valid_month
+/// Returns true if the month value is valid. The 12 GDateMonth enumeration values are
+/// the only valid months.
+=| fn is_valid_year
+/// Returns true if the year is valid. Any year greater than 0 is valid, though there
+/// is a 16-bit limit to what GDate will understand.
+=| fn is_valid_dmy
+/// Returns true if the day-month-year triplet forms a valid, existing day in the range
+/// of days GDate understands (Year 1 or later, no more than a few thousand years in the
+/// future).
+=| fn is_valid_julian
+/// Returns true if the Julian day is valid. Anything greater than zero is basically a
+/// valid Julian, though there is a 32-bit limit.
+=| fn is_valid_weekday
+/// Returns true if the weekday is valid. The seven GDateWeekday enumeration values are
+/// the only valid weekdays.
 =! ./src/source.rs
 =/ //! Manages available sources of events for the main loop
+=/ 
+=| struct Continue
+/// Return type of idle and timeout functions.
+///
+/// In the callback, return `Continue(true)` to continue scheduling the callback
+/// in the main loop or `Continue(false)` to remove it from the main loop.
+=| fn idle_add<F>
+/// Adds a function to be called whenever there are no higher priority events pending to the default main loop.
+///
+/// The function is given the default idle priority, `PRIORITY_DEFAULT_IDLE`.
+/// If the function returns `Continue(false)` it is automatically removed from
+/// the list of event sources and will not be called again.
+///
+/// # Examples
+///
+/// ```ignore
+/// let mut i = 0;
+/// idle_add(move || {
+///     println!("Idle: {}", i);
+///     i += 1;
+///     Continue(if i <= 10 { true } else { false })
+/// });
+/// ```
+=| fn timeout_add<F>
+/// Sets a function to be called at regular intervals, with the default priority, `PRIORITY_DEFAULT`.
+///
+/// The function is called repeatedly until it returns `Continue(false)`, at which point the timeout is
+/// automatically destroyed and the function will not be called again. The first call to the
+/// function will be at the end of the first interval .
+///
+/// Note that timeout functions may be delayed, due to the processing of other event sources. Thus
+/// they should not be relied on for precise timing. After each call to the timeout function, the
+/// time of the next timeout is recalculated based on the current time and the given interval (it
+/// does not try to 'catch up' time lost in delays).
+///
+/// If you want to have a timer in the "seconds" range and do not care about the exact time of the
+/// first call of the timer, use the `timeout_add_seconds()` function; this function allows for more
+/// optimizations and more efficient system power usage.
+///
+/// The interval given is in terms of monotonic time, not wall clock time.
+/// See `g_get_monotonic_time()` in glib documentation.
+///
+/// # Examples
+///
+/// ```ignore
+/// timeout_add(3000, || {
+///     println!("This prints once every 3 seconds");
+///     Continue(true)
+/// });
+/// ```
+=| fn timeout_add_seconds<F>
+/// Sets a function to be called at regular intervals with the default priority, `PRIORITY_DEFAULT`.
+///
+/// The function is called repeatedly until it returns `Continue(false)`, at which point the timeout
+/// is automatically destroyed and the function will not be called again.
+///
+/// Note that the first call of the timer may not be precise for timeouts of one second. If you need
+/// finer precision and have such a timeout, you may want to use `timeout_add()` instead.
+///
+/// The interval given is in terms of monotonic time, not wall clock time.
+/// See `g_get_monotonic_time()` in glib documentation.
+///
+/// # Examples
+///
+/// ```ignore
+/// timeout_add_seconds(10, || {
+///     println!("This prints once every 10 seconds");
+///     Continue(true)
+/// });
+/// ```
+=! ./src/lib.rs
+=/ /*!
+=/ Bindings and wrappers for __GLib__
+=/ */
+=/ 
 =! ./src/error.rs
+=| struct Error
+/// The Error structure contains information about an error that has occurred.
 =| impl Error§fn new_literal
     /// Creates a new Error; unlike Error::new(), message is not a printf()-style format string.
     /// Use this function if message contains text you don't have control over, that could include
@@ -214,6 +371,7 @@
     /// Returns the error message stored in the wrapped GError
 =! ./src/permission.rs
 =/ //! GPermission — An object representing the permission to perform a certain action
+=/ 
 =| impl Permission§fn get_allowed
     /// Gets the value of the 'allowed' property. This property is true if the caller
     /// currently has permission to perform the action that permission represents the
