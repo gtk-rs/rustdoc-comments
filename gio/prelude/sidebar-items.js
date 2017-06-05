@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["ActionExt",""],["ActionGroupExt",""],["ActionMapExt",""],["AppInfoExt",""],["ApplicationExt",""],["MenuModelExt",""],["PermissionExt",""]]});
