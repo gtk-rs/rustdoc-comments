@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `sourceview` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, sourceview">
+
+    <title>sourceview - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc mod">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Crate sourceview</p><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#constants">Constants</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'sourceview', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>sourceview</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/sourceview/lib.rs.html#5-50' title='goto source code'>[src]</a></span></h1>
+<h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="prelude/index.html"
+                                  title='mod sourceview::prelude'>prelude</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="mod" href="signal/index.html"
+                                  title='mod sourceview::signal'>signal</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Buffer.html"
+                                  title='struct sourceview::Buffer'>Buffer</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Completion.html"
+                                  title='struct sourceview::Completion'>Completion</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionActivation.html"
+                                  title='struct sourceview::CompletionActivation'>CompletionActivation</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionContext.html"
+                                  title='struct sourceview::CompletionContext'>CompletionContext</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionInfo.html"
+                                  title='struct sourceview::CompletionInfo'>CompletionInfo</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionItem.html"
+                                  title='struct sourceview::CompletionItem'>CompletionItem</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionProposal.html"
+                                  title='struct sourceview::CompletionProposal'>CompletionProposal</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionProvider.html"
+                                  title='struct sourceview::CompletionProvider'>CompletionProvider</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.CompletionWords.html"
+                                  title='struct sourceview::CompletionWords'>CompletionWords</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.DrawSpacesFlags.html"
+                                  title='struct sourceview::DrawSpacesFlags'>DrawSpacesFlags</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Error.html"
+                                  title='struct sourceview::Error'>Error</a></td>
+                           <td class='docblock-short'>
+                                <p>A generic error capable of representing various error domains (types).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Gutter.html"
+                                  title='struct sourceview::Gutter'>Gutter</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.GutterRenderer.html"
+                                  title='struct sourceview::GutterRenderer'>GutterRenderer</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.GutterRendererPixbuf.html"
+                                  title='struct sourceview::GutterRendererPixbuf'>GutterRendererPixbuf</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.GutterRendererState.html"
+                                  title='struct sourceview::GutterRendererState'>GutterRendererState</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.GutterRendererText.html"
+                                  title='struct sourceview::GutterRendererText'>GutterRendererText</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Language.html"
+                                  title='struct sourceview::Language'>Language</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.LanguageManager.html"
+                                  title='struct sourceview::LanguageManager'>LanguageManager</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Object.html"
+                                  title='struct sourceview::Object'>Object</a></td>
+                           <td class='docblock-short'>
+                                <p>The base class in the object hierarchy.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Style.html"
+                                  title='struct sourceview::Style'>Style</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.StyleScheme.html"
+                                  title='struct sourceview::StyleScheme'>StyleScheme</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.StyleSchemeManager.html"
+                                  title='struct sourceview::StyleSchemeManager'>StyleSchemeManager</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Tag.html"
+                                  title='struct sourceview::Tag'>Tag</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.View.html"
+                                  title='struct sourceview::View'>View</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.GutterRendererAlignmentMode.html"
+                                  title='enum sourceview::GutterRendererAlignmentMode'>GutterRendererAlignmentMode</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.SmartHomeEndType.html"
+                                  title='enum sourceview::SmartHomeEndType'>SmartHomeEndType</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.COMPLETION_ACTIVATION_INTERACTIVE.html"
+                                  title='constant sourceview::COMPLETION_ACTIVATION_INTERACTIVE'>COMPLETION_ACTIVATION_INTERACTIVE</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.COMPLETION_ACTIVATION_NONE.html"
+                                  title='constant sourceview::COMPLETION_ACTIVATION_NONE'>COMPLETION_ACTIVATION_NONE</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.COMPLETION_ACTIVATION_USER_REQUESTED.html"
+                                  title='constant sourceview::COMPLETION_ACTIVATION_USER_REQUESTED'>COMPLETION_ACTIVATION_USER_REQUESTED</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_ALL.html"
+                                  title='constant sourceview::DRAW_SPACES_ALL'>DRAW_SPACES_ALL</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_LEADING.html"
+                                  title='constant sourceview::DRAW_SPACES_LEADING'>DRAW_SPACES_LEADING</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_NBSP.html"
+                                  title='constant sourceview::DRAW_SPACES_NBSP'>DRAW_SPACES_NBSP</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_NEWLINE.html"
+                                  title='constant sourceview::DRAW_SPACES_NEWLINE'>DRAW_SPACES_NEWLINE</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_SPACE.html"
+                                  title='constant sourceview::DRAW_SPACES_SPACE'>DRAW_SPACES_SPACE</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_TAB.html"
+                                  title='constant sourceview::DRAW_SPACES_TAB'>DRAW_SPACES_TAB</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_TEXT.html"
+                                  title='constant sourceview::DRAW_SPACES_TEXT'>DRAW_SPACES_TEXT</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.DRAW_SPACES_TRAILING.html"
+                                  title='constant sourceview::DRAW_SPACES_TRAILING'>DRAW_SPACES_TRAILING</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.GUTTER_RENDERER_STATE_CURSOR.html"
+                                  title='constant sourceview::GUTTER_RENDERER_STATE_CURSOR'>GUTTER_RENDERER_STATE_CURSOR</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.GUTTER_RENDERER_STATE_NORMAL.html"
+                                  title='constant sourceview::GUTTER_RENDERER_STATE_NORMAL'>GUTTER_RENDERER_STATE_NORMAL</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.GUTTER_RENDERER_STATE_PRELIT.html"
+                                  title='constant sourceview::GUTTER_RENDERER_STATE_PRELIT'>GUTTER_RENDERER_STATE_PRELIT</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="constant" href="constant.GUTTER_RENDERER_STATE_SELECTED.html"
+                                  title='constant sourceview::GUTTER_RENDERER_STATE_SELECTED'>GUTTER_RENDERER_STATE_SELECTED</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.BufferExt.html"
+                                  title='trait sourceview::BufferExt'>BufferExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionContextExt.html"
+                                  title='trait sourceview::CompletionContextExt'>CompletionContextExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionExt.html"
+                                  title='trait sourceview::CompletionExt'>CompletionExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionInfoExt.html"
+                                  title='trait sourceview::CompletionInfoExt'>CompletionInfoExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionItemExt.html"
+                                  title='trait sourceview::CompletionItemExt'>CompletionItemExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionProposalExt.html"
+                                  title='trait sourceview::CompletionProposalExt'>CompletionProposalExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionProviderExt.html"
+                                  title='trait sourceview::CompletionProviderExt'>CompletionProviderExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.CompletionWordsExt.html"
+                                  title='trait sourceview::CompletionWordsExt'>CompletionWordsExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.GutterExt.html"
+                                  title='trait sourceview::GutterExt'>GutterExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.GutterRendererExt.html"
+                                  title='trait sourceview::GutterRendererExt'>GutterRendererExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.GutterRendererPixbufExt.html"
+                                  title='trait sourceview::GutterRendererPixbufExt'>GutterRendererPixbufExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.GutterRendererTextExt.html"
+                                  title='trait sourceview::GutterRendererTextExt'>GutterRendererTextExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.LanguageExt.html"
+                                  title='trait sourceview::LanguageExt'>LanguageExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.LanguageManagerExt.html"
+                                  title='trait sourceview::LanguageManagerExt'>LanguageManagerExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.StyleExt.html"
+                                  title='trait sourceview::StyleExt'>StyleExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.StyleSchemeExt.html"
+                                  title='trait sourceview::StyleSchemeExt'>StyleSchemeExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.StyleSchemeManagerExt.html"
+                                  title='trait sourceview::StyleSchemeManagerExt'>StyleSchemeManagerExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.TagExt.html"
+                                  title='trait sourceview::TagExt'>TagExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.ViewExt.html"
+                                  title='trait sourceview::ViewExt'>ViewExt</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "sourceview";
+    </script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

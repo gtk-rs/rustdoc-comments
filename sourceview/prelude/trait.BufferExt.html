@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `BufferExt` trait in crate `sourceview`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, BufferExt">
+
+    <title>sourceview::prelude::BufferExt - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc trait">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Trait BufferExt</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>sourceview</a>::<wbr><a href='index.html'>prelude</a></p><script>window.sidebarCurrent = {name: 'BufferExt', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>sourceview</a>::<wbr><a href='index.html'>prelude</a>::<wbr><a class="trait" href=''>BufferExt</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/sourceview/auto/buffer.rs.html#52-155' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait BufferExt {
+    fn <a href='#tymethod.begin_not_undoable_action' class='fnname'>begin_not_undoable_action</a>(&amp;self);
+    fn <a href='#tymethod.can_redo' class='fnname'>can_redo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>;
+    fn <a href='#tymethod.can_undo' class='fnname'>can_undo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>;
+    fn <a href='#tymethod.end_not_undoable_action' class='fnname'>end_not_undoable_action</a>(&amp;self);
+    fn <a href='#tymethod.ensure_highlight' class='fnname'>ensure_highlight</a>(&amp;self, start: &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>, end: &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>);
+    fn <a href='#tymethod.get_highlight_matching_brackets' class='fnname'>get_highlight_matching_brackets</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>;
+    fn <a href='#tymethod.get_highlight_syntax' class='fnname'>get_highlight_syntax</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>;
+    fn <a href='#tymethod.get_language' class='fnname'>get_language</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../sourceview/struct.Language.html" title="struct sourceview::Language">Language</a>&gt;;
+    fn <a href='#tymethod.get_max_undo_levels' class='fnname'>get_max_undo_levels</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>;
+    fn <a href='#tymethod.get_style_scheme' class='fnname'>get_style_scheme</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../sourceview/struct.StyleScheme.html" title="struct sourceview::StyleScheme">StyleScheme</a>&gt;;
+    fn <a href='#tymethod.redo' class='fnname'>redo</a>(&amp;self);
+    fn <a href='#tymethod.set_highlight_matching_brackets' class='fnname'>set_highlight_matching_brackets</a>(&amp;self, highlight: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>);
+    fn <a href='#tymethod.set_highlight_syntax' class='fnname'>set_highlight_syntax</a>(&amp;self, highlight: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>);
+    fn <a href='#tymethod.set_language' class='fnname'>set_language</a>&lt;'a, P:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'a <a class="struct" href="../../sourceview/struct.Language.html" title="struct sourceview::Language">Language</a>&gt;&gt;&gt;(&amp;self, language: P);
+    fn <a href='#tymethod.set_max_undo_levels' class='fnname'>set_max_undo_levels</a>(&amp;self, max_undo_levels: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>);
+    fn <a href='#tymethod.set_style_scheme' class='fnname'>set_style_scheme</a>&lt;'a, P:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'a <a class="struct" href="../../sourceview/struct.StyleScheme.html" title="struct sourceview::StyleScheme">StyleScheme</a>&gt;&gt;&gt;(&amp;self, scheme: P);
+    fn <a href='#tymethod.undo' class='fnname'>undo</a>(&amp;self);
+    fn <a href='#tymethod.get_property_can_redo' class='fnname'>get_property_can_redo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>;
+    fn <a href='#tymethod.get_property_can_undo' class='fnname'>get_property_can_undo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>;
+    fn <a href='#tymethod.connect_highlight_updated' class='fnname'>connect_highlight_updated</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self, &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>, &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>) + 'static&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f: F<br>&nbsp;&nbsp;&nbsp;&nbsp;) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>;
+    fn <a href='#tymethod.connect_redo' class='fnname'>connect_redo</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self) + 'static&gt;(&amp;self, f: F) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>;
+    fn <a href='#tymethod.connect_source_mark_updated' class='fnname'>connect_source_mark_updated</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self, &amp;<a class="struct" href="../../gtk/auto/text_mark/struct.TextMark.html" title="struct gtk::auto::text_mark::TextMark">TextMark</a>) + 'static&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f: F<br>&nbsp;&nbsp;&nbsp;&nbsp;) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>;
+    fn <a href='#tymethod.connect_undo' class='fnname'>connect_undo</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self) + 'static&gt;(&amp;self, f: F) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a>;
+}</pre>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.begin_not_undoable_action' class='method'><span id='begin_not_undoable_action.v' class='invisible'><code>fn <a href='#tymethod.begin_not_undoable_action' class='fnname'>begin_not_undoable_action</a>(&amp;self)</code></span></h3><h3 id='tymethod.can_redo' class='method'><span id='can_redo.v' class='invisible'><code>fn <a href='#tymethod.can_redo' class='fnname'>can_redo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h3><h3 id='tymethod.can_undo' class='method'><span id='can_undo.v' class='invisible'><code>fn <a href='#tymethod.can_undo' class='fnname'>can_undo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h3><h3 id='tymethod.end_not_undoable_action' class='method'><span id='end_not_undoable_action.v' class='invisible'><code>fn <a href='#tymethod.end_not_undoable_action' class='fnname'>end_not_undoable_action</a>(&amp;self)</code></span></h3><h3 id='tymethod.ensure_highlight' class='method'><span id='ensure_highlight.v' class='invisible'><code>fn <a href='#tymethod.ensure_highlight' class='fnname'>ensure_highlight</a>(&amp;self, start: &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>, end: &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>)</code></span></h3><h3 id='tymethod.get_highlight_matching_brackets' class='method'><span id='get_highlight_matching_brackets.v' class='invisible'><code>fn <a href='#tymethod.get_highlight_matching_brackets' class='fnname'>get_highlight_matching_brackets</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h3><h3 id='tymethod.get_highlight_syntax' class='method'><span id='get_highlight_syntax.v' class='invisible'><code>fn <a href='#tymethod.get_highlight_syntax' class='fnname'>get_highlight_syntax</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h3><h3 id='tymethod.get_language' class='method'><span id='get_language.v' class='invisible'><code>fn <a href='#tymethod.get_language' class='fnname'>get_language</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../sourceview/struct.Language.html" title="struct sourceview::Language">Language</a>&gt;</code></span></h3><h3 id='tymethod.get_max_undo_levels' class='method'><span id='get_max_undo_levels.v' class='invisible'><code>fn <a href='#tymethod.get_max_undo_levels' class='fnname'>get_max_undo_levels</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a></code></span></h3><h3 id='tymethod.get_style_scheme' class='method'><span id='get_style_scheme.v' class='invisible'><code>fn <a href='#tymethod.get_style_scheme' class='fnname'>get_style_scheme</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../sourceview/struct.StyleScheme.html" title="struct sourceview::StyleScheme">StyleScheme</a>&gt;</code></span></h3><h3 id='tymethod.redo' class='method'><span id='redo.v' class='invisible'><code>fn <a href='#tymethod.redo' class='fnname'>redo</a>(&amp;self)</code></span></h3><h3 id='tymethod.set_highlight_matching_brackets' class='method'><span id='set_highlight_matching_brackets.v' class='invisible'><code>fn <a href='#tymethod.set_highlight_matching_brackets' class='fnname'>set_highlight_matching_brackets</a>(&amp;self, highlight: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span></h3><h3 id='tymethod.set_highlight_syntax' class='method'><span id='set_highlight_syntax.v' class='invisible'><code>fn <a href='#tymethod.set_highlight_syntax' class='fnname'>set_highlight_syntax</a>(&amp;self, highlight: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a>)</code></span></h3><h3 id='tymethod.set_language' class='method'><span id='set_language.v' class='invisible'><code>fn <a href='#tymethod.set_language' class='fnname'>set_language</a>&lt;'a, P:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'a <a class="struct" href="../../sourceview/struct.Language.html" title="struct sourceview::Language">Language</a>&gt;&gt;&gt;(&amp;self, language: P)</code></span></h3><h3 id='tymethod.set_max_undo_levels' class='method'><span id='set_max_undo_levels.v' class='invisible'><code>fn <a href='#tymethod.set_max_undo_levels' class='fnname'>set_max_undo_levels</a>(&amp;self, max_undo_levels: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>)</code></span></h3><h3 id='tymethod.set_style_scheme' class='method'><span id='set_style_scheme.v' class='invisible'><code>fn <a href='#tymethod.set_style_scheme' class='fnname'>set_style_scheme</a>&lt;'a, P:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;'a <a class="struct" href="../../sourceview/struct.StyleScheme.html" title="struct sourceview::StyleScheme">StyleScheme</a>&gt;&gt;&gt;(&amp;self, scheme: P)</code></span></h3><h3 id='tymethod.undo' class='method'><span id='undo.v' class='invisible'><code>fn <a href='#tymethod.undo' class='fnname'>undo</a>(&amp;self)</code></span></h3><h3 id='tymethod.get_property_can_redo' class='method'><span id='get_property_can_redo.v' class='invisible'><code>fn <a href='#tymethod.get_property_can_redo' class='fnname'>get_property_can_redo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h3><h3 id='tymethod.get_property_can_undo' class='method'><span id='get_property_can_undo.v' class='invisible'><code>fn <a href='#tymethod.get_property_can_undo' class='fnname'>get_property_can_undo</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h3><h3 id='tymethod.connect_highlight_updated' class='method'><span id='connect_highlight_updated.v' class='invisible'><code>fn <a href='#tymethod.connect_highlight_updated' class='fnname'>connect_highlight_updated</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self, &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>, &amp;<a class="struct" href="../../gtk/auto/text_iter/struct.TextIter.html" title="struct gtk::auto::text_iter::TextIter">TextIter</a>) + 'static&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;f: F<br>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span></h3><h3 id='tymethod.connect_redo' class='method'><span id='connect_redo.v' class='invisible'><code>fn <a href='#tymethod.connect_redo' class='fnname'>connect_redo</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self) + 'static&gt;(&amp;self, f: F) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span></h3><h3 id='tymethod.connect_source_mark_updated' class='method'><span id='connect_source_mark_updated.v' class='invisible'><code>fn <a href='#tymethod.connect_source_mark_updated' class='fnname'>connect_source_mark_updated</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self, &amp;<a class="struct" href="../../gtk/auto/text_mark/struct.TextMark.html" title="struct gtk::auto::text_mark::TextMark">TextMark</a>) + 'static&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;self, <br>&nbsp;&nbsp;&nbsp;&nbsp;f: F<br>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span></h3><h3 id='tymethod.connect_undo' class='method'><span id='connect_undo.v' class='invisible'><code>fn <a href='#tymethod.connect_undo' class='fnname'>connect_undo</a>&lt;F:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(&amp;Self) + 'static&gt;(&amp;self, f: F) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u64.html">u64</a></code></span></h3></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl&lt;O:&nbsp;<a class="trait" href="../../glib/object/trait.IsA.html" title="trait glib::object::IsA">IsA</a>&lt;<a class="struct" href="../../sourceview/struct.Buffer.html" title="struct sourceview::Buffer">Buffer</a>&gt; + <a class="trait" href="../../glib/object/trait.IsA.html" title="trait glib::object::IsA">IsA</a>&lt;<a class="struct" href="../../sourceview/struct.Object.html" title="struct sourceview::Object">Object</a>&gt;&gt; BufferExt for O</code></li>
+</ul><script type="text/javascript" async
+                         src="../../implementors/sourceview/prelude/trait.BufferExt.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "sourceview";
+    </script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
