@@ -1770,14 +1770,15 @@ surface.finish();
 <!-- impl File::fn restrict -->
 Specify what PDF version to generate.
 <!-- struct Writer -->
-A PDF surface that writes to a generic `io::Write` type (owning variant)
+A PDF surface that writes to a generic `io::Write` type.
 
 The `Writer` takes ownership of the write object.
 Once you're done using the surface, you can obtain the write object
 back using the `finish()` method.
 
-If you would like the surface to reference the write object
-instead, use `RefWriter`.
+If you would like the surface to reference the write object,
+pass a `&'w mut _` reference.
+The `Writer` will borrow that lifetime until it is dropped.
 <!-- fn new -->
 Create a new writer surface.
 
@@ -1821,7 +1822,7 @@ surface.finish();
 <!-- fn restrict -->
 Specify what PDF version to generate.
 <!-- struct Writer -->
-A PDF surface that writes to a generic `io::Write` type (owning variant)
+A PDF surface that writes to a generic `io::Write` type
 
 The `Writer` takes ownership of the write object.
 Once you're done using the surface, you can obtain the write object
@@ -1835,8 +1836,9 @@ A PDF surface that writes to a generic `io::Write` type (referencing variant)
 The `RefWriter` references the write object,
 which is why a lifetime parameter is required.
 
-If you would like the surface to own the write object
-instead, use `Writer`.
+If you would like the surface to own the write object,
+pass a `&'w mut _` reference.
+The `Writer` will borrow that lifetime until it is dropped.
 <!-- file ps.rs -->
 <!-- struct File -->
 A PostScript surface that writes to a file
@@ -1858,14 +1860,15 @@ surface.finish();
 <!-- impl File::fn restrict -->
 Specify what PostScript level to generate.
 <!-- struct Writer -->
-A PostScript surface that writes to a generic `io::Write` type (owning variant)
+A PostScript surface that writes to a generic `io::Write` type
 
 The `Writer` takes ownership of the write object.
 Once you're done using the surface, you can obtain the write object
 back using the `finish()` method.
 
-If you would like the surface to reference the write object
-instead, use `RefWriter`.
+If you would like the surface to reference the write object,
+pass a `&'w mut _` reference.
+The `Writer` will borrow that lifetime until it is dropped.
 <!-- fn new -->
 Create a new writer surface.
 
