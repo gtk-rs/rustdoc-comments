@@ -1271,6 +1271,61 @@ destroyed until a matching call to ScaledFont drop trait is made.
 
 The number of references to a cairo_scaled_font_t can be get using
 ScaledFont::get_reference_count().
+<!-- file image_surface.rs -->
+<!-- impl ImageSurface::fn from_raw_full -->
+Wraps a raw pointer for a `*mut ffi::cairo_surface_t` with an `ImageSurface`.
+
+Returns a `Result<ImageSurface, Status>`.  The `Ok()` case is when the surface
+passed to this function is in a success state, i.e. `surface.status() == Success`.
+The `Err()` case is when the surface is in an error state.
+
+# Errors
+
+When Cairo encounters an error when creating a surface, for
+example, if it runs out of memory or if an invalid size gets
+passed to a surface-creation function, it will still return a
+valid pointer to a surface.  However, that surface is an
+"error surface" whose `surface.status()` is different from
+`Success`.  Operations on a surface with a non-success status
+are an error; Cairo will print a warning about them and do
+nothing.
+<!-- impl ImageSurface::fn create -->
+Creates a new `ImageSurface`.
+
+# Errors
+
+This function may return an `Err()` with a [Cairo status
+code][cairo-status] if the surface cannot be created.  For
+example, it will return `Err(Status::NoMemory)` if there is
+insufficient memory for the requested surface, or
+`Err(Status::InvalidSize)` if Cairo's backend for image
+surfaces cannot handle the specified size.
+
+[cairo-status]: enum.Status.html
+<!-- impl ImageSurface::fn create_for_data -->
+Creates a new `ImageSurface` from a buffer supplied by the program.
+
+The `data` is assumed to come in the `format` specified.  The `stride`
+parameter specifies the distance in bytes between rows, and it must match
+Cairo's requirements for rowstrides:
+
+1. The `stride` must be aligned to 32 bits.
+
+2. The absolute value of `stride` must be greater than or equal to
+`cairo_format_stride_for_width()`.
+
+The `free` function will get called with the `data` as argument when
+the surface is dropped.
+
+# Errors
+
+This function may return an `Err()` with a [Cairo status
+code][cairo-status] if the surface cannot be created.  For
+example, it will return `Err(Status::InvalidStride)` if the
+`stride` parameter does not match the rowstride that Cairo
+expects.
+
+[cairo-status]: enum.Status.html
 <!-- file lib.rs -->
 <!-- file_comment -->
 
