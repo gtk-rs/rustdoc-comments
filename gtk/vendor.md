@@ -1231,7 +1231,7 @@ To track changes in the selected application, use the
 
 # Implements
 
-[`AppChooserButtonExt`](trait.AppChooserButtonExt.html), [`ComboBoxExt`](trait.ComboBoxExt.html), [`BinExt`](trait.BinExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`CellEditableExt`](trait.CellEditableExt.html), [`CellLayoutExt`](trait.CellLayoutExt.html), [`AppChooserExt`](trait.AppChooserExt.html), [`ColorBoxExtManual`](prelude/trait.ColorBoxExtManual.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
+[`AppChooserButtonExt`](trait.AppChooserButtonExt.html), [`ComboBoxExt`](trait.ComboBoxExt.html), [`BinExt`](trait.BinExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`CellEditableExt`](trait.CellEditableExt.html), [`CellLayoutExt`](trait.CellLayoutExt.html), [`AppChooserExt`](trait.AppChooserExt.html), [`ComboBoxExtManual`](prelude/trait.ComboBoxExtManual.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
 <!-- trait AppChooserButtonExt -->
 Trait containing all `AppChooserButton` methods.
 
@@ -7337,7 +7337,7 @@ the actual URI data.
 # Returns
 
 `true` is there is an URI list available, `false` otherwise.
-<!-- trait ClipboardExt::fn connect_owner_change -->
+<!-- impl Clipboard::fn connect_owner_change -->
 The ::owner-change signal is emitted when GTK+ receives an
 event that indicates that the ownership of the selection
 associated with `clipboard` has changed.
@@ -7670,7 +7670,7 @@ The button also contains another node with name arrow.
 
 # Implements
 
-[`ComboBoxExt`](trait.ComboBoxExt.html), [`BinExt`](trait.BinExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`CellEditableExt`](trait.CellEditableExt.html), [`CellLayoutExt`](trait.CellLayoutExt.html), [`ColorBoxExtManual`](prelude/trait.ColorBoxExtManual.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
+[`ComboBoxExt`](trait.ComboBoxExt.html), [`BinExt`](trait.BinExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`CellEditableExt`](trait.CellEditableExt.html), [`CellLayoutExt`](trait.CellLayoutExt.html), [`ComboBoxExtManual`](prelude/trait.ComboBoxExtManual.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
 <!-- trait ComboBoxExt -->
 Trait containing all `ComboBox` methods.
 
@@ -8180,7 +8180,7 @@ children, and the .linked class to the node of its internal box.
 
 # Implements
 
-[`ComboBoxTextExt`](trait.ComboBoxTextExt.html), [`ComboBoxExt`](trait.ComboBoxExt.html), [`BinExt`](trait.BinExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`CellEditableExt`](trait.CellEditableExt.html), [`CellLayoutExt`](trait.CellLayoutExt.html), [`ColorBoxExtManual`](prelude/trait.ColorBoxExtManual.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
+[`ComboBoxTextExt`](trait.ComboBoxTextExt.html), [`ComboBoxExt`](trait.ComboBoxExt.html), [`BinExt`](trait.BinExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`CellEditableExt`](trait.CellEditableExt.html), [`CellLayoutExt`](trait.CellLayoutExt.html), [`ComboBoxExtManual`](prelude/trait.ComboBoxExtManual.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
 <!-- trait ComboBoxTextExt -->
 Trait containing all `ComboBoxText` methods.
 
@@ -15780,10 +15780,10 @@ a `Widget`
 # Returns
 
 a newly created `GestureLongPress`
-<!-- trait GestureLongPressExt::fn connect_cancelled -->
+<!-- impl GestureLongPress::fn connect_cancelled -->
 This signal is emitted whenever a press moved too far, or was released
 before `GestureLongPress::pressed` happened.
-<!-- trait GestureLongPressExt::fn connect_pressed -->
+<!-- impl GestureLongPress::fn connect_pressed -->
 This signal is emitted whenever a press goes unmoved/unreleased longer than
 what the GTK+ defaults tell.
 ## `x`
@@ -15837,7 +15837,7 @@ non-first click falls within the expected area. This is not
 akin to an input shape.
 ## `rect`
 rectangle to receive coordinates on
-<!-- trait GestureMultiPressExt::fn connect_pressed -->
+<!-- impl GestureMultiPress::fn connect_pressed -->
 This signal is emitted whenever a button or touch press happens.
 ## `n_press`
 how many touch/button presses happened with this one
@@ -15845,7 +15845,7 @@ how many touch/button presses happened with this one
 The X coordinate, in widget allocation coordinates
 ## `y`
 The Y coordinate, in widget allocation coordinates
-<!-- trait GestureMultiPressExt::fn connect_released -->
+<!-- impl GestureMultiPress::fn connect_released -->
 This signal is emitted when a button or touch is released. `n_press`
 will report the number of press that is paired to this event, note
 that `GestureMultiPress::stopped` may have been emitted between the
@@ -15856,7 +15856,7 @@ number of press that is paired with this release
 The X coordinate, in widget allocation coordinates
 ## `y`
 The Y coordinate, in widget allocation coordinates
-<!-- trait GestureMultiPressExt::fn connect_stopped -->
+<!-- impl GestureMultiPress::fn connect_stopped -->
 This signal is emitted whenever any time/distance threshold has
 been exceeded.
 <!-- struct GesturePan -->
@@ -15898,16 +15898,16 @@ the expected orientation for pan gestures
 Sets the orientation to be expected on pan gestures.
 ## `orientation`
 expected orientation
-<!-- trait GesturePanExt::fn connect_pan -->
+<!-- impl GesturePan::fn connect_pan -->
 This signal is emitted once a panning gesture along the
 expected axis is detected.
 ## `direction`
 current direction of the pan gesture
 ## `offset`
 Offset along the gesture orientation
-<!-- trait GesturePanExt::fn get_property_orientation -->
+<!-- impl GesturePan::fn get_property_orientation -->
 The expected orientation of pan gestures.
-<!-- trait GesturePanExt::fn set_property_orientation -->
+<!-- impl GesturePan::fn set_property_orientation -->
 The expected orientation of pan gestures.
 <!-- struct GestureRotate -->
 `GestureRotate` is a `Gesture` implementation able to recognize
@@ -15934,7 +15934,7 @@ not active, 0 is returned.
 # Returns
 
 the angle delta in radians
-<!-- trait GestureRotateExt::fn connect_angle_changed -->
+<!-- impl GestureRotate::fn connect_angle_changed -->
 This signal is emitted when the angle between both tracked points
 changes.
 ## `angle`
@@ -16066,7 +16066,7 @@ return value for the velocity in the Y axis, in pixels/sec
 # Returns
 
 whether velocity could be calculated
-<!-- trait GestureSwipeExt::fn connect_swipe -->
+<!-- impl GestureSwipe::fn connect_swipe -->
 This signal is emitted when the recognized gesture is finished, velocity
 and direction are a product of previously recorded events.
 ## `velocity_x`
@@ -16099,7 +16099,7 @@ considered 1:1). If `self` is not active, 1 is returned.
 # Returns
 
 the scale delta
-<!-- trait GestureZoomExt::fn connect_scale_changed -->
+<!-- impl GestureZoom::fn connect_scale_changed -->
 This signal is emitted whenever the distance between both tracked
 sequences changes.
 ## `scale`
@@ -22955,114 +22955,114 @@ Feature: `v3_16`
 # Returns
 
 the newly created `ModelButton` widget
-<!-- trait ModelButtonExt::fn get_property_active -->
+<!-- impl ModelButton::fn get_property_active -->
 The state of the button. This is reflecting the state of the associated
 `gio::Action`.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_active -->
+<!-- impl ModelButton::fn set_property_active -->
 The state of the button. This is reflecting the state of the associated
 `gio::Action`.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_centered -->
+<!-- impl ModelButton::fn get_property_centered -->
 Whether to render the button contents centered instead of left-aligned.
 This property should be set for title-like items.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_centered -->
+<!-- impl ModelButton::fn set_property_centered -->
 Whether to render the button contents centered instead of left-aligned.
 This property should be set for title-like items.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_icon -->
+<!-- impl ModelButton::fn get_property_icon -->
 A `gio::Icon` that will be used if iconic appearance for the button is
 desired.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_icon -->
+<!-- impl ModelButton::fn set_property_icon -->
 A `gio::Icon` that will be used if iconic appearance for the button is
 desired.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_iconic -->
+<!-- impl ModelButton::fn get_property_iconic -->
 If this property is set, the button will show an icon if one is set.
 If no icon is set, the text will be used. This is typically used for
 horizontal sections of linked buttons.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_iconic -->
+<!-- impl ModelButton::fn set_property_iconic -->
 If this property is set, the button will show an icon if one is set.
 If no icon is set, the text will be used. This is typically used for
 horizontal sections of linked buttons.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_inverted -->
+<!-- impl ModelButton::fn get_property_inverted -->
 Whether to show the submenu indicator at the opposite side than normal.
 This property should be set for model buttons that 'go back' to a parent
 menu.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_inverted -->
+<!-- impl ModelButton::fn set_property_inverted -->
 Whether to show the submenu indicator at the opposite side than normal.
 This property should be set for model buttons that 'go back' to a parent
 menu.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_menu-name -->
+<!-- impl ModelButton::fn get_property_menu-name -->
 The name of a submenu to open when the button is activated.
 If this is set, the button should not have an action associated with it.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_menu-name -->
+<!-- impl ModelButton::fn set_property_menu-name -->
 The name of a submenu to open when the button is activated.
 If this is set, the button should not have an action associated with it.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_role -->
+<!-- impl ModelButton::fn get_property_role -->
 Specifies whether the button is a plain, check or radio button.
 When `Actionable:action-name` is set, the role will be determined
 from the action and does not have to be set explicitly.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_role -->
+<!-- impl ModelButton::fn set_property_role -->
 Specifies whether the button is a plain, check or radio button.
 When `Actionable:action-name` is set, the role will be determined
 from the action and does not have to be set explicitly.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_text -->
+<!-- impl ModelButton::fn get_property_text -->
 The label for the button.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn set_property_text -->
+<!-- impl ModelButton::fn set_property_text -->
 The label for the button.
 
 Feature: `v3_16`
 
-<!-- trait ModelButtonExt::fn get_property_use-markup -->
+<!-- impl ModelButton::fn get_property_use-markup -->
 If `true`, XML tags in the text of the button are interpreted as by
 `pango_parse_markup` to format the enclosed spans of text. If `false`, the
 text will be displayed verbatim.
 
 Feature: `v3_24`
 
-<!-- trait ModelButtonExt::fn set_property_use-markup -->
+<!-- impl ModelButton::fn set_property_use-markup -->
 If `true`, XML tags in the text of the button are interpreted as by
 `pango_parse_markup` to format the enclosed spans of text. If `false`, the
 text will be displayed verbatim.
@@ -25349,7 +25349,7 @@ Feature: `v3_18`
 
 ## `show_trash`
 whether to show an item for the Trash location
-<!-- trait PlacesSidebarExt::fn connect_drag_action_ask -->
+<!-- impl PlacesSidebar::fn connect_drag_action_ask -->
 The places sidebar emits this signal when it needs to ask the application
 to pop up a menu to ask the user for which drag action to perform.
 ## `actions`
@@ -25359,7 +25359,7 @@ Possible drag actions that need to be asked for.
 
 the final drag action that the sidebar should pass to the drag side
 of the drag-and-drop operation.
-<!-- trait PlacesSidebarExt::fn connect_drag_action_requested -->
+<!-- impl PlacesSidebar::fn connect_drag_action_requested -->
 When the user starts a drag-and-drop operation and the sidebar needs
 to ask the application for which drag action to perform, then the
 sidebar will emit this signal.
@@ -25382,7 +25382,7 @@ The drag action to use must be the return value of the signal handler.
 The drag action to use, for example, `gdk::DragAction::Copy`
 or `gdk::DragAction::Move`, or 0 if no action is allowed here (i.e. drops
 are not allowed in the specified `dest_file`).
-<!-- trait PlacesSidebarExt::fn connect_drag_perform_drop -->
+<!-- impl PlacesSidebar::fn connect_drag_perform_drop -->
 The places sidebar emits this signal when the user completes a
 drag-and-drop operation and one of the sidebar's items is the
 destination. This item is in the `dest_file`, and the
@@ -25395,7 +25395,7 @@ Destination `gio::File`.
  `glib::List` of `gio::File` that got dropped.
 ## `action`
 Drop action to perform.
-<!-- trait PlacesSidebarExt::fn connect_mount -->
+<!-- impl PlacesSidebar::fn connect_mount -->
 The places sidebar emits this signal when it starts a new operation
 because the user clicked on some location that needs mounting.
 In this way the application using the `PlacesSidebar` can track the
@@ -25405,7 +25405,7 @@ Feature: `v3_20`
 
 ## `mount_operation`
 the `gio::MountOperation` that is going to start.
-<!-- trait PlacesSidebarExt::fn connect_open_location -->
+<!-- impl PlacesSidebar::fn connect_open_location -->
 The places sidebar emits this signal when the user selects a location
 in it. The calling application should display the contents of that
 location; for example, a file manager should show a list of files in
@@ -25414,7 +25414,7 @@ the specified location.
 `gio::File` to which the caller should switch.
 ## `open_flags`
 a single value from `PlacesOpenFlags` specifying how the `location` should be opened.
-<!-- trait PlacesSidebarExt::fn connect_populate_popup -->
+<!-- impl PlacesSidebar::fn connect_populate_popup -->
 The places sidebar emits this signal when the user invokes a contextual
 popup on one of its items. In the signal handler, the application may
 add extra items to the menu as appropriate. For example, a file manager
@@ -25448,7 +25448,7 @@ a `Menu` or another `Container`
 ## `selected_volume`
 `gio::Volume` if the selected
  item is a volume, or `None` if it is a file.
-<!-- trait PlacesSidebarExt::fn connect_show_connect_to_server -->
+<!-- impl PlacesSidebar::fn connect_show_connect_to_server -->
 The places sidebar emits this signal when it needs the calling
 application to present an way to connect directly to a network server.
 For example, the application may bring up a dialog box asking for
@@ -25459,12 +25459,12 @@ the corresponding mount by using, for example, `gio::File::mount_enclosing_volum
 
 use the `PlacesSidebar::show-other-locations` signal
  to connect to network servers.
-<!-- trait PlacesSidebarExt::fn connect_show_enter_location -->
+<!-- impl PlacesSidebar::fn connect_show_enter_location -->
 The places sidebar emits this signal when it needs the calling
 application to present an way to directly enter a location.
 For example, the application may bring up a dialog box asking for
 a URL like "http://http.example.com".
-<!-- trait PlacesSidebarExt::fn connect_show_error_message -->
+<!-- impl PlacesSidebar::fn connect_show_error_message -->
 The places sidebar emits this signal when it needs the calling
 application to present an error message. Most of these messages
 refer to mounting or unmounting media, for example, when a drive
@@ -25473,7 +25473,7 @@ cannot be started for some reason.
 primary message with a summary of the error to show.
 ## `secondary`
 secondary message with details of the error to show.
-<!-- trait PlacesSidebarExt::fn connect_show_other_locations -->
+<!-- impl PlacesSidebar::fn connect_show_other_locations -->
 The places sidebar emits this signal when it needs the calling
 application to present a way to show other locations e.g. drives
 and network access points.
@@ -25488,7 +25488,7 @@ Feature: `v3_18`
 use the `PlacesSidebar::show-other-locations-with-flags`
 which includes the open flags in order to allow the user to specify to open
 in a new tab or window, in a similar way than `PlacesSidebar::open-location`
-<!-- trait PlacesSidebarExt::fn connect_show_other_locations_with_flags -->
+<!-- impl PlacesSidebar::fn connect_show_other_locations_with_flags -->
 The places sidebar emits this signal when it needs the calling
 application to present a way to show other locations e.g. drives
 and network access points.
@@ -25499,7 +25499,7 @@ Feature: `v3_20`
 
 ## `open_flags`
 a single value from `PlacesOpenFlags` specifying how it should be opened.
-<!-- trait PlacesSidebarExt::fn connect_show_starred_location -->
+<!-- impl PlacesSidebar::fn connect_show_starred_location -->
 The places sidebar emits this signal when it needs the calling
 application to present a way to show the starred files. In GNOME,
 starred files are implemented by setting the nao:predefined-tag-favorite
@@ -25510,7 +25510,7 @@ Feature: `v3_22_26`
 ## `open_flags`
 a single value from `PlacesOpenFlags` specifying how the
  starred file should be opened.
-<!-- trait PlacesSidebarExt::fn connect_unmount -->
+<!-- impl PlacesSidebar::fn connect_unmount -->
 The places sidebar emits this signal when it starts a new operation
 because the user for example ejected some drive or unmounted a mount.
 In this way the application using the `PlacesSidebar` can track the
@@ -25520,13 +25520,13 @@ Feature: `v3_20`
 
 ## `mount_operation`
 the `gio::MountOperation` that is going to start.
-<!-- trait PlacesSidebarExt::fn get_property_populate-all -->
+<!-- impl PlacesSidebar::fn get_property_populate-all -->
 If :populate-all is `true`, the `PlacesSidebar::populate-popup` signal
 is also emitted for popovers.
 
 Feature: `v3_18`
 
-<!-- trait PlacesSidebarExt::fn set_property_populate-all -->
+<!-- impl PlacesSidebar::fn set_property_populate-all -->
 If :populate-all is `true`, the `PlacesSidebar::populate-popup` signal
 is also emitted for popovers.
 
@@ -44954,7 +44954,7 @@ This function is not useful in the context of CSS-based
  `StyleProvider` and a CSS style class.
 ## `font_desc`
 the font description to use, or `None` to undo
- the effect of previous calls to `WidgetExt::override_font`
+ the effect of previous calls to `Widget::override_font`
 <!-- trait WidgetExt::fn override_symbolic_color -->
 Sets a symbolic color for a widget.
 
