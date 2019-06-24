@@ -1239,23 +1239,23 @@ a nul-terminated string.
 # Returns
 
 `true` on success.
-<!-- impl Pixbuf::fn get_property_bits_per_sample -->
+<!-- trait PixbufExt::fn get_property_bits-per-sample -->
 The number of bits per sample.
 Currently only 8 bit per sample are supported.
-<!-- impl Pixbuf::fn set_property_bits_per_sample -->
+<!-- trait PixbufExt::fn set_property_bits-per-sample -->
 The number of bits per sample.
 Currently only 8 bit per sample are supported.
-<!-- impl Pixbuf::fn get_property_n_channels -->
+<!-- trait PixbufExt::fn get_property_n-channels -->
 The number of samples per pixel.
 Currently, only 3 or 4 samples per pixel are supported.
-<!-- impl Pixbuf::fn set_property_n_channels -->
+<!-- trait PixbufExt::fn set_property_n-channels -->
 The number of samples per pixel.
 Currently, only 3 or 4 samples per pixel are supported.
-<!-- impl Pixbuf::fn get_property_rowstride -->
+<!-- trait PixbufExt::fn get_property_rowstride -->
 The number of bytes between the start of a row and
 the start of the next row. This number must (obviously)
 be at least as large as the width of the pixbuf.
-<!-- impl Pixbuf::fn set_property_rowstride -->
+<!-- trait PixbufExt::fn set_property_rowstride -->
 The number of bytes between the start of a row and
 the start of the next row. This number must (obviously)
 be at least as large as the width of the pixbuf.
@@ -1859,7 +1859,7 @@ Gets whether `self` should loop indefinitely when it reaches the end.
 Sets whether `self` should loop indefinitely when it reaches the end.
 ## `loop_`
 whether to loop the animation
-<!-- impl PixbufSimpleAnim::fn get_property_loop -->
+<!-- trait PixbufSimpleAnimExt::fn get_property_loop -->
 Whether the animation should loop when it reaches the end.
-<!-- impl PixbufSimpleAnim::fn set_property_loop -->
+<!-- trait PixbufSimpleAnimExt::fn set_property_loop -->
 Whether the animation should loop when it reaches the end.
