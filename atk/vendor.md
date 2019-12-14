@@ -336,7 +336,7 @@ height to set for `self`
 # Returns
 
 `true` or `false` whether the size was set or not
-<!-- trait ComponentExt::fn bounds-changed -->
+<!-- trait ComponentExt::fn connect_bounds_changed -->
 The 'bounds-changed" signal is emitted when the bposition or
 size of the component changes.
 ## `arg1`
