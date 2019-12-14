@@ -974,7 +974,7 @@ the screen to warp `self` to.
 the X coordinate of the destination.
 ## `y`
 the Y coordinate of the destination.
-<!-- impl Device::fn connect_changed -->
+<!-- impl Device::fn changed -->
 The ::changed signal is emitted either when the `Device`
 has changed the number of either axes or keys. For example
 In X this will normally happen when the slave device routing
@@ -982,7 +982,7 @@ events through the master device changes (for example, user
 switches from the USB mouse to a tablet), in that case the
 master device will change to reflect the new slave device
 axes and keys.
-<!-- impl Device::fn connect_tool_changed -->
+<!-- impl Device::fn tool-changed -->
 The ::tool-changed signal is emitted on pen/eraser
 ``GdkDevices`` whenever tools enter or leave proximity.
 
@@ -1227,13 +1227,13 @@ a list of
  ``GdkDevices``. The returned list must be
  freed with g_list_free (). The list elements are owned by
  GTK+ and must not be freed or unreffed.
-<!-- impl DeviceManager::fn connect_device_added -->
+<!-- impl DeviceManager::fn device-added -->
 The ::device-added signal is emitted either when a new master
 pointer is created, or when a slave (Hardware) input device
 is plugged in.
 ## `device`
 the newly added `Device`.
-<!-- impl DeviceManager::fn connect_device_changed -->
+<!-- impl DeviceManager::fn device-changed -->
 The ::device-changed signal is emitted whenever a device
 has changed in the hierarchy, either slave devices being
 disconnected from their master device or connected to
@@ -1246,7 +1246,7 @@ If a slave device is detached from all master devices
 if it's attached, it will change to `DeviceType::Slave`.
 ## `device`
 the `Device` that changed.
-<!-- impl DeviceManager::fn connect_device_removed -->
+<!-- impl DeviceManager::fn device-removed -->
 The ::device-removed signal is emitted either when a master
 pointer is removed, or when a slave (Hardware) input device
 is unplugged.
@@ -1803,12 +1803,12 @@ removed.
 
 This is most useful for X11. On windowing systems where requests are
 handled synchronously, this function will do nothing.
-<!-- impl Display::fn connect_closed -->
+<!-- impl Display::fn closed -->
 The ::closed signal is emitted when the connection to the windowing
 system for `display` is closed.
 ## `is_error`
 `true` if the display was closed due to an error
-<!-- impl Display::fn connect_monitor_added -->
+<!-- impl Display::fn monitor-added -->
 The ::monitor-added signal is emitted whenever a monitor is
 added.
 
@@ -1816,7 +1816,7 @@ Feature: `v3_22`
 
 ## `monitor`
 the monitor that was just added
-<!-- impl Display::fn connect_monitor_removed -->
+<!-- impl Display::fn monitor-removed -->
 The ::monitor-removed signal is emitted whenever a monitor is
 removed.
 
@@ -1824,10 +1824,10 @@ Feature: `v3_22`
 
 ## `monitor`
 the monitor that was just removed
-<!-- impl Display::fn connect_opened -->
+<!-- impl Display::fn opened -->
 The ::opened signal is emitted when the connection to the windowing
 system for `display` is opened.
-<!-- impl Display::fn connect_seat_added -->
+<!-- impl Display::fn seat-added -->
 The ::seat-added signal is emitted whenever a new seat is made
 known to the windowing system.
 
@@ -1835,7 +1835,7 @@ Feature: `v3_20`
 
 ## `seat`
 the seat that was just added
-<!-- impl Display::fn connect_seat_removed -->
+<!-- impl Display::fn seat-removed -->
 The ::seat-removed signal is emitted whenever a seat is removed
 by the windowing system.
 
@@ -1926,7 +1926,7 @@ a `Display`, or `None` if the
 Sets `display` as the default display.
 ## `display`
 a `Display`
-<!-- impl DisplayManager::fn connect_display_opened -->
+<!-- impl DisplayManager::fn display-opened -->
 The ::display-opened signal is emitted when a display is opened.
 ## `display`
 the opened display
@@ -2050,7 +2050,7 @@ Feature: `v3_20`
 x coordinate of the drag window hotspot
 ## `hot_y`
 y coordinate of the drag window hotspot
-<!-- impl DragContext::fn connect_action_changed -->
+<!-- impl DragContext::fn action-changed -->
 A new action is being chosen for the drag and drop operation.
 
 This signal will only be emitted if the `DragContext` manages
@@ -2061,7 +2061,7 @@ Feature: `v3_20`
 
 ## `action`
 The action currently chosen
-<!-- impl DragContext::fn connect_cancel -->
+<!-- impl DragContext::fn cancel -->
 The drag and drop operation was cancelled.
 
 This signal will only be emitted if the `DragContext` manages
@@ -2072,7 +2072,7 @@ Feature: `v3_20`
 
 ## `reason`
 The reason the context was cancelled
-<!-- impl DragContext::fn connect_dnd_finished -->
+<!-- impl DragContext::fn dnd-finished -->
 The drag and drop operation was finished, the drag destination
 finished reading all data. The drag source can now free all
 miscellaneous data.
@@ -2083,7 +2083,7 @@ for more information.
 
 Feature: `v3_20`
 
-<!-- impl DragContext::fn connect_drop_performed -->
+<!-- impl DragContext::fn drop-performed -->
 The drag and drop operation was performed on an accepting client.
 
 This signal will only be emitted if the `DragContext` manages
@@ -2499,10 +2499,10 @@ Gets the frame timings for the current frame.
 
 # Returns
 
-the `FrameTimings` for the frame currently
- being processed, or even no frame is being processed, for the
- previous frame. Before any frames have been processed, returns
- `None`.
+the `FrameTimings` for the
+ frame currently being processed, or even no frame is being
+ processed, for the previous frame. Before any frames have been
+ processed, returns `None`.
 <!-- impl FrameClock::fn get_frame_counter -->
 A `FrameClock` maintains a 64-bit counter that increments for
 each frame drawn.
@@ -2563,8 +2563,8 @@ the frame counter value identifying the frame to
 
 # Returns
 
-the `FrameTimings` object for the specified
- frame, or `None` if it is not available. See
+the `FrameTimings` object for
+ the specified frame, or `None` if it is not available. See
  `FrameClock::get_history_start`.
 <!-- impl FrameClock::fn request_phase -->
 Asks the frame clock to run a particular phase. The signal
@@ -2579,32 +2579,32 @@ this allows GTK+ to adjust system parameters to get maximally
 smooth animations.
 ## `phase`
 the phase that is requested
-<!-- impl FrameClock::fn connect_after_paint -->
+<!-- impl FrameClock::fn after-paint -->
 This signal ends processing of the frame. Applications
 should generally not handle this signal.
-<!-- impl FrameClock::fn connect_before_paint -->
+<!-- impl FrameClock::fn before-paint -->
 This signal begins processing of the frame. Applications
 should generally not handle this signal.
-<!-- impl FrameClock::fn connect_flush_events -->
+<!-- impl FrameClock::fn flush-events -->
 This signal is used to flush pending motion events that
 are being batched up and compressed together. Applications
 should not handle this signal.
-<!-- impl FrameClock::fn connect_layout -->
+<!-- impl FrameClock::fn layout -->
 This signal is emitted as the second step of toolkit and
 application processing of the frame. Any work to update
 sizes and positions of application elements should be
 performed. GTK+ normally handles this internally.
-<!-- impl FrameClock::fn connect_paint -->
+<!-- impl FrameClock::fn paint -->
 This signal is emitted as the third step of toolkit and
 application processing of the frame. The frame is
 repainted. GDK normally handles this internally and
 produces expose events, which are turned into GTK+
 ``GtkWidget`::draw` signals.
-<!-- impl FrameClock::fn connect_resume_events -->
+<!-- impl FrameClock::fn resume-events -->
 This signal is emitted after processing of the frame is
 finished, and is handled internally by GTK+ to resume normal
 event processing. Applications should not handle this signal.
-<!-- impl FrameClock::fn connect_update -->
+<!-- impl FrameClock::fn update -->
 This signal is emitted as the first step of toolkit and
 application processing of the frame. Animations should
 be updated using `FrameClock::get_frame_time`.
@@ -3136,6 +3136,256 @@ the device is a trackpoint. This device type has been
 the device is a "pad", a collection of buttons,
  rings and strips found in drawing tablets. This device type has been
  added in 3.22.
+<!-- struct Keymap -->
+A `Keymap` defines the translation from keyboard state
+(including a hardware key, a modifier mask, and active keyboard group)
+to a keyval. This translation has two phases. The first phase is
+to determine the effective keyboard group and level for the keyboard
+state; the second phase is to look up the keycode/group/level triplet
+in the keymap and see what keyval it corresponds to.
+<!-- impl Keymap::fn get_default -->
+Returns the `Keymap` attached to the default display.
+
+# Deprecated since 3.22
+
+Use `Keymap::get_for_display` instead
+
+# Returns
+
+the `Keymap` attached to the default display.
+<!-- impl Keymap::fn get_for_display -->
+Returns the `Keymap` attached to `display`.
+## `display`
+the `Display`.
+
+# Returns
+
+the `Keymap` attached to `display`.
+<!-- impl Keymap::fn add_virtual_modifiers -->
+Maps the non-virtual modifiers (i.e Mod2, Mod3, ...) which are set
+in `state` to the virtual modifiers (i.e. Super, Hyper and Meta) and
+set the corresponding bits in `state`.
+
+GDK already does this before delivering key events, but for
+compatibility reasons, it only sets the first virtual modifier
+it finds, whereas this function sets all matching virtual modifiers.
+
+This function is useful when matching key events against
+accelerators.
+## `state`
+pointer to the modifier mask to change
+<!-- impl Keymap::fn get_caps_lock_state -->
+Returns whether the Caps Lock modifer is locked.
+
+# Returns
+
+`true` if Caps Lock is on
+<!-- impl Keymap::fn get_direction -->
+Returns the direction of effective layout of the keymap.
+
+# Returns
+
+`pango::Direction::Ltr` or `pango::Direction::Rtl`
+ if it can determine the direction. `pango::Direction::Neutral`
+ otherwise.
+<!-- impl Keymap::fn get_entries_for_keycode -->
+Returns the keyvals bound to `hardware_keycode`.
+The Nth `KeymapKey` in `keys` is bound to the Nth
+keyval in `keyvals`. Free the returned arrays with `g_free`.
+When a keycode is pressed by the user, the keyval from
+this list of entries is selected by considering the effective
+keyboard group and level. See `Keymap::translate_keyboard_state`.
+## `hardware_keycode`
+a keycode
+## `keys`
+return
+ location for array of `KeymapKey`, or `None`
+## `keyvals`
+return
+ location for array of keyvals, or `None`
+## `n_entries`
+length of `keys` and `keyvals`
+
+# Returns
+
+`true` if there were any entries
+<!-- impl Keymap::fn get_entries_for_keyval -->
+Obtains a list of keycode/group/level combinations that will
+generate `keyval`. Groups and levels are two kinds of keyboard mode;
+in general, the level determines whether the top or bottom symbol
+on a key is used, and the group determines whether the left or
+right symbol is used. On US keyboards, the shift key changes the
+keyboard level, and there are no groups. A group switch key might
+convert a keyboard between Hebrew to English modes, for example.
+`EventKey` contains a `group` field that indicates the active
+keyboard group. The level is computed from the modifier mask.
+The returned array should be freed
+with `g_free`.
+## `keyval`
+a keyval, such as `GDK_KEY_a`, `GDK_KEY_Up`, `GDK_KEY_Return`, etc.
+## `keys`
+return location
+ for an array of `KeymapKey`
+## `n_keys`
+return location for number of elements in returned array
+
+# Returns
+
+`true` if keys were found and returned
+<!-- impl Keymap::fn get_modifier_mask -->
+Returns the modifier mask the `self`’s windowing system backend
+uses for a particular purpose.
+
+Note that this function always returns real hardware modifiers, not
+virtual ones (e.g. it will return `ModifierType::Mod1Mask` rather than
+`ModifierType::MetaMask` if the backend maps MOD1 to META), so there are use
+cases where the return value of this function has to be transformed
+by `Keymap::add_virtual_modifiers` in order to contain the
+expected result.
+## `intent`
+the use case for the modifier mask
+
+# Returns
+
+the modifier mask used for `intent`.
+<!-- impl Keymap::fn get_modifier_state -->
+Returns the current modifier state.
+
+# Returns
+
+the current modifier state.
+<!-- impl Keymap::fn get_num_lock_state -->
+Returns whether the Num Lock modifer is locked.
+
+# Returns
+
+`true` if Num Lock is on
+<!-- impl Keymap::fn get_scroll_lock_state -->
+Returns whether the Scroll Lock modifer is locked.
+
+Feature: `v3_18`
+
+
+# Returns
+
+`true` if Scroll Lock is on
+<!-- impl Keymap::fn have_bidi_layouts -->
+Determines if keyboard layouts for both right-to-left and left-to-right
+languages are in use.
+
+# Returns
+
+`true` if there are layouts in both directions, `false` otherwise
+<!-- impl Keymap::fn lookup_key -->
+Looks up the keyval mapped to a keycode/group/level triplet.
+If no keyval is bound to `key`, returns 0. For normal user input,
+you want to use `Keymap::translate_keyboard_state` instead of
+this function, since the effective group/level may not be
+the same as the current keyboard state.
+## `key`
+a `KeymapKey` with keycode, group, and level initialized
+
+# Returns
+
+a keyval, or 0 if none was mapped to the given `key`
+<!-- impl Keymap::fn map_virtual_modifiers -->
+Maps the virtual modifiers (i.e. Super, Hyper and Meta) which
+are set in `state` to their non-virtual counterparts (i.e. Mod2,
+Mod3,...) and set the corresponding bits in `state`.
+
+This function is useful when matching key events against
+accelerators.
+## `state`
+pointer to the modifier state to map
+
+# Returns
+
+`false` if two virtual modifiers were mapped to the
+ same non-virtual modifier. Note that `false` is also returned
+ if a virtual modifier is mapped to a non-virtual modifier that
+ was already set in `state`.
+<!-- impl Keymap::fn translate_keyboard_state -->
+Translates the contents of a `EventKey` into a keyval, effective
+group, and level. Modifiers that affected the translation and
+are thus unavailable for application use are returned in
+`consumed_modifiers`.
+See [Groups][key-group-explanation] for an explanation of
+groups and levels. The `effective_group` is the group that was
+actually used for the translation; some keys such as Enter are not
+affected by the active keyboard group. The `level` is derived from
+`state`. For convenience, `EventKey` already contains the translated
+keyval, so this function isn’t as useful as you might think.
+
+`consumed_modifiers` gives modifiers that should be masked outfrom `state`
+when comparing this key press to a hot key. For instance, on a US keyboard,
+the `plus` symbol is shifted, so when comparing a key press to a
+`<Control>plus` accelerator `<Shift>` should be masked out.
+
+
+```C
+// We want to ignore irrelevant modifiers like ScrollLock
+#define ALL_ACCELS_MASK (GDK_CONTROL_MASK | GDK_SHIFT_MASK | GDK_MOD1_MASK)
+gdk_keymap_translate_keyboard_state (keymap, event->hardware_keycode,
+                                     event->state, event->group,
+                                     &keyval, NULL, NULL, &consumed);
+if (keyval == GDK_PLUS &&
+    (event->state & ~consumed & ALL_ACCELS_MASK) == GDK_CONTROL_MASK)
+  // Control was pressed
+```
+
+An older interpretation `consumed_modifiers` was that it contained
+all modifiers that might affect the translation of the key;
+this allowed accelerators to be stored with irrelevant consumed
+modifiers, by doing:
+
+```C
+// XXX Don’t do this XXX
+if (keyval == accel_keyval &&
+    (event->state & ~consumed & ALL_ACCELS_MASK) == (accel_mods & ~consumed))
+  // Accelerator was pressed
+```
+
+However, this did not work if multi-modifier combinations were
+used in the keymap, since, for instance, `<Control>` would be
+masked out even if only `<Control><Alt>` was used in the keymap.
+To support this usage as well as well as possible, all single
+modifier combinations that could affect the key for any combination
+of modifiers will be returned in `consumed_modifiers`; multi-modifier
+combinations are returned only when actually found in `state`. When
+you store accelerators, you should always store them with consumed
+modifiers removed. Store `<Control>plus`, not `<Control><Shift>plus`,
+## `hardware_keycode`
+a keycode
+## `state`
+a modifier state
+## `group`
+active keyboard group
+## `keyval`
+return location for keyval, or `None`
+## `effective_group`
+return location for effective
+ group, or `None`
+## `level`
+return location for level, or `None`
+## `consumed_modifiers`
+return location for modifiers
+ that were used to determine the group or level, or `None`
+
+# Returns
+
+`true` if there was a keyval bound to the keycode/state/group
+<!-- impl Keymap::fn direction-changed -->
+The ::direction-changed signal gets emitted when the direction of
+the keymap changes.
+<!-- impl Keymap::fn keys-changed -->
+The ::keys-changed signal is emitted when the mapping represented by
+`keymap` changes.
+<!-- impl Keymap::fn state-changed -->
+The ::state-changed signal is emitted when the state of the
+keyboard changes, e.g when Caps Lock is turned on or off.
+See `Keymap::get_caps_lock_state`.
+<!-- struct KeymapKey -->
+A `KeymapKey` is a hardware key that can be mapped to a keyval.
 <!-- enum ModifierIntent -->
 This enum is used with `Keymap::get_modifier_mask`
 in order to determine what modifiers the
@@ -3209,7 +3459,12 @@ Feature: `v3_22`
 
 the physical height of the monitor
 <!-- impl Monitor::fn get_manufacturer -->
-Gets the name of the monitor's manufacturer, if available.
+Gets the name or PNP ID of the monitor's manufacturer, if available.
+
+Note that this value might also vary depending on actual
+display backend.
+
+PNP ID registry is located at https://uefi.org/pnp_id_list
 
 Feature: `v3_22`
 
@@ -3389,7 +3644,7 @@ The string can be either one of:
 - A RGBA color in the form “rgba(r,g,b,a)”
 
 Where “r”, “g”, “b” and “a” are respectively the red, green, blue and
-alpha color values. In the last two cases, r g and b are either integers
+alpha color values. In the last two cases, “r”, “g”, and “b” are either integers
 in the range 0 to 255 or percentage values in the range 0% to 100%, and
 a is a floating point value in the range 0 to 1.
 ## `spec`
@@ -3400,18 +3655,18 @@ the string specifying the color
 `true` if the parsing succeeded
 <!-- impl RGBA::fn to_string -->
 Returns a textual specification of `self` in the form
-`rgb (r, g, b)` or
-`rgba (r, g, b, a)`,
+`rgb(r,g,b)` or
+`rgba(r g,b,a)`,
 where “r”, “g”, “b” and “a” represent the red, green,
-blue and alpha values respectively. r, g, and b are
-represented as integers in the range 0 to 255, and a
-is represented as floating point value in the range 0 to 1.
+blue and alpha values respectively. “r”, “g”, and “b” are
+represented as integers in the range 0 to 255, and “a”
+is represented as a floating point value in the range 0 to 1.
 
-These string forms are string forms those supported by
+These string forms are string forms that are supported by
 the CSS3 colors module, and can be parsed by `RGBA::parse`.
 
 Note that this string representation may lose some
-precision, since r, g and b are represented as 8-bit
+precision, since “r”, “g” and “b” are represented as 8-bit
 integers. If this is a concern, you should use a
 different representation.
 
@@ -3926,16 +4181,16 @@ font will be 13 units high. (10 * 96. / 72. = 13.3).
 ## `dpi`
 the resolution in “dots per inch”. (Physical inches aren’t actually
  involved; the terminology is conventional.)
-<!-- impl Screen::fn connect_composited_changed -->
+<!-- impl Screen::fn composited-changed -->
 The ::composited-changed signal is emitted when the composited
 status of the screen changes
-<!-- impl Screen::fn connect_monitors_changed -->
+<!-- impl Screen::fn monitors-changed -->
 The ::monitors-changed signal is emitted when the number, size
 or position of the monitors attached to the screen change.
 
 Only for X11 and OS X for now. A future implementation for Win32
 may be a possibility.
-<!-- impl Screen::fn connect_size_changed -->
+<!-- impl Screen::fn size-changed -->
 The ::size-changed signal is emitted when the pixel width or
 height of a screen changes.
 <!-- enum ScrollDirection -->
@@ -4070,7 +4325,7 @@ Releases a grab added through `Seat::grab`.
 
 Feature: `v3_20`
 
-<!-- impl Seat::fn connect_device_added -->
+<!-- impl Seat::fn device-added -->
 The ::device-added signal is emitted when a new input
 device is related to this seat.
 
@@ -4078,7 +4333,7 @@ Feature: `v3_20`
 
 ## `device`
 the newly added `Device`.
-<!-- impl Seat::fn connect_device_removed -->
+<!-- impl Seat::fn device-removed -->
 The ::device-removed signal is emitted when an
 input device is removed (e.g. unplugged).
 
@@ -4086,7 +4341,7 @@ Feature: `v3_20`
 
 ## `device`
 the just removed `Device`.
-<!-- impl Seat::fn connect_tool_added -->
+<!-- impl Seat::fn tool-added -->
 The ::tool-added signal is emitted whenever a new tool
 is made known to the seat. The tool may later be assigned
 to a device (i.e. on proximity with a tablet). The device
@@ -4098,7 +4353,7 @@ Feature: `v3_22`
 
 ## `tool`
 the new `DeviceTool` known to the seat
-<!-- impl Seat::fn connect_tool_removed -->
+<!-- impl Seat::fn tool-removed -->
 This signal is emitted whenever a tool is no longer known
 to this `seat`.
 
@@ -4143,6 +4398,8 @@ The layout is vertical, the order is BGR
 
 Feature: `v3_22`
 
+<!-- struct TimeCoord -->
+A `TimeCoord` stores a single event in a motion history.
 <!-- enum VisibilityState -->
 Specifies the visiblity status of a window for a `EventVisibility`.
 <!-- enum VisibilityState::variant Unobscured -->
@@ -4771,7 +5028,7 @@ or any other error occurs.
 Attempt to deiconify (unminimize) `self`. On X11 the window manager may
 choose to ignore the request to deiconify. When using GTK+,
 use `gtk_window_deiconify` instead of the `Window` variant. Or better yet,
-you probably want to use `gtk_window_present`, which raises the window, focuses it,
+you probably want to use `gtk_window_present_with_time`, which raises the window, focuses it,
 unminimizes it, and puts it on the current desktop.
 <!-- trait WindowExt::fn destroy -->
 Destroys the window system resources associated with `self` and decrements `self`'s
@@ -4814,7 +5071,7 @@ Some backends may not support native child windows.
 
 `true` if the window has a native window, `false` otherwise
 <!-- trait WindowExt::fn focus -->
-Sets keyboard focus to `self`. In most cases, `gtk_window_present`
+Sets keyboard focus to `self`. In most cases, `gtk_window_present_with_time`
 should be used on a ``GtkWindow``, rather than calling this function.
 ## `timestamp`
 timestamp of the event triggering the window focus
@@ -6291,7 +6548,7 @@ and `gtk_window_unstick`.
 Withdraws a window (unmaps it and asks the window manager to forget about it).
 This function is not really useful as `WindowExt::hide` automatically
 withdraws toplevel windows before hiding them.
-<!-- trait WindowExt::fn connect_create_surface -->
+<!-- trait WindowExt::fn create-surface -->
 The ::create-surface signal is emitted when an offscreen window
 needs its surface (re)created, which happens either when the
 window is first drawn to, or when the window is being
@@ -6310,7 +6567,7 @@ the height of the offscreen surface to create
 # Returns
 
 the newly created `cairo::Surface` for the offscreen window
-<!-- trait WindowExt::fn connect_from_embedder -->
+<!-- trait WindowExt::fn from-embedder -->
 The ::from-embedder signal is emitted to translate coordinates
 in the embedder of an offscreen window to the offscreen window.
 
@@ -6325,7 +6582,7 @@ return location for the x
 ## `offscreen_y`
 return location for the y
  coordinate in the offscreen window
-<!-- trait WindowExt::fn connect_moved_to_rect -->
+<!-- trait WindowExt::fn moved-to-rect -->
 Emitted when the position of `window` is finalized after being moved to a
 destination rectangle.
 
@@ -6350,7 +6607,7 @@ the final position of `window` or `None` if the
 `true` if the anchors were flipped horizontally
 ## `flipped_y`
 `true` if the anchors were flipped vertically
-<!-- trait WindowExt::fn connect_pick_embedded_child -->
+<!-- trait WindowExt::fn pick-embedded-child -->
 The ::pick-embedded-child signal is emitted to find an embedded
 child at the given position.
 ## `x`
@@ -6362,7 +6619,7 @@ y coordinate in the window
 
 the `Window` of the
  embedded child at `x`, `y`, or `None`
-<!-- trait WindowExt::fn connect_to_embedder -->
+<!-- trait WindowExt::fn to-embedder -->
 The ::to-embedder signal is emitted to translate coordinates
 in an offscreen window to its embedder.
 

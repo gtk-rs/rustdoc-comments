@@ -266,7 +266,7 @@ Sets whether the license text in `self` is
 automatically wrapped.
 ## `wrap_license`
 whether to wrap the license
-<!-- trait AboutDialogExt::fn connect_activate_link -->
+<!-- trait AboutDialogExt::fn activate-link -->
 The signal which gets emitted to activate a URI.
 Applications may connect to it to override the default behaviour,
 which is to call `gtk_show_uri_on_window`.
@@ -440,7 +440,7 @@ Creates a new `AccelGroup`.
 a new `AccelGroup` object
 <!-- impl AccelGroup::fn from_accel_closure -->
 Finds the `AccelGroup` to which `closure` is connected;
-see `AccelGroupExt::connect`.
+see `AccelGroup::connect`.
 ## `closure`
 a `gobject::Closure`
 
@@ -502,7 +502,7 @@ path used for determining key and modifiers
 closure to be executed upon accelerator activation
 <!-- trait AccelGroupExt::fn disconnect -->
 Removes an accelerator previously installed through
-`AccelGroupExt::connect`.
+`AccelGroup::connect`.
 
 Since 2.20 `closure` can be `None`.
 ## `closure`
@@ -514,7 +514,7 @@ the closure to remove from this accelerator
 `true` if the closure was found and got disconnected
 <!-- trait AccelGroupExt::fn disconnect_key -->
 Removes an accelerator previously installed through
-`AccelGroupExt::connect`.
+`AccelGroup::connect`.
 ## `accel_key`
 key value of the accelerator
 ## `accel_mods`
@@ -580,7 +580,7 @@ an array of
  is owned by GTK+ and must not be freed.
 <!-- trait AccelGroupExt::fn unlock -->
 Undoes the last call to `AccelGroupExt::lock` on this `self`.
-<!-- trait AccelGroupExt::fn connect_accel_activate -->
+<!-- trait AccelGroupExt::fn accel-activate -->
 The accel-activate signal is an implementation detail of
 `AccelGroup` and not meant to be used by applications.
 ## `acceleratable`
@@ -593,7 +593,7 @@ the modifier combination of the accelerator
 # Returns
 
 `true` if the accelerator was activated
-<!-- trait AccelGroupExt::fn connect_accel_changed -->
+<!-- trait AccelGroupExt::fn accel-changed -->
 The accel-changed signal is emitted when an entry
 is added to or removed from the accel group.
 
@@ -731,7 +731,7 @@ a keyval, or 0
 the modifier mask for the accel
 <!-- trait AccelLabelExt::fn set_accel_closure -->
 Sets the closure to be monitored by this accelerator label. The closure
-must be connected to an accelerator group; see `AccelGroupExt::connect`.
+must be connected to an accelerator group; see `AccelGroup::connect`.
 Passing `None` for `accel_closure` will dissociate `self` from its
 current closure, if any.
 ## `accel_closure`
@@ -1080,10 +1080,10 @@ changed the `Adjustment:value` property.
 
 GTK+ emits `Adjustment::value-changed` itself whenever
  the value changes
-<!-- trait AdjustmentExt::fn connect_changed -->
+<!-- trait AdjustmentExt::fn changed -->
 Emitted when one or more of the `Adjustment` properties have been
 changed, other than the `Adjustment:value` property.
-<!-- trait AdjustmentExt::fn connect_value_changed -->
+<!-- trait AdjustmentExt::fn value-changed -->
 Emitted when the `Adjustment:value` property has been changed.
 <!-- trait AdjustmentExt::fn get_property_lower -->
 The minimum value of the adjustment.
@@ -1307,7 +1307,7 @@ Sets whether the dropdown menu of this button should show an
 entry to trigger a `AppChooserDialog`.
 ## `setting`
 the new value for `AppChooserButton:show-dialog-item`
-<!-- trait AppChooserButtonExt::fn connect_custom_item_activated -->
+<!-- trait AppChooserButtonExt::fn custom-item-activated -->
 Emitted when a custom item, previously added with
 `AppChooserButtonExt::append_custom_item`, is activated from the
 dropdown menu.
@@ -1526,7 +1526,7 @@ Sets whether the app chooser should show recommended applications
 for the content type in a separate section.
 ## `setting`
 the new value for `AppChooserWidget:show-recommended`
-<!-- trait AppChooserWidgetExt::fn connect_application_activated -->
+<!-- trait AppChooserWidgetExt::fn application-activated -->
 Emitted when an application item is activated from the widget's list.
 
 This usually happens when the user double clicks an item, or an item
@@ -1534,11 +1534,11 @@ is selected and the user presses one of the keys Space, Shift+Space,
 Return or Enter.
 ## `application`
 the activated `gio::AppInfo`
-<!-- trait AppChooserWidgetExt::fn connect_application_selected -->
+<!-- trait AppChooserWidgetExt::fn application-selected -->
 Emitted when an application item is selected from the widget's list.
 ## `application`
 the selected `gio::AppInfo`
-<!-- trait AppChooserWidgetExt::fn connect_populate_popup -->
+<!-- trait AppChooserWidgetExt::fn populate-popup -->
 Emitted when a context menu is about to popup over an application item.
 Clients can insert menu items into the provided `Menu` object in the
 callback of this signal; the context menu will be shown over the item
@@ -2004,12 +2004,21 @@ Removes an inhibitor that has been established with `GtkApplicationExt::inhibit`
 Inhibitors are also cleared when the application exits.
 ## `cookie`
 a cookie that was returned by `GtkApplicationExt::inhibit`
-<!-- trait GtkApplicationExt::fn connect_window_added -->
+<!-- trait GtkApplicationExt::fn query-end -->
+Emitted when the session manager is about to end the session, only
+if `Application::register-session` is `true`. Applications can
+connect to this signal and call `GtkApplicationExt::inhibit` with
+`ApplicationInhibitFlags::Logout` to delay the end of the session
+until state has been saved.
+
+Feature: `v3_24_8`
+
+<!-- trait GtkApplicationExt::fn window-added -->
 Emitted when a `Window` is added to `application` through
 `GtkApplicationExt::add_window`.
 ## `window`
 the newly-added `Window`
-<!-- trait GtkApplicationExt::fn connect_window_removed -->
+<!-- trait GtkApplicationExt::fn window-removed -->
 Emitted when a `Window` is removed from `application`,
 either as a side-effect of being destroyed or explicitly
 through `GtkApplicationExt::remove_window`.
@@ -2520,7 +2529,7 @@ visibility or completeness of a page changes.
 One situation where it can be necessary to call this
 function is when changing a value on the current page
 affects the future page flow of the assistant.
-<!-- trait AssistantExt::fn connect_apply -->
+<!-- trait AssistantExt::fn apply -->
 The ::apply signal is emitted when the apply button is clicked.
 
 The default behavior of the `Assistant` is to switch to the page
@@ -2532,13 +2541,13 @@ to complete, you might consider putting a page of type
 `AssistantPageType::Progress` after the confirmation page and handle
 this operation within the `Assistant::prepare` signal of the progress
 page.
-<!-- trait AssistantExt::fn connect_cancel -->
+<!-- trait AssistantExt::fn cancel -->
 The ::cancel signal is emitted when then the cancel button is clicked.
-<!-- trait AssistantExt::fn connect_close -->
+<!-- trait AssistantExt::fn close -->
 The ::close signal is emitted either when the close button of
 a summary page is clicked, or when the apply button in the last
 page in the flow (of type `AssistantPageType::Confirm`) is clicked.
-<!-- trait AssistantExt::fn connect_prepare -->
+<!-- trait AssistantExt::fn prepare -->
 The ::prepare signal is emitted when a new page is set as the
 assistant's current page, before making the new page visible.
 
@@ -2725,7 +2734,7 @@ Trait containing all `Box` methods.
 
 # Implementors
 
-[`AppChooserWidget`](struct.AppChooserWidget.html), [`Box`](struct.Box.html), [`ButtonBox`](struct.ButtonBox.html), [`ColorChooserWidget`](struct.ColorChooserWidget.html), [`FileChooserButton`](struct.FileChooserButton.html), [`FileChooserWidget`](struct.FileChooserWidget.html), [`FontChooserWidget`](struct.FontChooserWidget.html), [`InfoBar`](struct.InfoBar.html), [`RecentChooserWidget`](struct.RecentChooserWidget.html), [`StackSwitcher`](struct.StackSwitcher.html), [`Statusbar`](struct.Statusbar.html)
+[`AppChooserWidget`](struct.AppChooserWidget.html), [`Box`](struct.Box.html), [`ButtonBox`](struct.ButtonBox.html), [`ColorChooserWidget`](struct.ColorChooserWidget.html), [`FileChooserButton`](struct.FileChooserButton.html), [`FileChooserWidget`](struct.FileChooserWidget.html), [`FontChooserWidget`](struct.FontChooserWidget.html), [`InfoBar`](struct.InfoBar.html), [`RecentChooserWidget`](struct.RecentChooserWidget.html), [`ShortcutLabel`](struct.ShortcutLabel.html), [`StackSwitcher`](struct.StackSwitcher.html), [`Statusbar`](struct.Statusbar.html)
 <!-- impl Box::fn new -->
 Creates a new `Box`.
 ## `orientation`
@@ -2900,7 +2909,7 @@ Trait containing all `Buildable` methods.
 
 # Implementors
 
-[`AboutDialog`](struct.AboutDialog.html), [`AccelLabel`](struct.AccelLabel.html), [`ActionBar`](struct.ActionBar.html), [`AppChooserButton`](struct.AppChooserButton.html), [`AppChooserDialog`](struct.AppChooserDialog.html), [`AppChooserWidget`](struct.AppChooserWidget.html), [`ApplicationWindow`](struct.ApplicationWindow.html), [`AspectFrame`](struct.AspectFrame.html), [`Assistant`](struct.Assistant.html), [`Bin`](struct.Bin.html), [`Box`](struct.Box.html), [`Buildable`](struct.Buildable.html), [`ButtonBox`](struct.ButtonBox.html), [`Button`](struct.Button.html), [`Calendar`](struct.Calendar.html), [`CellAreaBox`](struct.CellAreaBox.html), [`CellArea`](struct.CellArea.html), [`CellView`](struct.CellView.html), [`CheckButton`](struct.CheckButton.html), [`CheckMenuItem`](struct.CheckMenuItem.html), [`ColorButton`](struct.ColorButton.html), [`ColorChooserDialog`](struct.ColorChooserDialog.html), [`ColorChooserWidget`](struct.ColorChooserWidget.html), [`ComboBoxText`](struct.ComboBoxText.html), [`ComboBox`](struct.ComboBox.html), [`Container`](struct.Container.html), [`Dialog`](struct.Dialog.html), [`DrawingArea`](struct.DrawingArea.html), [`EntryCompletion`](struct.EntryCompletion.html), [`Entry`](struct.Entry.html), [`EventBox`](struct.EventBox.html), [`Expander`](struct.Expander.html), [`FileChooserButton`](struct.FileChooserButton.html), [`FileChooserDialog`](struct.FileChooserDialog.html), [`FileChooserWidget`](struct.FileChooserWidget.html), [`FileFilter`](struct.FileFilter.html), [`Fixed`](struct.Fixed.html), [`FlowBoxChild`](struct.FlowBoxChild.html), [`FlowBox`](struct.FlowBox.html), [`FontButton`](struct.FontButton.html), [`FontChooserDialog`](struct.FontChooserDialog.html), [`FontChooserWidget`](struct.FontChooserWidget.html), [`Frame`](struct.Frame.html), [`GLArea`](struct.GLArea.html), [`Grid`](struct.Grid.html), [`HeaderBar`](struct.HeaderBar.html), [`IconView`](struct.IconView.html), [`Image`](struct.Image.html), [`InfoBar`](struct.InfoBar.html), [`Invisible`](struct.Invisible.html), [`Label`](struct.Label.html), [`Layout`](struct.Layout.html), [`LevelBar`](struct.LevelBar.html), [`LinkButton`](struct.LinkButton.html), [`ListBoxRow`](struct.ListBoxRow.html), [`ListBox`](struct.ListBox.html), [`ListStore`](struct.ListStore.html), [`LockButton`](struct.LockButton.html), [`MenuBar`](struct.MenuBar.html), [`MenuButton`](struct.MenuButton.html), [`MenuItem`](struct.MenuItem.html), [`MenuShell`](struct.MenuShell.html), [`MenuToolButton`](struct.MenuToolButton.html), [`Menu`](struct.Menu.html), [`MessageDialog`](struct.MessageDialog.html), [`Misc`](struct.Misc.html), [`ModelButton`](struct.ModelButton.html), [`Notebook`](struct.Notebook.html), [`OffscreenWindow`](struct.OffscreenWindow.html), [`Overlay`](struct.Overlay.html), [`Paned`](struct.Paned.html), [`PlacesSidebar`](struct.PlacesSidebar.html), [`Plug`](struct.Plug.html), [`PopoverMenu`](struct.PopoverMenu.html), [`Popover`](struct.Popover.html), [`ProgressBar`](struct.ProgressBar.html), [`RadioButton`](struct.RadioButton.html), [`RadioMenuItem`](struct.RadioMenuItem.html), [`RadioToolButton`](struct.RadioToolButton.html), [`Range`](struct.Range.html), [`RecentChooserDialog`](struct.RecentChooserDialog.html), [`RecentChooserMenu`](struct.RecentChooserMenu.html), [`RecentChooserWidget`](struct.RecentChooserWidget.html), [`RecentFilter`](struct.RecentFilter.html), [`Revealer`](struct.Revealer.html), [`ScaleButton`](struct.ScaleButton.html), [`Scale`](struct.Scale.html), [`Scrollbar`](struct.Scrollbar.html), [`ScrolledWindow`](struct.ScrolledWindow.html), [`SearchBar`](struct.SearchBar.html), [`SearchEntry`](struct.SearchEntry.html), [`SeparatorMenuItem`](struct.SeparatorMenuItem.html), [`SeparatorToolItem`](struct.SeparatorToolItem.html), [`Separator`](struct.Separator.html), [`ShortcutsWindow`](struct.ShortcutsWindow.html), [`SizeGroup`](struct.SizeGroup.html), [`Socket`](struct.Socket.html), [`SpinButton`](struct.SpinButton.html), [`Spinner`](struct.Spinner.html), [`StackSidebar`](struct.StackSidebar.html), [`StackSwitcher`](struct.StackSwitcher.html), [`Stack`](struct.Stack.html), [`Statusbar`](struct.Statusbar.html), [`Switch`](struct.Switch.html), [`TextTagTable`](struct.TextTagTable.html), [`TextView`](struct.TextView.html), [`ToggleButton`](struct.ToggleButton.html), [`ToggleToolButton`](struct.ToggleToolButton.html), [`ToolButton`](struct.ToolButton.html), [`ToolItemGroup`](struct.ToolItemGroup.html), [`ToolItem`](struct.ToolItem.html), [`ToolPalette`](struct.ToolPalette.html), [`Toolbar`](struct.Toolbar.html), [`TreeStore`](struct.TreeStore.html), [`TreeViewColumn`](struct.TreeViewColumn.html), [`TreeView`](struct.TreeView.html), [`Viewport`](struct.Viewport.html), [`VolumeButton`](struct.VolumeButton.html), [`Widget`](struct.Widget.html), [`Window`](struct.Window.html)
+[`AboutDialog`](struct.AboutDialog.html), [`AccelLabel`](struct.AccelLabel.html), [`ActionBar`](struct.ActionBar.html), [`AppChooserButton`](struct.AppChooserButton.html), [`AppChooserDialog`](struct.AppChooserDialog.html), [`AppChooserWidget`](struct.AppChooserWidget.html), [`ApplicationWindow`](struct.ApplicationWindow.html), [`AspectFrame`](struct.AspectFrame.html), [`Assistant`](struct.Assistant.html), [`Bin`](struct.Bin.html), [`Box`](struct.Box.html), [`Buildable`](struct.Buildable.html), [`ButtonBox`](struct.ButtonBox.html), [`Button`](struct.Button.html), [`Calendar`](struct.Calendar.html), [`CellAreaBox`](struct.CellAreaBox.html), [`CellArea`](struct.CellArea.html), [`CellView`](struct.CellView.html), [`CheckButton`](struct.CheckButton.html), [`CheckMenuItem`](struct.CheckMenuItem.html), [`ColorButton`](struct.ColorButton.html), [`ColorChooserDialog`](struct.ColorChooserDialog.html), [`ColorChooserWidget`](struct.ColorChooserWidget.html), [`ComboBoxText`](struct.ComboBoxText.html), [`ComboBox`](struct.ComboBox.html), [`Container`](struct.Container.html), [`Dialog`](struct.Dialog.html), [`DrawingArea`](struct.DrawingArea.html), [`EntryCompletion`](struct.EntryCompletion.html), [`Entry`](struct.Entry.html), [`EventBox`](struct.EventBox.html), [`Expander`](struct.Expander.html), [`FileChooserButton`](struct.FileChooserButton.html), [`FileChooserDialog`](struct.FileChooserDialog.html), [`FileChooserWidget`](struct.FileChooserWidget.html), [`FileFilter`](struct.FileFilter.html), [`Fixed`](struct.Fixed.html), [`FlowBoxChild`](struct.FlowBoxChild.html), [`FlowBox`](struct.FlowBox.html), [`FontButton`](struct.FontButton.html), [`FontChooserDialog`](struct.FontChooserDialog.html), [`FontChooserWidget`](struct.FontChooserWidget.html), [`Frame`](struct.Frame.html), [`GLArea`](struct.GLArea.html), [`Grid`](struct.Grid.html), [`HeaderBar`](struct.HeaderBar.html), [`IconView`](struct.IconView.html), [`Image`](struct.Image.html), [`InfoBar`](struct.InfoBar.html), [`Invisible`](struct.Invisible.html), [`Label`](struct.Label.html), [`Layout`](struct.Layout.html), [`LevelBar`](struct.LevelBar.html), [`LinkButton`](struct.LinkButton.html), [`ListBoxRow`](struct.ListBoxRow.html), [`ListBox`](struct.ListBox.html), [`ListStore`](struct.ListStore.html), [`LockButton`](struct.LockButton.html), [`MenuBar`](struct.MenuBar.html), [`MenuButton`](struct.MenuButton.html), [`MenuItem`](struct.MenuItem.html), [`MenuShell`](struct.MenuShell.html), [`MenuToolButton`](struct.MenuToolButton.html), [`Menu`](struct.Menu.html), [`MessageDialog`](struct.MessageDialog.html), [`Misc`](struct.Misc.html), [`ModelButton`](struct.ModelButton.html), [`Notebook`](struct.Notebook.html), [`OffscreenWindow`](struct.OffscreenWindow.html), [`Overlay`](struct.Overlay.html), [`Paned`](struct.Paned.html), [`PlacesSidebar`](struct.PlacesSidebar.html), [`Plug`](struct.Plug.html), [`PopoverMenu`](struct.PopoverMenu.html), [`Popover`](struct.Popover.html), [`ProgressBar`](struct.ProgressBar.html), [`RadioButton`](struct.RadioButton.html), [`RadioMenuItem`](struct.RadioMenuItem.html), [`RadioToolButton`](struct.RadioToolButton.html), [`Range`](struct.Range.html), [`RecentChooserDialog`](struct.RecentChooserDialog.html), [`RecentChooserMenu`](struct.RecentChooserMenu.html), [`RecentChooserWidget`](struct.RecentChooserWidget.html), [`RecentFilter`](struct.RecentFilter.html), [`Revealer`](struct.Revealer.html), [`ScaleButton`](struct.ScaleButton.html), [`Scale`](struct.Scale.html), [`Scrollbar`](struct.Scrollbar.html), [`ScrolledWindow`](struct.ScrolledWindow.html), [`SearchBar`](struct.SearchBar.html), [`SearchEntry`](struct.SearchEntry.html), [`SeparatorMenuItem`](struct.SeparatorMenuItem.html), [`SeparatorToolItem`](struct.SeparatorToolItem.html), [`Separator`](struct.Separator.html), [`ShortcutLabel`](struct.ShortcutLabel.html), [`ShortcutsWindow`](struct.ShortcutsWindow.html), [`SizeGroup`](struct.SizeGroup.html), [`Socket`](struct.Socket.html), [`SpinButton`](struct.SpinButton.html), [`Spinner`](struct.Spinner.html), [`StackSidebar`](struct.StackSidebar.html), [`StackSwitcher`](struct.StackSwitcher.html), [`Stack`](struct.Stack.html), [`Statusbar`](struct.Statusbar.html), [`Switch`](struct.Switch.html), [`TextTagTable`](struct.TextTagTable.html), [`TextView`](struct.TextView.html), [`ToggleButton`](struct.ToggleButton.html), [`ToggleToolButton`](struct.ToggleToolButton.html), [`ToolButton`](struct.ToolButton.html), [`ToolItemGroup`](struct.ToolItemGroup.html), [`ToolItem`](struct.ToolItem.html), [`ToolPalette`](struct.ToolPalette.html), [`Toolbar`](struct.Toolbar.html), [`TreeStore`](struct.TreeStore.html), [`TreeViewColumn`](struct.TreeViewColumn.html), [`TreeView`](struct.TreeView.html), [`Viewport`](struct.Viewport.html), [`VolumeButton`](struct.VolumeButton.html), [`Widget`](struct.Widget.html), [`Window`](struct.Window.html)
 <!-- trait BuildableExt::fn add_child -->
 Adds a child to `self`. `type_` is an optional string
 describing how the child should be added.
@@ -3127,7 +3136,7 @@ attribute specifies the name of the signal, and the “handler” attribute
 specifies the function to connect to the signal. By default, GTK+ tries
 to find the handler using `gmodule::Module::symbol`, but this can be changed by
 passing a custom ``GtkBuilderConnectFunc`` to
-`BuilderExt::connect_signals_full`. The remaining attributes, “after”,
+`Builder::connect_signals_full`. The remaining attributes, “after”,
 “swapped” and “object”, have the same meaning as the corresponding
 parameters of the `g_signal_connect_object` or
 `g_signal_connect_data` functions. A “last_modification_time”
@@ -3396,7 +3405,7 @@ nul-terminated array of objects to build
 
 A positive value on success, 0 if an error occurred
 <!-- trait BuilderExt::fn connect_signals -->
-This method is a simpler variation of `BuilderExt::connect_signals_full`.
+This method is a simpler variation of `Builder::connect_signals_full`.
 It uses symbols explicitly added to `self` with prior calls to
 `BuilderExt::add_callback_symbol`. In the case that symbols are not
 explicitly added; it uses `gmodule::Module`’s introspective features (by opening the module `None`)
@@ -3510,7 +3519,7 @@ with `BuilderExt::add_callback_symbols`
 
 This function is intended for possible use in language bindings
 or for any case that one might be cusomizing signal connections
-using `BuilderExt::connect_signals_full`
+using `Builder::connect_signals_full`
 ## `callback_name`
 The name of the callback
 
@@ -3820,12 +3829,12 @@ If true, an underline in the text of the button label indicates
 the next character should be used for the mnemonic accelerator key.
 ## `use_underline`
 `true` if underlines in the text indicate mnemonics
-<!-- trait ButtonExt::fn connect_activate -->
+<!-- trait ButtonExt::fn activate -->
 The ::activate signal on `Button` is an action signal and
 emitting it causes the button to animate press then release.
 Applications should never connect to this signal, but use the
 `Button::clicked` signal.
-<!-- trait ButtonExt::fn connect_clicked -->
+<!-- trait ButtonExt::fn clicked -->
 Emitted when the button has been activated (pressed and released).
 <!-- trait ButtonExt::fn get_property_always_show_image -->
 If `true`, the button will ignore the `Settings:gtk-button-images`
@@ -4099,20 +4108,20 @@ the display options to set
 Removes the visual marker from a particular day.
 ## `day`
 the day number to unmark between 1 and 31.
-<!-- trait CalendarExt::fn connect_day_selected -->
+<!-- trait CalendarExt::fn day-selected -->
 Emitted when the user selects a day.
-<!-- trait CalendarExt::fn connect_day_selected_double_click -->
+<!-- trait CalendarExt::fn day-selected-double-click -->
 Emitted when the user double-clicks a day.
-<!-- trait CalendarExt::fn connect_month_changed -->
+<!-- trait CalendarExt::fn month-changed -->
 Emitted when the user clicks a button to change the selected month on a
 calendar.
-<!-- trait CalendarExt::fn connect_next_month -->
+<!-- trait CalendarExt::fn next-month -->
 Emitted when the user switched to the next month.
-<!-- trait CalendarExt::fn connect_next_year -->
+<!-- trait CalendarExt::fn next-year -->
 Emitted when user switched to the next year.
-<!-- trait CalendarExt::fn connect_prev_month -->
+<!-- trait CalendarExt::fn prev-month -->
 Emitted when the user switched to the previous month.
-<!-- trait CalendarExt::fn connect_prev_year -->
+<!-- trait CalendarExt::fn prev-year -->
 Emitted when user switched to the previous year.
 <!-- trait CalendarExt::fn get_property_day -->
 The selected day (as a number between 1 and 31, or 0
@@ -5010,7 +5019,7 @@ edit widget.
 See `CellAreaExt::get_edited_cell` and `CellAreaExt::get_edit_widget`.
 ## `canceled`
 whether editing was canceled.
-<!-- trait CellAreaExt::fn connect_add_editable -->
+<!-- trait CellAreaExt::fn add-editable -->
 Indicates that editing has started on `renderer` and that `editable`
 should be added to the owning cell-layouting widget at `cell_area`.
 ## `renderer`
@@ -5022,7 +5031,7 @@ the `Widget` relative `gdk::Rectangle` coordinates
  where `editable` should be added
 ## `path`
 the `TreePath` string this edit was initiated for
-<!-- trait CellAreaExt::fn connect_apply_attributes -->
+<!-- trait CellAreaExt::fn apply-attributes -->
 This signal is emitted whenever applying attributes to `area` from `model`
 ## `model`
 the `TreeModel` to apply the attributes from
@@ -5032,7 +5041,7 @@ the `TreeIter` indicating which row to apply the attributes of
 whether the view shows children for this row
 ## `is_expanded`
 whether the view is currently showing the children of this row
-<!-- trait CellAreaExt::fn connect_focus_changed -->
+<!-- trait CellAreaExt::fn focus-changed -->
 Indicates that focus changed on this `area`. This signal
 is emitted either as a result of focus handling or event
 handling.
@@ -5045,7 +5054,7 @@ same cell area for a different row of data.
 the `CellRenderer` that has focus
 ## `path`
 the current `TreePath` string set for `area`
-<!-- trait CellAreaExt::fn connect_remove_editable -->
+<!-- trait CellAreaExt::fn remove-editable -->
 Indicates that editing finished on `renderer` and that `editable`
 should be removed from the owning cell-layouting widget.
 ## `renderer`
@@ -5360,7 +5369,7 @@ lifetime is temporary and does not persist across other edits and/or cells.
 ## `event`
 The ``GdkEvent`` that began the editing process, or
  `None` if editing was initiated programmatically
-<!-- trait CellEditableExt::fn connect_editing_done -->
+<!-- trait CellEditableExt::fn editing-done -->
 This signal is a sign for the cell renderer to update its
 value from the `cell_editable`.
 
@@ -5372,7 +5381,7 @@ disconnect the `cell_editable` from signals on the `CellRenderer`, etc.
 
 `CellEditable::editing_done` is a convenience method
 for emitting `CellEditable::editing-done`.
-<!-- trait CellEditableExt::fn connect_remove_widget -->
+<!-- trait CellEditableExt::fn remove-widget -->
 This signal is meant to indicate that the cell is finished
 editing, and the `cell_editable` widget is being removed and may
 subsequently be destroyed.
@@ -5815,13 +5824,13 @@ in response to the `CellEditable::editing-done` signal of
 `CellEditable`.
 ## `canceled`
 `true` if the editing has been canceled
-<!-- trait CellRendererExt::fn connect_editing_canceled -->
+<!-- trait CellRendererExt::fn editing-canceled -->
 This signal gets emitted when the user cancels the process of editing a
 cell. For example, an editable cell renderer could be written to cancel
 editing when the user presses Escape.
 
 See also: `CellRendererExt::stop_editing`.
-<!-- trait CellRendererExt::fn connect_editing_started -->
+<!-- trait CellRendererExt::fn editing-started -->
 This signal gets emitted when a cell starts to be edited.
 The intended use of this signal is to do special setup
 on `editable`, e.g. adding a `EntryCompletion` or setting
@@ -5882,11 +5891,11 @@ Creates a new `CellRendererAccel`.
 # Returns
 
 the new cell renderer
-<!-- trait CellRendererAccelExt::fn connect_accel_cleared -->
+<!-- trait CellRendererAccelExt::fn accel-cleared -->
 Gets emitted when the user has removed the accelerator.
 ## `path_string`
 the path identifying the row of the edited cell
-<!-- trait CellRendererAccelExt::fn connect_accel_edited -->
+<!-- trait CellRendererAccelExt::fn accel-edited -->
 Gets emitted when the user has selected a new accelerator.
 ## `path_string`
 the path identifying the row of the edited cell
@@ -5975,7 +5984,7 @@ a different string in each row of the `TreeView`.
 # Returns
 
 the new cell renderer
-<!-- trait CellRendererComboExt::fn connect_changed -->
+<!-- trait CellRendererComboExt::fn changed -->
 This signal is emitted each time after the user selected an item in
 the combo box, either by using the mouse or the arrow keys. Contrary
 to `ComboBox`, `CellRendererCombo`::changed is not emitted for
@@ -6307,7 +6316,7 @@ displayed). If `number_of_rows` is -1, then the fixed height is unset, and
 the height is determined by the properties again.
 ## `number_of_rows`
 Number of rows of text each cell renderer is allocated, or -1
-<!-- trait CellRendererTextExt::fn connect_edited -->
+<!-- trait CellRendererTextExt::fn edited -->
 This signal is emitted after `renderer` has been edited.
 
 It is the responsibility of the application to update the model
@@ -6463,7 +6472,7 @@ up a per-row setting using `TreeViewColumn` to associate model
 columns with cell renderer properties).
 ## `radio`
 `true` to make the toggle look like a radio button
-<!-- trait CellRendererToggleExt::fn connect_toggled -->
+<!-- trait CellRendererToggleExt::fn toggled -->
 The ::toggled signal is emitted when the cell is toggled.
 
 It is the responsibility of the application to update the model
@@ -6847,7 +6856,7 @@ visual appearance, it doesn’t affect the semantics of the widget.
 `true` to display an “inconsistent” third state check
 <!-- trait CheckMenuItemExt::fn toggled -->
 Emits the `CheckMenuItem::toggled` signal.
-<!-- trait CheckMenuItemExt::fn connect_toggled -->
+<!-- trait CheckMenuItemExt::fn toggled -->
 This signal is emitted when the state of the check box is changed.
 
 A signal handler can use `CheckMenuItemExt::get_active`
@@ -7337,7 +7346,7 @@ the actual URI data.
 # Returns
 
 `true` is there is an URI list available, `false` otherwise.
-<!-- impl Clipboard::fn connect_owner_change -->
+<!-- impl Clipboard::fn owner-change -->
 The ::owner-change signal is emitted when GTK+ receives an
 event that indicates that the ownership of the selection
 associated with `clipboard` has changed.
@@ -7400,7 +7409,7 @@ A `gdk::Color` to set the current color with
 Sets the title for the color selection dialog.
 ## `title`
 String containing new window title
-<!-- trait ColorButtonExt::fn connect_color_set -->
+<!-- trait ColorButtonExt::fn color-set -->
 The ::color-set signal is emitted when the user selects a color.
 When handling this signal, use `ColorButton::get_rgba` to
 find out which color was just selected.
@@ -7511,7 +7520,7 @@ the new color
 Sets whether or not the color chooser should use the alpha channel.
 ## `use_alpha`
 `true` if color chooser should use alpha channel, `false` if not
-<!-- trait ColorChooserExt::fn connect_color_activated -->
+<!-- trait ColorChooserExt::fn color-activated -->
 Emitted when a color is activated from the color chooser.
 This usually happens when the user clicks a color swatch,
 or a color is selected and the user presses one of the keys
@@ -7972,14 +7981,14 @@ the preferred number of columns when you want the popup to be layed out
 in a table.
 ## `width`
 Preferred number of columns
-<!-- trait ComboBoxExt::fn connect_changed -->
+<!-- trait ComboBoxExt::fn changed -->
 The changed signal is emitted when the active
 item is changed. The can be due to the user selecting
 a different item from the list, or due to a
 call to `ComboBoxExt::set_active_iter`.
 It will also be emitted while typing into the entry of a combo box
 with an entry.
-<!-- trait ComboBoxExt::fn connect_format_entry_text -->
+<!-- trait ComboBoxExt::fn format-entry-text -->
 For combo boxes that are created with an entry (See `ComboBox`:has-entry).
 
 A signal which allows you to change how the text displayed in a combo box's
@@ -8020,19 +8029,19 @@ the `TreePath` string from the combo box's current model to format text for
 
 a newly allocated string representing `path`
 for the current `ComboBox` model.
-<!-- trait ComboBoxExt::fn connect_move_active -->
+<!-- trait ComboBoxExt::fn move-active -->
 The ::move-active signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to move the active selection.
 ## `scroll_type`
 a `ScrollType`
-<!-- trait ComboBoxExt::fn connect_popdown -->
+<!-- trait ComboBoxExt::fn popdown -->
 The ::popdown signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to popdown the combo box list.
 
 The default bindings for this signal are Alt+Up and Escape.
-<!-- trait ComboBoxExt::fn connect_popup -->
+<!-- trait ComboBoxExt::fn popup -->
 The ::popup signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to popup the combo box list.
@@ -8944,7 +8953,7 @@ this `self`.
 # Returns
 
 a new string representing the `self`.
-<!-- trait CssProviderExt::fn connect_parsing_error -->
+<!-- trait CssProviderExt::fn parsing-error -->
 Signals that a parsing error occurred. the `path`, `line` and `position`
 describe the actual location of the error as accurately as possible.
 
@@ -9435,14 +9444,14 @@ A convenient way to sensitize/desensitize dialog buttons.
 a response ID
 ## `setting`
 `true` for sensitive
-<!-- trait DialogExt::fn connect_close -->
+<!-- trait DialogExt::fn close -->
 The ::close signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user uses a keybinding to close
 the dialog.
 
 The default binding for this signal is the Escape key.
-<!-- trait DialogExt::fn connect_response -->
+<!-- trait DialogExt::fn response -->
 Emitted when an action widget is clicked, the dialog receives a
 delete event, or the application programmer calls `DialogExt::response`.
 On a delete event, the response ID is `ResponseType::DeleteEvent`.
@@ -9745,7 +9754,7 @@ indicates that the position should be set after the last character
 of the editable. Note that `position` is in characters, not in bytes.
 ## `position`
 the position of the cursor
-<!-- trait EditableSignals::fn connect_changed -->
+<!-- trait EditableSignals::fn changed -->
 The ::changed signal is emitted at the end of a single
 user-visible operation on the contents of the `Editable`.
 
@@ -9754,7 +9763,7 @@ selection will cause only one signal emission (even though it
 is implemented by first deleting the selection, then inserting
 the new content, and may cause multiple ::notify::text signals
 to be emitted).
-<!-- trait EditableSignals::fn connect_delete_text -->
+<!-- trait EditableSignals::fn delete-text -->
 This signal is emitted when text is deleted from
 the widget by the user. The default handler for
 this signal will normally be responsible for deleting
@@ -9768,7 +9777,7 @@ and `end_pos` parameters are interpreted as for
 the starting position
 ## `end_pos`
 the end position
-<!-- trait EditableSignals::fn connect_insert_text -->
+<!-- trait EditableSignals::fn insert-text -->
 This signal is emitted when text is inserted into
 the widget by the user. The default handler for
 this signal will normally be responsible for inserting
@@ -10511,7 +10520,7 @@ byte index into the entry layout text
 Unsets the invisible char previously set with
 `EntryExt::set_invisible_char`. So that the
 default invisible char is used again.
-<!-- trait EntryExt::fn connect_activate -->
+<!-- trait EntryExt::fn activate -->
 The ::activate signal is emitted when the user hits
 the Enter key.
 
@@ -10521,28 +10530,28 @@ it is also commonly used by applications to intercept
 activation of entries.
 
 The default bindings for this signal are all forms of the Enter key.
-<!-- trait EntryExt::fn connect_backspace -->
+<!-- trait EntryExt::fn backspace -->
 The ::backspace signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
 The default bindings for this signal are
 Backspace and Shift-Backspace.
-<!-- trait EntryExt::fn connect_copy_clipboard -->
+<!-- trait EntryExt::fn copy-clipboard -->
 The ::copy-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to copy the selection to the clipboard.
 
 The default bindings for this signal are
 Ctrl-c and Ctrl-Insert.
-<!-- trait EntryExt::fn connect_cut_clipboard -->
+<!-- trait EntryExt::fn cut-clipboard -->
 The ::cut-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to cut the selection to the clipboard.
 
 The default bindings for this signal are
 Ctrl-x and Shift-Delete.
-<!-- trait EntryExt::fn connect_delete_from_cursor -->
+<!-- trait EntryExt::fn delete-from-cursor -->
 The ::delete-from-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a text deletion.
@@ -10558,21 +10567,21 @@ deleting a word.
 the granularity of the deletion, as a `DeleteType`
 ## `count`
 the number of `type_` units to delete
-<!-- trait EntryExt::fn connect_icon_press -->
+<!-- trait EntryExt::fn icon-press -->
 The ::icon-press signal is emitted when an activatable icon
 is clicked.
 ## `icon_pos`
 The position of the clicked icon
 ## `event`
 the button press event
-<!-- trait EntryExt::fn connect_icon_release -->
+<!-- trait EntryExt::fn icon-release -->
 The ::icon-release signal is emitted on the button release from a
 mouse click over an activatable icon.
 ## `icon_pos`
 The position of the clicked icon
 ## `event`
 the button release event
-<!-- trait EntryExt::fn connect_insert_at_cursor -->
+<!-- trait EntryExt::fn insert-at-cursor -->
 The ::insert-at-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates the insertion of a
@@ -10581,7 +10590,7 @@ fixed string at the cursor.
 This signal has no default bindings.
 ## `string`
 the string to insert
-<!-- trait EntryExt::fn connect_insert_emoji -->
+<!-- trait EntryExt::fn insert-emoji -->
 The ::insert-emoji signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to present the Emoji chooser for the `entry`.
@@ -10590,7 +10599,7 @@ The default bindings for this signal are Ctrl-. and Ctrl-;
 
 Feature: `v3_22_27`
 
-<!-- trait EntryExt::fn connect_move_cursor -->
+<!-- trait EntryExt::fn move-cursor -->
 The ::move-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a cursor movement.
@@ -10614,7 +10623,7 @@ the granularity of the move, as a `MovementStep`
 the number of `step` units to move
 ## `extend_selection`
 `true` if the move should extend the selection
-<!-- trait EntryExt::fn connect_paste_clipboard -->
+<!-- trait EntryExt::fn paste-clipboard -->
 The ::paste-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to paste the contents of the clipboard
@@ -10622,7 +10631,7 @@ into the text view.
 
 The default bindings for this signal are
 Ctrl-v and Shift-Insert.
-<!-- trait EntryExt::fn connect_populate_popup -->
+<!-- trait EntryExt::fn populate-popup -->
 The ::populate-popup signal gets emitted before showing the
 context menu of the entry.
 
@@ -10637,13 +10646,13 @@ The signal handler should not make assumptions about the
 type of `widget`.
 ## `widget`
 the container that is being populated
-<!-- trait EntryExt::fn connect_preedit_changed -->
+<!-- trait EntryExt::fn preedit-changed -->
 If an input method is used, the typed text will not immediately
 be committed to the buffer. So if you are interested in the text,
 connect to this signal.
 ## `preedit`
 the current preedit string
-<!-- trait EntryExt::fn connect_toggle_overwrite -->
+<!-- trait EntryExt::fn toggle-overwrite -->
 The ::toggle-overwrite signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to toggle the overwrite mode of the entry.
@@ -11070,13 +11079,13 @@ Note that `n_chars` is in characters, not in bytes.
 the new text
 ## `n_chars`
 the number of characters in `text`, or -1
-<!-- trait EntryBufferExt::fn connect_deleted_text -->
+<!-- trait EntryBufferExt::fn deleted-text -->
 This signal is emitted after text is deleted from the buffer.
 ## `position`
 the position the text was deleted at.
 ## `n_chars`
 The number of characters that were deleted.
-<!-- trait EntryBufferExt::fn connect_inserted_text -->
+<!-- trait EntryBufferExt::fn inserted-text -->
 This signal is emitted after text is inserted into the buffer.
 ## `position`
 the position the text was inserted at.
@@ -11333,11 +11342,11 @@ renderer, use `gobject::ObjectExt::set` to set the `EntryCompletion:text-column`
 property directly.
 ## `column`
 the column in the model of `self` to get strings from
-<!-- trait EntryCompletionExt::fn connect_action_activated -->
+<!-- trait EntryCompletionExt::fn action-activated -->
 Gets emitted when an action is activated.
 ## `index`
 the index of the activated action
-<!-- trait EntryCompletionExt::fn connect_cursor_on_match -->
+<!-- trait EntryCompletionExt::fn cursor-on-match -->
 Gets emitted when a match from the cursor is on a match
 of the list. The default behaviour is to replace the contents
 of the entry with the contents of the text column in the row
@@ -11353,7 +11362,7 @@ a `TreeIter` positioned at the selected match
 # Returns
 
 `true` if the signal has been handled
-<!-- trait EntryCompletionExt::fn connect_insert_prefix -->
+<!-- trait EntryCompletionExt::fn insert-prefix -->
 Gets emitted when the inline autocompletion is triggered.
 The default behaviour is to make the entry display the
 whole prefix and select the newly inserted part.
@@ -11368,7 +11377,7 @@ the common prefix of all possible completions
 # Returns
 
 `true` if the signal has been handled
-<!-- trait EntryCompletionExt::fn connect_match_selected -->
+<!-- trait EntryCompletionExt::fn match-selected -->
 Gets emitted when a match from the list is selected.
 The default behaviour is to replace the contents of the
 entry with the contents of the text column in the row
@@ -11384,7 +11393,7 @@ a `TreeIter` positioned at the selected match
 # Returns
 
 `true` if the signal has been handled
-<!-- trait EntryCompletionExt::fn connect_no_matches -->
+<!-- trait EntryCompletionExt::fn no-matches -->
 Gets emitted when the filter model has zero
 number of rows in completion_complete method.
 (In other words when `EntryCompletion` is out of
@@ -12680,7 +12689,7 @@ is not in the current directory, does not exist, or
 is otherwise not currently selected, does nothing.
 ## `uri`
 the URI to unselect
-<!-- trait FileChooserExt::fn connect_confirm_overwrite -->
+<!-- trait FileChooserExt::fn confirm-overwrite -->
 This signal gets emitted whenever it is appropriate to present a
 confirmation dialog when the user has selected a file name that
 already exists. The signal only gets emitted when the file
@@ -12745,7 +12754,7 @@ gtk_widget_destroy (chooser);
 
 a `FileChooserConfirmation` value that indicates which
  action to take after emitting the signal.
-<!-- trait FileChooserExt::fn connect_current_folder_changed -->
+<!-- trait FileChooserExt::fn current-folder-changed -->
 This signal is emitted when the current folder in a `FileChooser`
 changes. This can happen due to the user performing some action that
 changes folders, such as selecting a bookmark or visiting a folder on the
@@ -12759,7 +12768,7 @@ See also: `FileChooser::set_current_folder`,
 `FileChooser::get_current_folder`,
 `FileChooser::set_current_folder_uri`,
 `FileChooser::get_current_folder_uri`.
-<!-- trait FileChooserExt::fn connect_file_activated -->
+<!-- trait FileChooserExt::fn file-activated -->
 This signal is emitted when the user "activates" a file in the file
 chooser. This can happen by double-clicking on a file in the file list, or
 by pressing `Enter`.
@@ -12771,7 +12780,7 @@ dialog.
 See also: `FileChooser::get_filename`,
 `FileChooser::get_filenames`, `FileChooser::get_uri`,
 `FileChooser::get_uris`.
-<!-- trait FileChooserExt::fn connect_selection_changed -->
+<!-- trait FileChooserExt::fn selection-changed -->
 This signal is emitted when there is a change in the set of selected files
 in a `FileChooser`. This can happen when the user modifies the selection
 with the mouse or the keyboard, or when explicitly calling functions to
@@ -12786,7 +12795,7 @@ See also: `FileChooser::select_filename`,
 `FileChooser::get_filenames`, `FileChooser::select_uri`,
 `FileChooser::unselect_uri`, `FileChooser::get_uri`,
 `FileChooser::get_uris`.
-<!-- trait FileChooserExt::fn connect_update_preview -->
+<!-- trait FileChooserExt::fn update-preview -->
 This signal is emitted when the preview in a file chooser should be
 regenerated. For example, this can happen when the currently selected file
 changes. You should use this signal if you want your file chooser to have
@@ -12873,6 +12882,11 @@ The `FileChooserButton` supports the ``GtkFileChooserActions``
 > such a way that other interface elements give space to the
 > widget.
 
+# CSS nodes
+
+`FileChooserButton` has a CSS node with name “filechooserbutton”, containing
+a subnode for the internal button with name “button” and style class “.file”.
+
 # Implements
 
 [`FileChooserButtonExt`](trait.FileChooserButtonExt.html), [`BoxExt`](trait.BoxExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`OrientableExt`](trait.OrientableExt.html), [`FileChooserExt`](trait.FileChooserExt.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
@@ -12953,7 +12967,7 @@ the new browse dialog title.
 Sets the width (in characters) that `self` will use to `n_chars`.
 ## `n_chars`
 the new width, in characters.
-<!-- trait FileChooserButtonExt::fn connect_file_set -->
+<!-- trait FileChooserButtonExt::fn file-set -->
 The ::file-set signal is emitted when the user selects a file.
 
 Note that this signal is only emitted when the user
@@ -13452,7 +13466,7 @@ Open or save mode for the widget
 # Returns
 
 a new `FileChooserWidget`
-<!-- trait FileChooserWidgetExt::fn connect_desktop_folder -->
+<!-- trait FileChooserWidgetExt::fn desktop-folder -->
 The ::desktop-folder signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13460,7 +13474,7 @@ This is used to make the file chooser show the user's Desktop
 folder in the file list.
 
 The default binding for this signal is `Alt + D`.
-<!-- trait FileChooserWidgetExt::fn connect_down_folder -->
+<!-- trait FileChooserWidgetExt::fn down-folder -->
 The ::down-folder signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13471,7 +13485,7 @@ path bar widget of the file chooser. For example, if the path bar is showing
 chooser to switch to the "baz" subfolder.
 
 The default binding for this signal is `Alt + Down`.
-<!-- trait FileChooserWidgetExt::fn connect_home_folder -->
+<!-- trait FileChooserWidgetExt::fn home-folder -->
 The ::home-folder signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13479,7 +13493,7 @@ This is used to make the file chooser show the user's home
 folder in the file list.
 
 The default binding for this signal is `Alt + Home`.
-<!-- trait FileChooserWidgetExt::fn connect_location_popup -->
+<!-- trait FileChooserWidgetExt::fn location-popup -->
 The ::location-popup signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13493,7 +13507,7 @@ On Unix systems, this is bound to `~` (tilde) with a `path` string of "~"
 itself for access to home directories.
 ## `path`
 a string that gets put in the text entry for the file name
-<!-- trait FileChooserWidgetExt::fn connect_location_popup_on_paste -->
+<!-- trait FileChooserWidgetExt::fn location-popup-on-paste -->
 The ::location-popup-on-paste signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13501,7 +13515,7 @@ This is used to make the file chooser show a "Location" prompt when the user
 pastes into a `FileChooserWidget`.
 
 The default binding for this signal is `Control + V`.
-<!-- trait FileChooserWidgetExt::fn connect_location_toggle_popup -->
+<!-- trait FileChooserWidgetExt::fn location-toggle-popup -->
 The ::location-toggle-popup signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13509,14 +13523,14 @@ This is used to toggle the visibility of a "Location" prompt which the user
 can use to manually type the name of the file he wishes to select.
 
 The default binding for this signal is `Control + L`.
-<!-- trait FileChooserWidgetExt::fn connect_places_shortcut -->
+<!-- trait FileChooserWidgetExt::fn places-shortcut -->
 The ::places-shortcut signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
 This is used to move the focus to the places sidebar.
 
 The default binding for this signal is `Alt + P`.
-<!-- trait FileChooserWidgetExt::fn connect_quick_bookmark -->
+<!-- trait FileChooserWidgetExt::fn quick-bookmark -->
 The ::quick-bookmark signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -13531,28 +13545,28 @@ etc. until `Alt + 0`. Note that in the default binding, that
 bookmark at index 10.
 ## `bookmark_index`
 the number of the bookmark to switch to
-<!-- trait FileChooserWidgetExt::fn connect_recent_shortcut -->
+<!-- trait FileChooserWidgetExt::fn recent-shortcut -->
 The ::recent-shortcut signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
 This is used to make the file chooser show the Recent location.
 
 The default binding for this signal is `Alt + R`.
-<!-- trait FileChooserWidgetExt::fn connect_search_shortcut -->
+<!-- trait FileChooserWidgetExt::fn search-shortcut -->
 The ::search-shortcut signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
 This is used to make the file chooser show the search entry.
 
 The default binding for this signal is `Alt + S`.
-<!-- trait FileChooserWidgetExt::fn connect_show_hidden -->
+<!-- trait FileChooserWidgetExt::fn show-hidden -->
 The ::show-hidden signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
 This is used to make the file chooser display hidden files.
 
 The default binding for this signal is `Control + H`.
-<!-- trait FileChooserWidgetExt::fn connect_up_folder -->
+<!-- trait FileChooserWidgetExt::fn up-folder -->
 The ::up-folder signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
@@ -14106,16 +14120,16 @@ Unselects a single child of `self`, if the selection
 mode allows it.
 ## `child`
 a child of `self`
-<!-- trait FlowBoxExt::fn connect_activate_cursor_child -->
+<!-- trait FlowBoxExt::fn activate-cursor-child -->
 The ::activate-cursor-child signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user activates the `box_`.
-<!-- trait FlowBoxExt::fn connect_child_activated -->
+<!-- trait FlowBoxExt::fn child-activated -->
 The ::child-activated signal is emitted when a child has been
 activated by the user.
 ## `child`
 the child that is activated
-<!-- trait FlowBoxExt::fn connect_move_cursor -->
+<!-- trait FlowBoxExt::fn move-cursor -->
 The ::move-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a cursor movement.
@@ -14140,27 +14154,27 @@ the number of `step` units to move
 
 `true` to stop other handlers from being invoked for the event.
 `false` to propagate the event further.
-<!-- trait FlowBoxExt::fn connect_select_all -->
+<!-- trait FlowBoxExt::fn select-all -->
 The ::select-all signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to select all children of the box, if
 the selection mode permits it.
 
 The default bindings for this signal is Ctrl-a.
-<!-- trait FlowBoxExt::fn connect_selected_children_changed -->
+<!-- trait FlowBoxExt::fn selected-children-changed -->
 The ::selected-children-changed signal is emitted when the
 set of selected children changes.
 
 Use `FlowBoxExt::selected_foreach` or
 `FlowBoxExt::get_selected_children` to obtain the
 selected children.
-<!-- trait FlowBoxExt::fn connect_toggle_cursor_child -->
+<!-- trait FlowBoxExt::fn toggle-cursor-child -->
 The ::toggle-cursor-child signal is a
 [keybinding signal][`BindingSignal`]
 which toggles the selection of the child that has the focus.
 
 The default binding for this signal is Ctrl-Space.
-<!-- trait FlowBoxExt::fn connect_unselect_all -->
+<!-- trait FlowBoxExt::fn unselect-all -->
 The ::unselect-all signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to unselect all children of the box, if
@@ -14261,7 +14275,7 @@ Returns whether the `self` is currently selected in its
 # Returns
 
 `true` if `self` is selected
-<!-- trait FlowBoxChildExt::fn connect_activate -->
+<!-- trait FlowBoxChildExt::fn activate -->
 The ::activate signal is emitted when the user activates
 a child widget in a `FlowBox`, either by clicking or
 double-clicking, or by using the Space or Enter key.
@@ -14378,7 +14392,7 @@ If `true`, font name will be written using font chosen.
 If `use_size` is `true`, the font name will be written using the selected size.
 ## `use_size`
 If `true`, font name will be written using the selected size.
-<!-- trait FontButtonExt::fn connect_font_set -->
+<!-- trait FontButtonExt::fn font-set -->
 The ::font-set signal is emitted when the user selects a font.
 When handling this signal, use `FontChooser::get_font`
 to find out which font was just selected.
@@ -14631,7 +14645,7 @@ the text to display in the preview area
 Shows or hides the editable preview entry.
 ## `show_preview_entry`
 whether to show the editable preview entry or not
-<!-- trait FontChooserExt::fn connect_font_activated -->
+<!-- trait FontChooserExt::fn font-activated -->
 Emitted when a font is activated.
 This usually happens when the user double clicks an item,
 or an item is selected and the user presses one of the keys
@@ -15170,7 +15184,7 @@ Feature: `v3_22`
 
 ## `use_es`
 whether to use OpenGL or OpenGL ES
-<!-- trait GLAreaExt::fn connect_create_context -->
+<!-- trait GLAreaExt::fn create-context -->
 The ::create-context signal is emitted when the widget is being
 realized, and allows you to override how the GL context is
 created. This is useful when you want to reuse an existing GL
@@ -15188,7 +15202,7 @@ Feature: `v3_16`
 
 a newly created `gdk::GLContext`;
  the `GLArea` widget will take ownership of the returned value.
-<!-- trait GLAreaExt::fn connect_render -->
+<!-- trait GLAreaExt::fn render -->
 The ::render signal is emitted every time the contents
 of the `GLArea` should be redrawn.
 
@@ -15204,7 +15218,7 @@ the `gdk::GLContext` used by `area`
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait GLAreaExt::fn connect_resize -->
+<!-- trait GLAreaExt::fn resize -->
 The ::resize signal is emitted once when the widget is realized, and
 then each time the widget is changed while realized. This is useful
 in order to keep GL state up to date with the widget size, like for
@@ -15639,7 +15653,7 @@ a child of it. `window` must pertain to `EventControllerExt::get_widget`.
 a `gdk::Window`, or `None`
 <!-- trait GestureExt::fn ungroup -->
 Separates `self` into an isolated group.
-<!-- trait GestureExt::fn connect_begin -->
+<!-- trait GestureExt::fn begin -->
 This signal is emitted when the gesture is recognized. This means the
 number of touch sequences matches `Gesture:n-points`, and the `Gesture::check`
 handler(s) returned `true`.
@@ -15649,7 +15663,7 @@ on a 2-touches gesture) is lifted, in that situation `sequence` won't pertain
 to the current set of active touches, so don't rely on this being true.
 ## `sequence`
 the `gdk::EventSequence` that made the gesture to be recognized
-<!-- trait GestureExt::fn connect_cancel -->
+<!-- trait GestureExt::fn cancel -->
 This signal is emitted whenever a sequence is cancelled. This usually
 happens on active touches when `EventControllerExt::reset` is called
 on `gesture` (manually, due to grabs...), or the individual `sequence`
@@ -15658,7 +15672,7 @@ was claimed by parent widgets' controllers (see `GestureExt::set_sequence_state`
 `gesture` must forget everything about `sequence` as a reaction to this signal.
 ## `sequence`
 the `gdk::EventSequence` that was cancelled
-<!-- trait GestureExt::fn connect_end -->
+<!-- trait GestureExt::fn end -->
 This signal is emitted when `gesture` either stopped recognizing the event
 sequences as something to be handled (the `Gesture::check` handler returned
 `false`), or the number of touch sequences became higher or lower than
@@ -15670,7 +15684,7 @@ sequence that exceeds `Gesture:n-points`). This situation may be detected
 by checking through `GestureExt::handles_sequence`.
 ## `sequence`
 the `gdk::EventSequence` that made gesture recognition to finish
-<!-- trait GestureExt::fn connect_sequence_state_changed -->
+<!-- trait GestureExt::fn sequence-state-changed -->
 This signal is emitted whenever a sequence state changes. See
 `GestureExt::set_sequence_state` to know more about the expectable
 sequence lifetimes.
@@ -15678,7 +15692,7 @@ sequence lifetimes.
 the `gdk::EventSequence` that was cancelled
 ## `state`
 the new sequence state
-<!-- trait GestureExt::fn connect_update -->
+<!-- trait GestureExt::fn update -->
 This signal is emitted whenever an event is handled while the gesture is
 recognized. `sequence` is guaranteed to pertain to the set of active touches.
 ## `sequence`
@@ -15742,19 +15756,19 @@ Y coordinate for the drag start point
 # Returns
 
 `true` if the gesture is active
-<!-- trait GestureDragExt::fn connect_drag_begin -->
+<!-- trait GestureDragExt::fn drag-begin -->
 This signal is emitted whenever dragging starts.
 ## `start_x`
 X coordinate, relative to the widget allocation
 ## `start_y`
 Y coordinate, relative to the widget allocation
-<!-- trait GestureDragExt::fn connect_drag_end -->
+<!-- trait GestureDragExt::fn drag-end -->
 This signal is emitted whenever the dragging is finished.
 ## `offset_x`
 X offset, relative to the start point
 ## `offset_y`
 Y offset, relative to the start point
-<!-- trait GestureDragExt::fn connect_drag_update -->
+<!-- trait GestureDragExt::fn drag-update -->
 This signal is emitted whenever the dragging point moves.
 ## `offset_x`
 X offset, relative to the start point
@@ -15780,10 +15794,10 @@ a `Widget`
 # Returns
 
 a newly created `GestureLongPress`
-<!-- impl GestureLongPress::fn connect_cancelled -->
+<!-- impl GestureLongPress::fn cancelled -->
 This signal is emitted whenever a press moved too far, or was released
 before `GestureLongPress::pressed` happened.
-<!-- impl GestureLongPress::fn connect_pressed -->
+<!-- impl GestureLongPress::fn pressed -->
 This signal is emitted whenever a press goes unmoved/unreleased longer than
 what the GTK+ defaults tell.
 ## `x`
@@ -15837,7 +15851,7 @@ non-first click falls within the expected area. This is not
 akin to an input shape.
 ## `rect`
 rectangle to receive coordinates on
-<!-- impl GestureMultiPress::fn connect_pressed -->
+<!-- impl GestureMultiPress::fn pressed -->
 This signal is emitted whenever a button or touch press happens.
 ## `n_press`
 how many touch/button presses happened with this one
@@ -15845,7 +15859,7 @@ how many touch/button presses happened with this one
 The X coordinate, in widget allocation coordinates
 ## `y`
 The Y coordinate, in widget allocation coordinates
-<!-- impl GestureMultiPress::fn connect_released -->
+<!-- impl GestureMultiPress::fn released -->
 This signal is emitted when a button or touch is released. `n_press`
 will report the number of press that is paired to this event, note
 that `GestureMultiPress::stopped` may have been emitted between the
@@ -15856,7 +15870,7 @@ number of press that is paired with this release
 The X coordinate, in widget allocation coordinates
 ## `y`
 The Y coordinate, in widget allocation coordinates
-<!-- impl GestureMultiPress::fn connect_stopped -->
+<!-- impl GestureMultiPress::fn stopped -->
 This signal is emitted whenever any time/distance threshold has
 been exceeded.
 <!-- struct GesturePan -->
@@ -15898,7 +15912,7 @@ the expected orientation for pan gestures
 Sets the orientation to be expected on pan gestures.
 ## `orientation`
 expected orientation
-<!-- impl GesturePan::fn connect_pan -->
+<!-- impl GesturePan::fn pan -->
 This signal is emitted once a panning gesture along the
 expected axis is detected.
 ## `direction`
@@ -15934,7 +15948,7 @@ not active, 0 is returned.
 # Returns
 
 the angle delta in radians
-<!-- impl GestureRotate::fn connect_angle_changed -->
+<!-- impl GestureRotate::fn angle-changed -->
 This signal is emitted when the angle between both tracked points
 changes.
 ## `angle`
@@ -16066,7 +16080,7 @@ return value for the velocity in the Y axis, in pixels/sec
 # Returns
 
 whether velocity could be calculated
-<!-- impl GestureSwipe::fn connect_swipe -->
+<!-- impl GestureSwipe::fn swipe -->
 This signal is emitted when the recognized gesture is finished, velocity
 and direction are a product of previously recorded events.
 ## `velocity_x`
@@ -16099,7 +16113,7 @@ considered 1:1). If `self` is not active, 1 is returned.
 # Returns
 
 the scale delta
-<!-- impl GestureZoom::fn connect_scale_changed -->
+<!-- impl GestureZoom::fn scale-changed -->
 This signal is emitted whenever the distance between both tracked
 sequences changes.
 ## `scale`
@@ -16692,13 +16706,13 @@ is TRUE), then the IM context may use some other method to display
 feedback, such as displaying it in a child of the root window.
 ## `use_preedit`
 whether the IM context should use the preedit string.
-<!-- trait IMContextExt::fn connect_commit -->
+<!-- trait IMContextExt::fn commit -->
 The ::commit signal is emitted when a complete input sequence
 has been entered by the user. This can be a single character
 immediately after a key press or the final result of preediting.
 ## `str`
 the completed character(s) entered by the user
-<!-- trait IMContextExt::fn connect_delete_surrounding -->
+<!-- trait IMContextExt::fn delete-surrounding -->
 The ::delete-surrounding signal is emitted when the input method
 needs to delete all or part of the context surrounding the cursor.
 ## `offset`
@@ -16711,18 +16725,18 @@ the number of characters to be deleted
 # Returns
 
 `true` if the signal was handled.
-<!-- trait IMContextExt::fn connect_preedit_changed -->
+<!-- trait IMContextExt::fn preedit-changed -->
 The ::preedit-changed signal is emitted whenever the preedit sequence
 currently being entered has changed. It is also emitted at the end of
 a preedit sequence, in which case
 `IMContextExt::get_preedit_string` returns the empty string.
-<!-- trait IMContextExt::fn connect_preedit_end -->
+<!-- trait IMContextExt::fn preedit-end -->
 The ::preedit-end signal is emitted when a preediting sequence
 has been completed or canceled.
-<!-- trait IMContextExt::fn connect_preedit_start -->
+<!-- trait IMContextExt::fn preedit-start -->
 The ::preedit-start signal is emitted when a new preediting sequence
 starts.
-<!-- trait IMContextExt::fn connect_retrieve_surrounding -->
+<!-- trait IMContextExt::fn retrieve-surrounding -->
 The ::retrieve-surrounding signal is emitted when the input method
 requires the context surrounding the cursor. The callback should set
 the input method surrounding context by calling the
@@ -17551,7 +17565,7 @@ array of
  directories that are searched for icon themes
 ## `n_elements`
 number of elements in `path`.
-<!-- trait IconThemeExt::fn connect_changed -->
+<!-- trait IconThemeExt::fn changed -->
 Emitted when the current icon theme is switched or GTK+ detects
 that a change has occurred in the contents of the current
 icon theme.
@@ -18136,7 +18150,7 @@ method sets `IconView:reorderable` to `false`.
 <!-- trait IconViewExt::fn unset_model_drag_source -->
 Undoes the effect of `IconView::enable_model_drag_source`. Calling this
 method sets `IconView:reorderable` to `false`.
-<!-- trait IconViewExt::fn connect_activate_cursor_item -->
+<!-- trait IconViewExt::fn activate-cursor-item -->
 A [keybinding signal][`BindingSignal`]
 which gets emitted when the user activates the currently
 focused item.
@@ -18146,7 +18160,7 @@ Applications should not connect to it, but may emit it with
 programmatically.
 
 The default bindings for this signal are Space, Return and Enter.
-<!-- trait IconViewExt::fn connect_item_activated -->
+<!-- trait IconViewExt::fn item-activated -->
 The ::item-activated signal is emitted when the method
 `IconViewExt::item_activated` is called, when the user double
 clicks an item with the "activate-on-single-click" property set
@@ -18156,7 +18170,7 @@ emitted when a non-editable item is selected and one of the keys:
 Space, Return or Enter is pressed.
 ## `path`
 the `TreePath` for the activated item
-<!-- trait IconViewExt::fn connect_move_cursor -->
+<!-- trait IconViewExt::fn move-cursor -->
 The ::move-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a cursor movement.
@@ -18175,7 +18189,7 @@ the Shift modifier.
 the granularity of the move, as a `MovementStep`
 ## `count`
 the number of `step` units to move
-<!-- trait IconViewExt::fn connect_select_all -->
+<!-- trait IconViewExt::fn select-all -->
 A [keybinding signal][`BindingSignal`]
 which gets emitted when the user selects all items.
 
@@ -18184,7 +18198,7 @@ Applications should not connect to it, but may emit it with
 programmatically.
 
 The default binding for this signal is Ctrl-a.
-<!-- trait IconViewExt::fn connect_select_cursor_item -->
+<!-- trait IconViewExt::fn select-cursor-item -->
 A [keybinding signal][`BindingSignal`]
 which gets emitted when the user selects the item that is currently
 focused.
@@ -18194,10 +18208,10 @@ Applications should not connect to it, but may emit it with
 programmatically.
 
 There is no default binding for this signal.
-<!-- trait IconViewExt::fn connect_selection_changed -->
+<!-- trait IconViewExt::fn selection-changed -->
 The ::selection-changed signal is emitted when the selection
 (i.e. the set of selected items) changes.
-<!-- trait IconViewExt::fn connect_toggle_cursor_item -->
+<!-- trait IconViewExt::fn toggle-cursor-item -->
 A [keybinding signal][`BindingSignal`]
 which gets emitted when the user toggles whether the currently
 focused item is selected or not. The exact effect of this
@@ -18208,7 +18222,7 @@ Applications should not connect to it, but may emit it with
 programmatically.
 
 There is no default binding for this signal is Ctrl-Space.
-<!-- trait IconViewExt::fn connect_unselect_all -->
+<!-- trait IconViewExt::fn unselect-all -->
 A [keybinding signal][`BindingSignal`]
 which gets emitted when the user unselects all items.
 
@@ -18430,7 +18444,8 @@ can then be loaded into a `gdk_pixbuf::Pixbuf` using
 
 # CSS nodes
 
-`Image` has a single CSS node with the name image.
+`Image` has a single CSS node with the name image. The style classes
+may appear on image CSS nodes: .icon-dropshadow, .lowres-icon.
 
 # Implements
 
@@ -18933,14 +18948,14 @@ If true, a standard close button is shown. When clicked it emits
 the response `ResponseType::Close`.
 ## `setting`
 `true` to include a close button
-<!-- trait InfoBarExt::fn connect_close -->
+<!-- trait InfoBarExt::fn close -->
 The ::close signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user uses a keybinding to dismiss
 the info bar.
 
 The default binding for this signal is the Escape key.
-<!-- trait InfoBarExt::fn connect_response -->
+<!-- trait InfoBarExt::fn response -->
 Emitted when an action widget is clicked or the application programmer
 calls `DialogExt::response`. The `response_id` depends on which action
 widget was clicked.
@@ -19653,7 +19668,7 @@ Feature: `v3_16`
 
 ## `yalign`
 the new yalign value, between 0 and 1
-<!-- trait LabelExt::fn connect_activate_current_link -->
+<!-- trait LabelExt::fn activate-current-link -->
 A [keybinding signal][`BindingSignal`]
 which gets emitted when the user activates a link in the label.
 
@@ -19661,7 +19676,7 @@ Applications may also emit the signal with `g_signal_emit_by_name`
 if they need to control activation of URIs programmatically.
 
 The default bindings for this signal are all forms of the Enter key.
-<!-- trait LabelExt::fn connect_activate_link -->
+<!-- trait LabelExt::fn activate-link -->
 The signal which gets emitted to activate a URI.
 Applications may connect to it to override the default behaviour,
 which is to call `gtk_show_uri_on_window`.
@@ -19671,13 +19686,13 @@ the URI that is activated
 # Returns
 
 `true` if the link has been activated
-<!-- trait LabelExt::fn connect_copy_clipboard -->
+<!-- trait LabelExt::fn copy-clipboard -->
 The ::copy-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to copy the selection to the clipboard.
 
 The default binding for this signal is Ctrl-c.
-<!-- trait LabelExt::fn connect_move_cursor -->
+<!-- trait LabelExt::fn move-cursor -->
 The ::move-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a cursor movement.
@@ -19701,7 +19716,7 @@ the granularity of the move, as a `MovementStep`
 the number of `step` units to move
 ## `extend_selection`
 `true` if the move should extend the selection
-<!-- trait LabelExt::fn connect_populate_popup -->
+<!-- trait LabelExt::fn populate-popup -->
 The ::populate-popup signal gets emitted before showing the
 context menu of the label. Note that only selectable labels
 have context menus.
@@ -20149,7 +20164,7 @@ Sets the value of the `LevelBar:value` property.
 ## `value`
 a value in the interval between
  `LevelBar:min-value` and `LevelBar:max-value`
-<!-- trait LevelBarExt::fn connect_offset_changed -->
+<!-- trait LevelBarExt::fn offset-changed -->
 Emitted when an offset specified on the bar changes value as an
 effect to `LevelBarExt::add_offset_value` being called.
 
@@ -20319,7 +20334,7 @@ Sets the “visited” state of the URI where the `LinkButton`
 points. See `LinkButtonExt::get_visited` for more details.
 ## `visited`
 the new “visited” state
-<!-- trait LinkButtonExt::fn connect_activate_link -->
+<!-- trait LinkButtonExt::fn activate-link -->
 The ::activate-link signal is emitted each time the `LinkButton`
 has been clicked.
 
@@ -20361,6 +20376,12 @@ the user tries to activate it. If it is selectable, the row will be marked
 as selected when the user tries to select it.
 
 The `ListBox` widget was added in GTK+ 3.10.
+
+# `ListBox` as `Buildable`
+
+The `ListBox` implementation of the `Buildable` interface supports
+setting a child as the placeholder by specifying “placeholder” as the “type”
+attribute of a `<child>` element. See `ListBoxExt::set_placeholder` for info.
 
 # CSS nodes
 
@@ -20621,11 +20642,11 @@ Unselect all children of `self`, if the selection mode allows it.
 Unselects a single row of `self`, if the selection mode allows it.
 ## `row`
 the row to unselected
-<!-- trait ListBoxExt::fn connect_row_activated -->
+<!-- trait ListBoxExt::fn row-activated -->
 The ::row-activated signal is emitted when a row has been activated by the user.
 ## `row`
 the activated row
-<!-- trait ListBoxExt::fn connect_row_selected -->
+<!-- trait ListBoxExt::fn row-selected -->
 The ::row-selected signal is emitted when a new row is selected, or
 (with a `None` `row`) when the selection is cleared.
 
@@ -20634,16 +20655,16 @@ give you the full picture of selection changes, and you should use
 the `ListBox::selected-rows-changed` signal instead.
 ## `row`
 the selected row
-<!-- trait ListBoxExt::fn connect_select_all -->
+<!-- trait ListBoxExt::fn select-all -->
 The ::select-all signal is a [keybinding signal][`BindingSignal`]
 which gets emitted to select all children of the box, if the selection
 mode permits it.
 
 The default bindings for this signal is Ctrl-a.
-<!-- trait ListBoxExt::fn connect_selected_rows_changed -->
+<!-- trait ListBoxExt::fn selected-rows-changed -->
 The ::selected-rows-changed signal is emitted when the
 set of selected rows changes.
-<!-- trait ListBoxExt::fn connect_unselect_all -->
+<!-- trait ListBoxExt::fn unselect-all -->
 The ::unselect-all signal is a [keybinding signal][`BindingSignal`]
 which gets emitted to unselect all children of the box, if the selection
 mode permits it.
@@ -20733,7 +20754,7 @@ the header, or `None`
 Set the `ListBoxRow:selectable` property for this row.
 ## `selectable`
 `true` to mark the row as selectable
-<!-- trait ListBoxRowExt::fn connect_activate -->
+<!-- trait ListBoxRowExt::fn activate -->
 This is a keybinding signal, which will cause this row to be activated.
 
 If you want to be notified when the user activates a row (by key or not),
@@ -21629,10 +21650,10 @@ Sets the `gdk::Screen` on which the menu will be displayed.
 ## `screen`
 a `gdk::Screen`, or `None` if the screen should be
  determined by the widget the menu is attached to
-<!-- trait GtkMenuExt::fn connect_move_scroll -->
+<!-- trait GtkMenuExt::fn move-scroll -->
 ## `scroll_type`
 a `ScrollType`
-<!-- trait GtkMenuExt::fn connect_popped_up -->
+<!-- trait GtkMenuExt::fn popped-up -->
 Emitted when the position of `menu` is finalized after being popped up
 using gtk_menu_popup_at_rect (), gtk_menu_popup_at_widget (), or
 gtk_menu_popup_at_pointer ().
@@ -22300,9 +22321,9 @@ the allocation to use as signal data.
 Emits the `MenuItem::toggle-size-request` signal on the given item.
 ## `requisition`
 the requisition to use as signal data.
-<!-- trait GtkMenuItemExt::fn connect_activate -->
+<!-- trait GtkMenuItemExt::fn activate -->
 Emitted when the item is activated.
-<!-- trait GtkMenuItemExt::fn connect_activate_item -->
+<!-- trait GtkMenuItemExt::fn activate-item -->
 Emitted when the item is activated, but also if the menu item has a
 submenu. For normal applications, the relevant signal is
 `MenuItem::activate`.
@@ -22512,22 +22533,22 @@ See also `gdk_keyboard_grab`
 ## `take_focus`
 `true` if the menu shell should take the keyboard
  focus on popup
-<!-- trait MenuShellExt::fn connect_activate_current -->
+<!-- trait MenuShellExt::fn activate-current -->
 An action signal that activates the current menu item within
 the menu shell.
 ## `force_hide`
 if `true`, hide the menu after activating the menu item
-<!-- trait MenuShellExt::fn connect_cancel -->
+<!-- trait MenuShellExt::fn cancel -->
 An action signal which cancels the selection within the menu shell.
 Causes the `MenuShell::selection-done` signal to be emitted.
-<!-- trait MenuShellExt::fn connect_cycle_focus -->
+<!-- trait MenuShellExt::fn cycle-focus -->
 A keybinding signal which moves the focus in the
 given `direction`.
 ## `direction`
 the direction to cycle in
-<!-- trait MenuShellExt::fn connect_deactivate -->
+<!-- trait MenuShellExt::fn deactivate -->
 This signal is emitted when a menu shell is deactivated.
-<!-- trait MenuShellExt::fn connect_insert -->
+<!-- trait MenuShellExt::fn insert -->
 The ::insert signal is emitted when a new `MenuItem` is added to
 a `MenuShell`. A separate signal is used instead of
 `Container`::add because of the need for an additional position
@@ -22538,12 +22559,12 @@ The inverse of this signal is the `Container`::removed signal.
 the `MenuItem` that is being inserted
 ## `position`
 the position at which the insert occurs
-<!-- trait MenuShellExt::fn connect_move_current -->
+<!-- trait MenuShellExt::fn move-current -->
 An keybinding signal which moves the current menu item
 in the direction specified by `direction`.
 ## `direction`
 the direction to move
-<!-- trait MenuShellExt::fn connect_move_selected -->
+<!-- trait MenuShellExt::fn move-selected -->
 The ::move-selected signal is emitted to move the selection to
 another item.
 ## `distance`
@@ -22552,7 +22573,7 @@ another item.
 # Returns
 
 `true` to stop the signal emission, `false` to continue
-<!-- trait MenuShellExt::fn connect_selection_done -->
+<!-- trait MenuShellExt::fn selection-done -->
 This signal is emitted when a selection has been
 completed within a menu shell.
 <!-- trait MenuShellExt::fn get_property_take_focus -->
@@ -22631,7 +22652,7 @@ Sets the `Menu` that is popped up when the user clicks on the arrow.
 If `menu` is NULL, the arrow button becomes insensitive.
 ## `menu`
 the `Menu` associated with `MenuToolButton`
-<!-- trait MenuToolButtonExt::fn connect_show_menu -->
+<!-- trait MenuToolButtonExt::fn show-menu -->
 The ::show-menu signal is emitted before the menu is shown.
 
 It can be used to populate the menu on demand, using
@@ -23311,7 +23332,7 @@ Multiple calls while the dialog is visible will be ignored.
 
 Feature: `v3_20`
 
-<!-- trait NativeDialogExt::fn connect_response -->
+<!-- trait NativeDialogExt::fn response -->
 Emitted when the user responds to the dialog.
 
 When this is called the dialog has been hidden.
@@ -23859,7 +23880,7 @@ via drag and drop or not.
 a child `Widget`
 ## `reorderable`
 whether the tab is reorderable or not
-<!-- trait NotebookExt::fn connect_create_window -->
+<!-- trait NotebookExt::fn create-window -->
 The ::create-window signal is emitted when a detachable
 tab is dropped on the root window.
 
@@ -23879,28 +23900,28 @@ the Y coordinate where the drop happens
 
 a `Notebook` that `page` should be
  added to, or `None`.
-<!-- trait NotebookExt::fn connect_page_added -->
+<!-- trait NotebookExt::fn page-added -->
 the ::page-added signal is emitted in the notebook
 right after a page is added to the notebook.
 ## `child`
 the child `Widget` affected
 ## `page_num`
 the new page number for `child`
-<!-- trait NotebookExt::fn connect_page_removed -->
+<!-- trait NotebookExt::fn page-removed -->
 the ::page-removed signal is emitted in the notebook
 right after a page is removed from the notebook.
 ## `child`
 the child `Widget` affected
 ## `page_num`
 the `child` page number
-<!-- trait NotebookExt::fn connect_page_reordered -->
+<!-- trait NotebookExt::fn page-reordered -->
 the ::page-reordered signal is emitted in the notebook
 right after a page has been reordered.
 ## `child`
 the child `Widget` affected
 ## `page_num`
 the new page number for `child`
-<!-- trait NotebookExt::fn connect_switch_page -->
+<!-- trait NotebookExt::fn switch-page -->
 Emitted when the user or a function changes the current page.
 ## `page`
 the new current page
@@ -24001,7 +24022,7 @@ Trait containing all `Orientable` methods.
 
 # Implementors
 
-[`AppChooserWidget`](struct.AppChooserWidget.html), [`Box`](struct.Box.html), [`ButtonBox`](struct.ButtonBox.html), [`CellAreaBox`](struct.CellAreaBox.html), [`CellRendererProgress`](struct.CellRendererProgress.html), [`CellView`](struct.CellView.html), [`ColorChooserWidget`](struct.ColorChooserWidget.html), [`FileChooserButton`](struct.FileChooserButton.html), [`FileChooserWidget`](struct.FileChooserWidget.html), [`FlowBox`](struct.FlowBox.html), [`FontChooserWidget`](struct.FontChooserWidget.html), [`Grid`](struct.Grid.html), [`InfoBar`](struct.InfoBar.html), [`LevelBar`](struct.LevelBar.html), [`Orientable`](struct.Orientable.html), [`Paned`](struct.Paned.html), [`ProgressBar`](struct.ProgressBar.html), [`Range`](struct.Range.html), [`RecentChooserWidget`](struct.RecentChooserWidget.html), [`ScaleButton`](struct.ScaleButton.html), [`Scale`](struct.Scale.html), [`Scrollbar`](struct.Scrollbar.html), [`Separator`](struct.Separator.html), [`SpinButton`](struct.SpinButton.html), [`StackSwitcher`](struct.StackSwitcher.html), [`Statusbar`](struct.Statusbar.html), [`ToolPalette`](struct.ToolPalette.html), [`Toolbar`](struct.Toolbar.html), [`VolumeButton`](struct.VolumeButton.html)
+[`AppChooserWidget`](struct.AppChooserWidget.html), [`Box`](struct.Box.html), [`ButtonBox`](struct.ButtonBox.html), [`CellAreaBox`](struct.CellAreaBox.html), [`CellRendererProgress`](struct.CellRendererProgress.html), [`CellView`](struct.CellView.html), [`ColorChooserWidget`](struct.ColorChooserWidget.html), [`FileChooserButton`](struct.FileChooserButton.html), [`FileChooserWidget`](struct.FileChooserWidget.html), [`FlowBox`](struct.FlowBox.html), [`FontChooserWidget`](struct.FontChooserWidget.html), [`Grid`](struct.Grid.html), [`InfoBar`](struct.InfoBar.html), [`LevelBar`](struct.LevelBar.html), [`Orientable`](struct.Orientable.html), [`Paned`](struct.Paned.html), [`ProgressBar`](struct.ProgressBar.html), [`Range`](struct.Range.html), [`RecentChooserWidget`](struct.RecentChooserWidget.html), [`ScaleButton`](struct.ScaleButton.html), [`Scale`](struct.Scale.html), [`Scrollbar`](struct.Scrollbar.html), [`Separator`](struct.Separator.html), [`ShortcutLabel`](struct.ShortcutLabel.html), [`SpinButton`](struct.SpinButton.html), [`StackSwitcher`](struct.StackSwitcher.html), [`Statusbar`](struct.Statusbar.html), [`ToolPalette`](struct.ToolPalette.html), [`Toolbar`](struct.Toolbar.html), [`VolumeButton`](struct.VolumeButton.html)
 <!-- trait OrientableExt::fn get_orientation -->
 Retrieves the orientation of the `self`.
 
@@ -24037,6 +24058,9 @@ properties of the child to non-zero values.
 
 More complicated placement of overlays is possible by connecting
 to the `Overlay::get-child-position` signal.
+
+An overlay’s minimum and natural sizes are those of its main child. The sizes
+of overlay children are not considered when measuring these preferred sizes.
 
 # `Overlay` as `Buildable`
 
@@ -24090,7 +24114,7 @@ whether the widget is a pass through child.
 <!-- trait OverlayExt::fn reorder_overlay -->
 Moves `child` to a new `index` in the list of `self` children.
 The list contains overlays in the order that these were
-added to `self`.
+added to `self` by default. See also `Overlay:index`.
 
 A widget’s index in the `self` children list determines which order
 the children are drawn if they overlap. The first child is drawn at
@@ -24100,7 +24124,7 @@ Feature: `v3_18`
 
 ## `child`
 the overlaid `Widget` to move
-## `position`
+## `index_`
 the new index for `child` in the list of overlay children
  of `self`, starting from 0. If negative, indicates the end of
  the list
@@ -24114,7 +24138,7 @@ Feature: `v3_18`
 an overlay child of `Overlay`
 ## `pass_through`
 whether the child should pass the input through
-<!-- trait OverlayExt::fn connect_get_child_position -->
+<!-- trait OverlayExt::fn get-child-position -->
 The ::get-child-position signal is emitted to determine
 the position and size of any overlay child widgets. A
 handler for this signal should fill `allocation` with
@@ -24737,14 +24761,14 @@ Feature: `v3_16`
 
 ## `wide`
 the new value for the `Paned:wide-handle` property
-<!-- trait PanedExt::fn connect_accept_position -->
+<!-- trait PanedExt::fn accept-position -->
 The ::accept-position signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to accept the current position of the handle when
 moving it using key bindings.
 
 The default binding for this signal is Return or Space.
-<!-- trait PanedExt::fn connect_cancel_position -->
+<!-- trait PanedExt::fn cancel-position -->
 The ::cancel-position signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to cancel moving the position of the handle using key
@@ -24752,7 +24776,7 @@ bindings. The position of the handle will be reset to the value prior to
 moving it.
 
 The default binding for this signal is Escape.
-<!-- trait PanedExt::fn connect_cycle_child_focus -->
+<!-- trait PanedExt::fn cycle-child-focus -->
 The ::cycle-child-focus signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to cycle the focus between the children of the paned.
@@ -24760,7 +24784,7 @@ which gets emitted to cycle the focus between the children of the paned.
 The default binding is f6.
 ## `reversed`
 whether cycling backward or forward
-<!-- trait PanedExt::fn connect_cycle_handle_focus -->
+<!-- trait PanedExt::fn cycle-handle-focus -->
 The ::cycle-handle-focus signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to cycle whether the paned should grab focus to allow
@@ -24769,14 +24793,14 @@ the user to change position of the handle by using key bindings.
 The default binding for this signal is f8.
 ## `reversed`
 whether cycling backward or forward
-<!-- trait PanedExt::fn connect_move_handle -->
+<!-- trait PanedExt::fn move-handle -->
 The ::move-handle signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to move the handle when the user is using key bindings
 to move it.
 ## `scroll_type`
 a `ScrollType`
-<!-- trait PanedExt::fn connect_toggle_handle_focus -->
+<!-- trait PanedExt::fn toggle-handle-focus -->
 The ::toggle-handle-focus is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to accept the current position of the handle and then
@@ -25349,7 +25373,7 @@ Feature: `v3_18`
 
 ## `show_trash`
 whether to show an item for the Trash location
-<!-- impl PlacesSidebar::fn connect_drag_action_ask -->
+<!-- impl PlacesSidebar::fn drag-action-ask -->
 The places sidebar emits this signal when it needs to ask the application
 to pop up a menu to ask the user for which drag action to perform.
 ## `actions`
@@ -25359,7 +25383,7 @@ Possible drag actions that need to be asked for.
 
 the final drag action that the sidebar should pass to the drag side
 of the drag-and-drop operation.
-<!-- impl PlacesSidebar::fn connect_drag_action_requested -->
+<!-- impl PlacesSidebar::fn drag-action-requested -->
 When the user starts a drag-and-drop operation and the sidebar needs
 to ask the application for which drag action to perform, then the
 sidebar will emit this signal.
@@ -25382,7 +25406,7 @@ The drag action to use must be the return value of the signal handler.
 The drag action to use, for example, `gdk::DragAction::Copy`
 or `gdk::DragAction::Move`, or 0 if no action is allowed here (i.e. drops
 are not allowed in the specified `dest_file`).
-<!-- impl PlacesSidebar::fn connect_drag_perform_drop -->
+<!-- impl PlacesSidebar::fn drag-perform-drop -->
 The places sidebar emits this signal when the user completes a
 drag-and-drop operation and one of the sidebar's items is the
 destination. This item is in the `dest_file`, and the
@@ -25395,7 +25419,7 @@ Destination `gio::File`.
  `glib::List` of `gio::File` that got dropped.
 ## `action`
 Drop action to perform.
-<!-- impl PlacesSidebar::fn connect_mount -->
+<!-- impl PlacesSidebar::fn mount -->
 The places sidebar emits this signal when it starts a new operation
 because the user clicked on some location that needs mounting.
 In this way the application using the `PlacesSidebar` can track the
@@ -25405,7 +25429,7 @@ Feature: `v3_20`
 
 ## `mount_operation`
 the `gio::MountOperation` that is going to start.
-<!-- impl PlacesSidebar::fn connect_open_location -->
+<!-- impl PlacesSidebar::fn open-location -->
 The places sidebar emits this signal when the user selects a location
 in it. The calling application should display the contents of that
 location; for example, a file manager should show a list of files in
@@ -25414,7 +25438,7 @@ the specified location.
 `gio::File` to which the caller should switch.
 ## `open_flags`
 a single value from `PlacesOpenFlags` specifying how the `location` should be opened.
-<!-- impl PlacesSidebar::fn connect_populate_popup -->
+<!-- impl PlacesSidebar::fn populate-popup -->
 The places sidebar emits this signal when the user invokes a contextual
 popup on one of its items. In the signal handler, the application may
 add extra items to the menu as appropriate. For example, a file manager
@@ -25448,7 +25472,7 @@ a `Menu` or another `Container`
 ## `selected_volume`
 `gio::Volume` if the selected
  item is a volume, or `None` if it is a file.
-<!-- impl PlacesSidebar::fn connect_show_connect_to_server -->
+<!-- impl PlacesSidebar::fn show-connect-to-server -->
 The places sidebar emits this signal when it needs the calling
 application to present an way to connect directly to a network server.
 For example, the application may bring up a dialog box asking for
@@ -25459,12 +25483,12 @@ the corresponding mount by using, for example, `gio::File::mount_enclosing_volum
 
 use the `PlacesSidebar::show-other-locations` signal
  to connect to network servers.
-<!-- impl PlacesSidebar::fn connect_show_enter_location -->
+<!-- impl PlacesSidebar::fn show-enter-location -->
 The places sidebar emits this signal when it needs the calling
 application to present an way to directly enter a location.
 For example, the application may bring up a dialog box asking for
 a URL like "http://http.example.com".
-<!-- impl PlacesSidebar::fn connect_show_error_message -->
+<!-- impl PlacesSidebar::fn show-error-message -->
 The places sidebar emits this signal when it needs the calling
 application to present an error message. Most of these messages
 refer to mounting or unmounting media, for example, when a drive
@@ -25473,7 +25497,7 @@ cannot be started for some reason.
 primary message with a summary of the error to show.
 ## `secondary`
 secondary message with details of the error to show.
-<!-- impl PlacesSidebar::fn connect_show_other_locations -->
+<!-- impl PlacesSidebar::fn show-other-locations -->
 The places sidebar emits this signal when it needs the calling
 application to present a way to show other locations e.g. drives
 and network access points.
@@ -25488,7 +25512,7 @@ Feature: `v3_18`
 use the `PlacesSidebar::show-other-locations-with-flags`
 which includes the open flags in order to allow the user to specify to open
 in a new tab or window, in a similar way than `PlacesSidebar::open-location`
-<!-- impl PlacesSidebar::fn connect_show_other_locations_with_flags -->
+<!-- impl PlacesSidebar::fn show-other-locations-with-flags -->
 The places sidebar emits this signal when it needs the calling
 application to present a way to show other locations e.g. drives
 and network access points.
@@ -25499,7 +25523,7 @@ Feature: `v3_20`
 
 ## `open_flags`
 a single value from `PlacesOpenFlags` specifying how it should be opened.
-<!-- impl PlacesSidebar::fn connect_show_starred_location -->
+<!-- impl PlacesSidebar::fn show-starred-location -->
 The places sidebar emits this signal when it needs the calling
 application to present a way to show the starred files. In GNOME,
 starred files are implemented by setting the nao:predefined-tag-favorite
@@ -25510,7 +25534,7 @@ Feature: `v3_22_26`
 ## `open_flags`
 a single value from `PlacesOpenFlags` specifying how the
  starred file should be opened.
-<!-- impl PlacesSidebar::fn connect_unmount -->
+<!-- impl PlacesSidebar::fn unmount -->
 The places sidebar emits this signal when it starts a new operation
 because the user for example ejected some drive or unmounted a mount.
 In this way the application using the `PlacesSidebar` can track the
@@ -25615,7 +25639,7 @@ Retrieves the socket the plug is embedded in.
 # Returns
 
 the window of the socket, or `None`
-<!-- trait PlugExt::fn connect_embedded -->
+<!-- trait PlugExt::fn embedded -->
 Gets emitted when the plug becomes embedded in a socket.
 <!-- trait PlugExt::fn get_property_embedded -->
 `true` if the plug is embedded in a socket.
@@ -25913,7 +25937,7 @@ You can show or hide the popover without transitions
  and `PopoverExt::popdown` will use transitions.
 ## `transitions_enabled`
 Whether transitions are enabled
-<!-- trait PopoverExt::fn connect_closed -->
+<!-- trait PopoverExt::fn closed -->
 This signal is emitted when the popover is dismissed either through
 API or user interaction.
 <!-- trait PopoverExt::fn get_property_constrain_to -->
@@ -26652,7 +26676,7 @@ sheet). Otherwise, the origin is at the top left corner of the
 imageable area (i.e. inside the margins).
 ## `full_page`
 `true` to set up the `PrintContext` for the full page
-<!-- trait PrintOperationExt::fn connect_begin_print -->
+<!-- trait PrintOperationExt::fn begin-print -->
 Emitted after the user has finished changing print settings
 in the dialog, before the actual rendering starts.
 
@@ -26661,7 +26685,7 @@ A typical use for ::begin-print is to use the parameters from the
 set the number of pages with `PrintOperationExt::set_n_pages`.
 ## `context`
 the `PrintContext` for the current operation
-<!-- trait PrintOperationExt::fn connect_create_custom_widget -->
+<!-- trait PrintOperationExt::fn create-custom-widget -->
 Emitted when displaying the print dialog. If you return a
 widget in a handler for this signal it will be added to a custom
 tab in the print dialog. You typically return a container widget
@@ -26677,7 +26701,7 @@ information you need from the widgets.
 
 A custom widget that gets embedded in
  the print dialog, or `None`
-<!-- trait PrintOperationExt::fn connect_custom_widget_apply -->
+<!-- trait PrintOperationExt::fn custom-widget-apply -->
 Emitted right before `PrintOperation::begin-print` if you added
 a custom widget in the `PrintOperation::create-custom-widget` handler.
 When you get this signal you should read the information from the
@@ -26685,7 +26709,7 @@ custom widgets, as the widgets are not guaraneed to be around at a
 later time.
 ## `widget`
 the custom widget added in create-custom-widget
-<!-- trait PrintOperationExt::fn connect_done -->
+<!-- trait PrintOperationExt::fn done -->
 Emitted when the print operation run has finished doing
 everything required for printing.
 
@@ -26698,7 +26722,7 @@ If you enabled print status tracking then
 after `PrintOperation::done` was emitted.
 ## `result`
 the result of the print operation
-<!-- trait PrintOperationExt::fn connect_draw_page -->
+<!-- trait PrintOperationExt::fn draw-page -->
 Emitted for every page that is printed. The signal handler
 must render the `page_nr`'s page onto the cairo context obtained
 from `context` using `PrintContext::get_cairo_context`.
@@ -26752,13 +26776,13 @@ needs.
 the `PrintContext` for the current operation
 ## `page_nr`
 the number of the currently printed page (0-based)
-<!-- trait PrintOperationExt::fn connect_end_print -->
+<!-- trait PrintOperationExt::fn end-print -->
 Emitted after all pages have been rendered.
 A handler for this signal can clean up any resources that have
 been allocated in the `PrintOperation::begin-print` handler.
 ## `context`
 the `PrintContext` for the current operation
-<!-- trait PrintOperationExt::fn connect_paginate -->
+<!-- trait PrintOperationExt::fn paginate -->
 Emitted after the `PrintOperation::begin-print` signal, but before
 the actual rendering starts. It keeps getting emitted until a connected
 signal handler returns `true`.
@@ -26778,7 +26802,7 @@ the `PrintContext` for the current operation
 # Returns
 
 `true` if pagination is complete
-<!-- trait PrintOperationExt::fn connect_preview -->
+<!-- trait PrintOperationExt::fn preview -->
 Gets emitted when a preview is requested from the native dialog.
 
 The default handler for this signal uses an external viewer
@@ -26805,7 +26829,7 @@ the `Window` to use as window parent, or `None`
 # Returns
 
 `true` if the listener wants to take over control of the preview
-<!-- trait PrintOperationExt::fn connect_request_page_setup -->
+<!-- trait PrintOperationExt::fn request-page-setup -->
 Emitted once for every page that is printed, to give
 the application a chance to modify the page setup. Any changes
 done to `setup` will be in force only for printing this page.
@@ -26815,12 +26839,12 @@ the `PrintContext` for the current operation
 the number of the currently printed page (0-based)
 ## `setup`
 the `PageSetup`
-<!-- trait PrintOperationExt::fn connect_status_changed -->
+<!-- trait PrintOperationExt::fn status-changed -->
 Emitted at between the various phases of the print operation.
 See `PrintStatus` for the phases that are being discriminated.
 Use `PrintOperationExt::get_status` to find out the current
 status.
-<!-- trait PrintOperationExt::fn connect_update_custom_widget -->
+<!-- trait PrintOperationExt::fn update-custom-widget -->
 Emitted after change of selected printer. The actual page setup and
 print settings are passed to the custom widget, which can actualize
 itself according to this change.
@@ -27085,7 +27109,7 @@ Note that this function requires a suitable cairo context to
 be associated with the print context.
 ## `page_nr`
 the page to render
-<!-- trait PrintOperationPreviewExt::fn connect_got_page_size -->
+<!-- trait PrintOperationPreviewExt::fn got-page-size -->
 The ::got-page-size signal is emitted once for each page
 that gets rendered to the preview.
 
@@ -27096,7 +27120,7 @@ context, using `PrintContext::set_cairo_context`.
 the current `PrintContext`
 ## `page_setup`
 the `PageSetup` for the current page
-<!-- trait PrintOperationPreviewExt::fn connect_ready -->
+<!-- trait PrintOperationPreviewExt::fn ready -->
 The ::ready signal gets emitted once per preview operation,
 before the first page is rendered.
 
@@ -28104,7 +28128,7 @@ changes.
 ## `group`
 an existing radio
  button group, such as one returned from `RadioButtonExt::get_group`, or `None`.
-<!-- trait RadioButtonExt::fn connect_group_changed -->
+<!-- trait RadioButtonExt::fn group-changed -->
 Emitted when the group of radio buttons that a radio button belongs
 to changes. This is emitted when a radio button switches from
 being alone to being part of a group of 2 or more buttons, or
@@ -28561,12 +28585,12 @@ them. The range emits the `Range::value-changed` signal if the
 value changes.
 ## `value`
 new value of the range
-<!-- trait RangeExt::fn connect_adjust_bounds -->
+<!-- trait RangeExt::fn adjust-bounds -->
 Emitted before clamping a value, to give the application a
 chance to adjust the bounds.
 ## `value`
 the value before we clamp
-<!-- trait RangeExt::fn connect_change_value -->
+<!-- trait RangeExt::fn change-value -->
 The `Range::change-value` signal is emitted when a scroll action is
 performed on a range. It allows an application to determine the
 type of scroll event that occurred and the resultant new value.
@@ -28588,11 +28612,11 @@ the new value resulting from the scroll action
 
 `true` to prevent other handlers from being invoked for
  the signal, `false` to propagate the signal further
-<!-- trait RangeExt::fn connect_move_slider -->
+<!-- trait RangeExt::fn move-slider -->
 Virtual function that moves the slider. Used for keybindings.
 ## `step`
 how to move the slider
-<!-- trait RangeExt::fn connect_value_changed -->
+<!-- trait RangeExt::fn value-changed -->
 Emitted when the range value changes.
 <!-- trait RangeExt::fn get_property_fill_level -->
 The fill level (e.g. prebuffering of a network stream).
@@ -28848,12 +28872,12 @@ Unselects all the items inside `self`.
 Unselects `uri` inside `self`.
 ## `uri`
 a URI
-<!-- trait RecentChooserExt::fn connect_item_activated -->
+<!-- trait RecentChooserExt::fn item-activated -->
 This signal is emitted when the user "activates" a recent item
 in the recent chooser. This can happen by double-clicking on an item
 in the recently used resources list, or by pressing
 `Enter`.
-<!-- trait RecentChooserExt::fn connect_selection_changed -->
+<!-- trait RecentChooserExt::fn selection-changed -->
 This signal is emitted when there is a change in the set of
 selected recently used resources. This can happen when a user
 modifies the selection with the mouse or the keyboard, or when
@@ -29687,7 +29711,7 @@ the URI of the item you wish to remove
 
 `true` if the item pointed by `uri` has been successfully
  removed by the recently used resources list, and `false` otherwise
-<!-- trait RecentManagerExt::fn connect_changed -->
+<!-- trait RecentManagerExt::fn changed -->
 Emitted when the current recently used resources manager changes
 its contents, either by calling `RecentManagerExt::add_item` or
 by another application.
@@ -30106,7 +30130,7 @@ and the current value.
 Sets the position in which the current value is displayed.
 ## `pos`
 the position in which the current value is displayed
-<!-- trait ScaleExt::fn connect_format_value -->
+<!-- trait ScaleExt::fn format-value -->
 Signal which allows you to change how the scale value is displayed.
 Connect a signal handler which returns an allocated string representing
 `value`. That string will then be used to display the scale's value.
@@ -30221,19 +30245,19 @@ inside them. The scale button emits the `ScaleButton::value-changed`
 signal if the value changes.
 ## `value`
 new value of the scale button
-<!-- trait ScaleButtonExt::fn connect_popdown -->
+<!-- trait ScaleButtonExt::fn popdown -->
 The ::popdown signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to popdown the scale widget.
 
 The default binding for this signal is Escape.
-<!-- trait ScaleButtonExt::fn connect_popup -->
+<!-- trait ScaleButtonExt::fn popup -->
 The ::popup signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to popup the scale widget.
 
 The default bindings for this signal are Space, Enter and Return.
-<!-- trait ScaleButtonExt::fn connect_value_changed -->
+<!-- trait ScaleButtonExt::fn value-changed -->
 The ::value-changed signal is emitted when the value field has
 changed.
 ## `value`
@@ -30746,7 +30770,7 @@ This setting only has an effect if kinetic scrolling is enabled.
 <!-- trait ScrolledWindowExt::fn set_hadjustment -->
 Sets the `Adjustment` for the horizontal scrollbar.
 ## `hadjustment`
-horizontal scroll adjustment
+the `Adjustment` to use, or `None` to create a new one
 <!-- trait ScrolledWindowExt::fn set_kinetic_scrolling -->
 Turns kinetic scrolling on or off.
 Kinetic scrolling only applies to devices with source
@@ -30852,7 +30876,7 @@ kind of shadow to draw around scrolled window contents
 <!-- trait ScrolledWindowExt::fn set_vadjustment -->
 Sets the `Adjustment` for the vertical scrollbar.
 ## `vadjustment`
-vertical scroll adjustment
+the `Adjustment` to use, or `None` to create a new one
 <!-- trait ScrolledWindowExt::fn unset_placement -->
 Unsets the placement of the contents with respect to the scrollbars
 for the scrolled window. If no window placement is set for a scrolled
@@ -30860,7 +30884,7 @@ window, it defaults to `CornerType::TopLeft`.
 
 See also `ScrolledWindowExt::set_placement` and
 `ScrolledWindowExt::get_placement`.
-<!-- trait ScrolledWindowExt::fn connect_edge_overshot -->
+<!-- trait ScrolledWindowExt::fn edge-overshot -->
 The ::edge-overshot signal is emitted whenever user initiated scrolling
 makes the scrolled window firmly surpass (i.e. with some edge resistance)
 the lower or upper limits defined by the adjustment in that orientation.
@@ -30875,7 +30899,7 @@ Feature: `v3_16`
 
 ## `pos`
 edge side that was hit
-<!-- trait ScrolledWindowExt::fn connect_edge_reached -->
+<!-- trait ScrolledWindowExt::fn edge-reached -->
 The ::edge-reached signal is emitted whenever user-initiated scrolling
 makes the scrolled window exactly reach the lower or upper limits
 defined by the adjustment in that orientation.
@@ -30890,7 +30914,7 @@ Feature: `v3_16`
 
 ## `pos`
 edge side that was reached
-<!-- trait ScrolledWindowExt::fn connect_move_focus_out -->
+<!-- trait ScrolledWindowExt::fn move-focus-out -->
 The ::move-focus-out signal is a
 [keybinding signal][`BindingSignal`] which gets
 emitted when focus is moved away from the scrolled window by a
@@ -30901,7 +30925,7 @@ container hierarchy. The default bindings for this signal are
 ## `direction_type`
 either `DirectionType::TabForward` or
  `DirectionType::TabBackward`
-<!-- trait ScrolledWindowExt::fn connect_scroll_child -->
+<!-- trait ScrolledWindowExt::fn scroll-child -->
 The ::scroll-child signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when a keybinding that scrolls is pressed.
@@ -30952,6 +30976,9 @@ scrollbars are only added as traditional widgets when a mouse
 is present. Otherwise, they are overlayed on top of the content,
 as narrow indicators.
 
+Note that overlay scrolling can also be globally disabled, with
+the `Settings::gtk-overlay-scrolling` setting.
+
 Feature: `v3_16`
 
 <!-- trait ScrolledWindowExt::fn set_property_overlay_scrolling -->
@@ -30959,6 +30986,9 @@ Whether overlay scrolling is enabled or not. If it is, the
 scrollbars are only added as traditional widgets when a mouse
 is present. Otherwise, they are overlayed on top of the content,
 as narrow indicators.
+
+Note that overlay scrolling can also be globally disabled, with
+the `Settings::gtk-overlay-scrolling` setting.
 
 Feature: `v3_16`
 
@@ -31183,7 +31213,7 @@ a key event
 `GDK_EVENT_STOP` if the key press event resulted
  in a search beginning or continuing, `GDK_EVENT_PROPAGATE`
  otherwise.
-<!-- trait SearchEntryExt::fn connect_next_match -->
+<!-- trait SearchEntryExt::fn next-match -->
 The ::next-match signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a move to the next match
 for the current search string.
@@ -31195,7 +31225,7 @@ The default bindings for this signal is Ctrl-g.
 
 Feature: `v3_16`
 
-<!-- trait SearchEntryExt::fn connect_previous_match -->
+<!-- trait SearchEntryExt::fn previous-match -->
 The ::previous-match signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a move to the previous match
 for the current search string.
@@ -31207,10 +31237,10 @@ The default bindings for this signal is Ctrl-Shift-g.
 
 Feature: `v3_16`
 
-<!-- trait SearchEntryExt::fn connect_search_changed -->
+<!-- trait SearchEntryExt::fn search-changed -->
 The `SearchEntry::search-changed` signal is emitted with a short
 delay of 150 milliseconds after the last change to the entry text.
-<!-- trait SearchEntryExt::fn connect_stop_search -->
+<!-- trait SearchEntryExt::fn stop-search -->
 The ::stop-search signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user stops a search via keyboard input.
 
@@ -31843,6 +31873,20 @@ Feature: `v3_20`
 The time for a button or touch press to be considered a "long press".
 <!-- trait SettingsExt::fn set_property_gtk_long_press_time -->
 The time for a button or touch press to be considered a "long press".
+<!-- trait SettingsExt::fn get_property_gtk_overlay_scrolling -->
+Whether scrolled windows may use overlayed scrolling indicators.
+If this is set to `false`, scrolled windows will have permanent
+scrollbars.
+
+Feature: `v3_24_9`
+
+<!-- trait SettingsExt::fn set_property_gtk_overlay_scrolling -->
+Whether scrolled windows may use overlayed scrolling indicators.
+If this is set to `false`, scrolled windows will have permanent
+scrollbars.
+
+Feature: `v3_24_9`
+
 <!-- trait SettingsExt::fn get_property_gtk_primary_button_warps_slider -->
 If the value of this setting is `true`, clicking the primary button in a
 `Range` trough will move the slider, and hence set the range’s value, to
@@ -31973,6 +32017,81 @@ The outline is bevelled outwards like a button.
 The outline has a sunken 3d appearance.
 <!-- enum ShadowType::variant EtchedOut -->
 The outline has a raised 3d appearance.
+<!-- struct ShortcutLabel -->
+`ShortcutLabel` is a widget that represents a single keyboard shortcut or gesture
+in the user interface.
+
+Feature: `v3_22`
+
+# Implements
+
+[`BoxExt`](trait.BoxExt.html), [`ContainerExt`](trait.ContainerExt.html), [`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`OrientableExt`](trait.OrientableExt.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
+<!-- impl ShortcutLabel::fn new -->
+Creates a new `ShortcutLabel` with `accelerator` set.
+
+Feature: `v3_22`
+
+## `accelerator`
+the initial accelerator
+
+# Returns
+
+a newly-allocated `ShortcutLabel`
+<!-- impl ShortcutLabel::fn get_accelerator -->
+Retrieves the current accelerator of `self`.
+
+Feature: `v3_22`
+
+
+# Returns
+
+the current accelerator.
+<!-- impl ShortcutLabel::fn get_disabled_text -->
+Retrieves the text that is displayed when no accelerator is set.
+
+Feature: `v3_22`
+
+
+# Returns
+
+the current text displayed when no
+accelerator is set.
+<!-- impl ShortcutLabel::fn set_accelerator -->
+Sets the accelerator to be displayed by `self`.
+
+Feature: `v3_22`
+
+## `accelerator`
+the new accelerator
+<!-- impl ShortcutLabel::fn set_disabled_text -->
+Sets the text to be displayed by `self` when no accelerator is set.
+
+Feature: `v3_22`
+
+## `disabled_text`
+the text to be displayed when no accelerator is set
+<!-- impl ShortcutLabel::fn get_property_accelerator -->
+The accelerator that `self_` displays. See `ShortcutsShortcut:accelerator`
+for the accepted syntax.
+
+Feature: `v3_22`
+
+<!-- impl ShortcutLabel::fn set_property_accelerator -->
+The accelerator that `self_` displays. See `ShortcutsShortcut:accelerator`
+for the accepted syntax.
+
+Feature: `v3_22`
+
+<!-- impl ShortcutLabel::fn get_property_disabled_text -->
+The text that is displayed when no accelerator is set.
+
+Feature: `v3_22`
+
+<!-- impl ShortcutLabel::fn set_property_disabled_text -->
+The text that is displayed when no accelerator is set.
+
+Feature: `v3_22`
+
 <!-- struct ShortcutsWindow -->
 A `ShortcutsWindow` shows brief information about the keyboard shortcuts
 and gestures of an application. The shortcuts can be grouped, and you can
@@ -32028,14 +32147,14 @@ Feature: `v3_20`
 # Implementors
 
 [`ShortcutsWindow`](struct.ShortcutsWindow.html)
-<!-- trait ShortcutsWindowExt::fn connect_close -->
+<!-- trait ShortcutsWindowExt::fn close -->
 The ::close signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user uses a keybinding to close
 the window.
 
 The default binding for this signal is the Escape key.
-<!-- trait ShortcutsWindowExt::fn connect_search -->
+<!-- trait ShortcutsWindowExt::fn search -->
 The ::search signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user uses a keybinding to start a search.
@@ -32364,10 +32483,10 @@ been created inside of the socket.
 
 the window of the plug if
 available, or `None`
-<!-- trait GtkSocketExt::fn connect_plug_added -->
+<!-- trait GtkSocketExt::fn plug-added -->
 This signal is emitted when a client is successfully
 added to the socket.
-<!-- trait GtkSocketExt::fn connect_plug_removed -->
+<!-- trait GtkSocketExt::fn plug-removed -->
 This signal is emitted when a client is removed from the socket.
 The default action is to destroy the `Socket` widget, so if you
 want to reuse it you must add a signal handler that returns `true`.
@@ -32675,7 +32794,7 @@ a `SpinType` indicating the direction to spin
 step increment to apply in the specified direction
 <!-- trait SpinButtonExt::fn update -->
 Manually force an update of the spin button.
-<!-- trait SpinButtonExt::fn connect_change_value -->
+<!-- trait SpinButtonExt::fn change-value -->
 The ::change-value signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a value change.
 
@@ -32686,7 +32805,7 @@ programmatically.
 The default bindings for this signal are Up/Down and PageUp and/PageDown.
 ## `scroll`
 a `ScrollType` to specify the speed and amount of change
-<!-- trait SpinButtonExt::fn connect_input -->
+<!-- trait SpinButtonExt::fn input -->
 The ::input signal can be used to influence the conversion of
 the users input into a double value. The signal handler is
 expected to use `EntryExt::get_text` to retrieve the text of
@@ -32700,7 +32819,7 @@ return location for the new value
 
 `true` for a successful conversion, `false` if the input
  was not handled, and `GTK_INPUT_ERROR` if the conversion failed.
-<!-- trait SpinButtonExt::fn connect_output -->
+<!-- trait SpinButtonExt::fn output -->
 The ::output signal can be used to change to formatting
 of the value that is displayed in the spin buttons entry.
 
@@ -32727,10 +32846,10 @@ on_output (GtkSpinButton *spin,
 # Returns
 
 `true` if the value has been displayed
-<!-- trait SpinButtonExt::fn connect_value_changed -->
+<!-- trait SpinButtonExt::fn value-changed -->
 The ::value-changed signal is emitted when the value represented by
 `spinbutton` changes. Also see the `SpinButton::output` signal.
-<!-- trait SpinButtonExt::fn connect_wrapped -->
+<!-- trait SpinButtonExt::fn wrapped -->
 The ::wrapped signal is emitted right after the spinbutton wraps
 from its maximum to minimum value or vice-versa.
 <!-- enum SpinButtonUpdatePolicy -->
@@ -33308,13 +33427,13 @@ Forces the removal of all messages from a statusbar's
 stack with the exact `context_id`.
 ## `context_id`
 a context identifier
-<!-- trait StatusbarExt::fn connect_text_popped -->
+<!-- trait StatusbarExt::fn text-popped -->
 Is emitted whenever a new message is popped off a statusbar's stack.
 ## `context_id`
 the context id of the relevant message/statusbar
 ## `text`
 the message that was just popped
-<!-- trait StatusbarExt::fn connect_text_pushed -->
+<!-- trait StatusbarExt::fn text-pushed -->
 Is emitted whenever a new message gets pushed onto a statusbar's stack.
 ## `context_id`
 the context id of the relevant message/statusbar
@@ -33795,7 +33914,7 @@ Flags that determine what to print
 # Returns
 
 a newly allocated string representing `self`
-<!-- trait StyleContextExt::fn connect_changed -->
+<!-- trait StyleContextExt::fn changed -->
 The ::changed signal is emitted when there is a change in the
 `StyleContext`.
 
@@ -34029,12 +34148,12 @@ called from a `Switch::state-set` signal handler.
 See `Switch::state-set` for details.
 ## `state`
 the new state
-<!-- trait SwitchExt::fn connect_activate -->
+<!-- trait SwitchExt::fn activate -->
 The ::activate signal on `Switch` is an action signal and
 emitting it causes the switch to animate.
 Applications should never connect to this signal, but use the
 notify::active signal.
-<!-- trait SwitchExt::fn connect_state_set -->
+<!-- trait SwitchExt::fn state-set -->
 The ::state-set signal on `Switch` is emitted to change the underlying
 state. It is emitted when the user changes the switch position. The
 default handler keeps the state in sync with the `Switch:active`
@@ -35102,7 +35221,7 @@ registered using `TextBuffer::register_serialize_format` or
 `TextBufferExt::register_serialize_tagset`
 ## `format`
 a `gdk::Atom` representing a registered rich text format.
-<!-- trait TextBufferExt::fn connect_apply_tag -->
+<!-- trait TextBufferExt::fn apply-tag -->
 The ::apply-tag signal is emitted to apply a tag to a
 range of text in a `TextBuffer`.
 Applying actually occurs in the default handler.
@@ -35120,7 +35239,7 @@ the applied tag
 the start of the range the tag is applied to
 ## `end`
 the end of the range the tag is applied to
-<!-- trait TextBufferExt::fn connect_begin_user_action -->
+<!-- trait TextBufferExt::fn begin-user-action -->
 The ::begin-user-action signal is emitted at the beginning of a single
 user-visible operation on a `TextBuffer`.
 
@@ -35131,10 +35250,10 @@ See also:
 `TextBufferExt::delete_interactive`,
 `TextBufferExt::backspace`,
 `TextBufferExt::delete_selection`.
-<!-- trait TextBufferExt::fn connect_changed -->
+<!-- trait TextBufferExt::fn changed -->
 The ::changed signal is emitted when the content of a `TextBuffer`
 has changed.
-<!-- trait TextBufferExt::fn connect_delete_range -->
+<!-- trait TextBufferExt::fn delete-range -->
 The ::delete-range signal is emitted to delete a range
 from a `TextBuffer`.
 
@@ -35150,7 +35269,7 @@ See also: `TextBufferExt::delete`.
 the start of the range to be deleted
 ## `end`
 the end of the range to be deleted
-<!-- trait TextBufferExt::fn connect_end_user_action -->
+<!-- trait TextBufferExt::fn end-user-action -->
 The ::end-user-action signal is emitted at the end of a single
 user-visible operation on the `TextBuffer`.
 
@@ -35162,7 +35281,7 @@ See also:
 `TextBufferExt::backspace`,
 `TextBufferExt::delete_selection`,
 `TextBufferExt::backspace`.
-<!-- trait TextBufferExt::fn connect_insert_child_anchor -->
+<!-- trait TextBufferExt::fn insert-child-anchor -->
 The ::insert-child-anchor signal is emitted to insert a
 `TextChildAnchor` in a `TextBuffer`.
 Insertion actually occurs in the default handler.
@@ -35177,7 +35296,7 @@ See also: `TextBufferExt::insert_child_anchor`.
 position to insert `anchor` in `textbuffer`
 ## `anchor`
 the `TextChildAnchor` to be inserted
-<!-- trait TextBufferExt::fn connect_insert_pixbuf -->
+<!-- trait TextBufferExt::fn insert-pixbuf -->
 The ::insert-pixbuf signal is emitted to insert a `gdk_pixbuf::Pixbuf`
 in a `TextBuffer`. Insertion actually occurs in the default handler.
 
@@ -35191,7 +35310,7 @@ See also: `TextBufferExt::insert_pixbuf`.
 position to insert `pixbuf` in `textbuffer`
 ## `pixbuf`
 the `gdk_pixbuf::Pixbuf` to be inserted
-<!-- trait TextBufferExtManual::fn connect_insert_text -->
+<!-- trait TextBufferExtManual::fn insert-text -->
 The ::insert-text signal is emitted to insert text in a `TextBuffer`.
 Insertion actually occurs in the default handler.
 
@@ -35209,7 +35328,7 @@ position to insert `text` in `textbuffer`
 the UTF-8 text to be inserted
 ## `len`
 length of the inserted text in bytes
-<!-- trait TextBufferExt::fn connect_mark_deleted -->
+<!-- trait TextBufferExt::fn mark-deleted -->
 The ::mark-deleted signal is emitted as notification
 after a `TextMark` is deleted.
 
@@ -35217,7 +35336,7 @@ See also:
 `TextBufferExt::delete_mark`.
 ## `mark`
 The mark that was deleted
-<!-- trait TextBufferExt::fn connect_mark_set -->
+<!-- trait TextBufferExt::fn mark-set -->
 The ::mark-set signal is emitted as notification
 after a `TextMark` is set.
 
@@ -35228,19 +35347,19 @@ See also:
 The location of `mark` in `textbuffer`
 ## `mark`
 The mark that is set
-<!-- trait TextBufferExt::fn connect_modified_changed -->
+<!-- trait TextBufferExt::fn modified-changed -->
 The ::modified-changed signal is emitted when the modified bit of a
 `TextBuffer` flips.
 
 See also:
 `TextBufferExt::set_modified`.
-<!-- trait TextBufferExt::fn connect_paste_done -->
+<!-- trait TextBufferExt::fn paste-done -->
 The paste-done signal is emitted after paste operation has been completed.
 This is useful to properly scroll the view to the end of the pasted text.
 See `TextBufferExt::paste_clipboard` for more details.
 ## `clipboard`
 the `Clipboard` pasted from
-<!-- trait TextBufferExt::fn connect_remove_tag -->
+<!-- trait TextBufferExt::fn remove-tag -->
 The ::remove-tag signal is emitted to remove all occurrences of `tag` from
 a range of text in a `TextBuffer`.
 Removal actually occurs in the default handler.
@@ -36491,7 +36610,7 @@ is the order in which they were added to the table, or created with
 automatically.
 ## `priority`
 the new priority
-<!-- trait TextTagExt::fn connect_event -->
+<!-- trait TextTagExt::fn event -->
 The ::event signal is emitted when an event occurs on a region of the
 buffer marked with this tag.
 ## `object`
@@ -36735,15 +36854,15 @@ removed, so the tag will end up destroyed if you don’t have a reference to
 it.
 ## `tag`
 a `TextTag`
-<!-- trait TextTagTableExt::fn connect_tag_added -->
+<!-- trait TextTagTableExt::fn tag-added -->
 ## `tag`
 the added tag.
-<!-- trait TextTagTableExt::fn connect_tag_changed -->
+<!-- trait TextTagTableExt::fn tag-changed -->
 ## `tag`
 the changed tag.
 ## `size_changed`
 whether the change affects the `TextView` layout.
-<!-- trait TextTagTableExt::fn connect_tag_removed -->
+<!-- trait TextTagTableExt::fn tag-removed -->
 ## `tag`
 the removed tag.
 <!-- struct TextView -->
@@ -37514,28 +37633,28 @@ window y coordinate
 buffer x coordinate return location or `None`
 ## `buffer_y`
 buffer y coordinate return location or `None`
-<!-- trait TextViewExt::fn connect_backspace -->
+<!-- trait TextViewExt::fn backspace -->
 The ::backspace signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user asks for it.
 
 The default bindings for this signal are
 Backspace and Shift-Backspace.
-<!-- trait TextViewExt::fn connect_copy_clipboard -->
+<!-- trait TextViewExt::fn copy-clipboard -->
 The ::copy-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to copy the selection to the clipboard.
 
 The default bindings for this signal are
 Ctrl-c and Ctrl-Insert.
-<!-- trait TextViewExt::fn connect_cut_clipboard -->
+<!-- trait TextViewExt::fn cut-clipboard -->
 The ::cut-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to cut the selection to the clipboard.
 
 The default bindings for this signal are
 Ctrl-x and Shift-Delete.
-<!-- trait TextViewExt::fn connect_delete_from_cursor -->
+<!-- trait TextViewExt::fn delete-from-cursor -->
 The ::delete-from-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a text deletion.
@@ -37552,7 +37671,7 @@ backwords.
 the granularity of the deletion, as a `DeleteType`
 ## `count`
 the number of `type_` units to delete
-<!-- trait TextViewExt::fn connect_extend_selection -->
+<!-- trait TextViewExt::fn extend-selection -->
 The ::extend-selection signal is emitted when the selection needs to be
 extended at `location`.
 
@@ -37571,7 +37690,7 @@ where the selection should end
 
 `GDK_EVENT_STOP` to stop other handlers from being invoked for the
  event. `GDK_EVENT_PROPAGATE` to propagate the event further.
-<!-- trait TextViewExt::fn connect_insert_at_cursor -->
+<!-- trait TextViewExt::fn insert-at-cursor -->
 The ::insert-at-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates the insertion of a
@@ -37580,7 +37699,7 @@ fixed string at the cursor.
 This signal has no default bindings.
 ## `string`
 the string to insert
-<!-- trait TextViewExt::fn connect_insert_emoji -->
+<!-- trait TextViewExt::fn insert-emoji -->
 The ::insert-emoji signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to present the Emoji chooser for the `text_view`.
@@ -37589,7 +37708,7 @@ The default bindings for this signal are Ctrl-. and Ctrl-;
 
 Feature: `v3_22_27`
 
-<!-- trait TextViewExt::fn connect_move_cursor -->
+<!-- trait TextViewExt::fn move-cursor -->
 The ::move-cursor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates a cursor movement.
@@ -37615,7 +37734,7 @@ the granularity of the move, as a `MovementStep`
 the number of `step` units to move
 ## `extend_selection`
 `true` if the move should extend the selection
-<!-- trait TextViewExt::fn connect_move_viewport -->
+<!-- trait TextViewExt::fn move-viewport -->
 The ::move-viewport signal is a
 [keybinding signal][`BindingSignal`]
 which can be bound to key combinations to allow the user
@@ -37627,7 +37746,7 @@ There are no default bindings for this signal.
 the granularity of the movement, as a `ScrollStep`
 ## `count`
 the number of `step` units to move
-<!-- trait TextViewExt::fn connect_paste_clipboard -->
+<!-- trait TextViewExt::fn paste-clipboard -->
 The ::paste-clipboard signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to paste the contents of the clipboard
@@ -37635,7 +37754,7 @@ into the text view.
 
 The default bindings for this signal are
 Ctrl-v and Shift-Insert.
-<!-- trait TextViewExt::fn connect_populate_popup -->
+<!-- trait TextViewExt::fn populate-popup -->
 The ::populate-popup signal gets emitted before showing the
 context menu of the text view.
 
@@ -37652,7 +37771,7 @@ type of `widget`, but check whether `popup` is a `Menu`
 or `Toolbar` or another kind of container.
 ## `popup`
 the container that is being populated
-<!-- trait TextViewExt::fn connect_preedit_changed -->
+<!-- trait TextViewExt::fn preedit-changed -->
 If an input method is used, the typed text will not immediately
 be committed to the buffer. So if you are interested in the text,
 connect to this signal.
@@ -37661,7 +37780,7 @@ This signal is only emitted if the text at the given position
 is actually editable.
 ## `preedit`
 the current preedit string
-<!-- trait TextViewExt::fn connect_select_all -->
+<!-- trait TextViewExt::fn select-all -->
 The ::select-all signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to select or unselect the complete
@@ -37671,7 +37790,7 @@ The default bindings for this signal are Ctrl-a and Ctrl-/
 for selecting and Shift-Ctrl-a and Ctrl-\ for unselecting.
 ## `select`
 `true` to select, `false` to unselect
-<!-- trait TextViewExt::fn connect_set_anchor -->
+<!-- trait TextViewExt::fn set-anchor -->
 The ::set-anchor signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user initiates setting the "anchor"
@@ -37679,14 +37798,14 @@ mark. The "anchor" mark gets placed at the same position as the
 "insert" mark.
 
 This signal has no default bindings.
-<!-- trait TextViewExt::fn connect_toggle_cursor_visible -->
+<!-- trait TextViewExt::fn toggle-cursor-visible -->
 The ::toggle-cursor-visible signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to toggle the `TextView:cursor-visible`
 property.
 
 The default binding for this signal is F7.
-<!-- trait TextViewExt::fn connect_toggle_overwrite -->
+<!-- trait TextViewExt::fn toggle-overwrite -->
 The ::toggle-overwrite signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted to toggle the overwrite mode of the text view.
@@ -37989,7 +38108,7 @@ and label; if `false`, draw the button like a normal button
 Emits the `ToggleButton::toggled` signal on the
 `ToggleButton`. There is no good reason for an
 application ever to call this function.
-<!-- trait ToggleButtonExt::fn connect_toggled -->
+<!-- trait ToggleButtonExt::fn toggled -->
 Should be connected if you wish to perform an action whenever the
 `ToggleButton`'s state is changed.
 <!-- struct ToggleToolButton -->
@@ -38030,7 +38149,7 @@ want the `ToggleButton` to be “pressed in”, and `false` to raise it.
 This action causes the toggled signal to be emitted.
 ## `is_active`
 whether `self` should be active
-<!-- trait ToggleToolButtonExt::fn connect_toggled -->
+<!-- trait ToggleToolButtonExt::fn toggled -->
 Emitted whenever the toggle tool button changes state.
 <!-- trait ToggleToolButtonExt::fn get_property_active -->
 If the toggle tool button should be pressed in.
@@ -38162,7 +38281,7 @@ Labels shown on tool buttons never have mnemonics on them; this property
 only affects the menu item on the overflow menu.
 ## `use_underline`
 whether the button label has the form “_Open”
-<!-- trait ToolButtonExt::fn connect_clicked -->
+<!-- trait ToolButtonExt::fn clicked -->
 This signal is emitted when the tool button is clicked with the mouse
 or activated with the keyboard.
 <!-- trait ToolButtonExt::fn get_property_icon_name -->
@@ -38424,7 +38543,7 @@ is in vertical mode
 Emits the signal `ToolItem::toolbar_reconfigured` on `self`.
 `Toolbar` and other `ToolShell` implementations use this function
 to notify children, when some aspect of their configuration changes.
-<!-- trait ToolItemExt::fn connect_create_menu_proxy -->
+<!-- trait ToolItemExt::fn create-menu-proxy -->
 This signal is emitted when the toolbar needs information from `tool_item`
 about whether the item should appear in the toolbar overflow menu. In
 response the tool item should either
@@ -38448,7 +38567,7 @@ menu.
 # Returns
 
 `true` if the signal was handled, `false` if not
-<!-- trait ToolItemExt::fn connect_toolbar_reconfigured -->
+<!-- trait ToolItemExt::fn toolbar-reconfigured -->
 This signal is emitted when some property of the toolbar that the
 item is a child of changes. For custom subclasses of `ToolItem`,
 the default handler of this signal use the functions
@@ -39080,7 +39199,7 @@ user preferences will be used to determine the icon size.
 <!-- trait ToolbarExt::fn unset_style -->
 Unsets a toolbar style set with `ToolbarExt::set_style`, so that
 user preferences will be used to determine the toolbar style.
-<!-- trait ToolbarExt::fn connect_focus_home_or_end -->
+<!-- trait ToolbarExt::fn focus-home-or-end -->
 A keybinding signal used internally by GTK+. This signal can't
 be used in application code
 ## `focus_home`
@@ -39089,11 +39208,11 @@ be used in application code
 # Returns
 
 `true` if the signal was handled, `false` if not
-<!-- trait ToolbarExt::fn connect_orientation_changed -->
+<!-- trait ToolbarExt::fn orientation-changed -->
 Emitted when the orientation of the toolbar changes.
 ## `orientation`
 the new `Orientation` of the toolbar
-<!-- trait ToolbarExt::fn connect_popup_context_menu -->
+<!-- trait ToolbarExt::fn popup-context-menu -->
 Emitted when the user right-clicks the toolbar or uses the
 keybinding to display a popup menu.
 
@@ -39112,7 +39231,7 @@ the mouse button the user pressed, or -1
 # Returns
 
 return `true` if the signal was handled, `false` if not
-<!-- trait ToolbarExt::fn connect_style_changed -->
+<!-- trait ToolbarExt::fn style-changed -->
 Emitted when the style of the toolbar changes.
 ## `style`
 the new `ToolbarStyle` of the toolbar
@@ -39893,13 +40012,13 @@ this means, see `TreeModel::ref_node`.
 Please note that nodes that are deleted are not unreffed.
 ## `iter`
 the `TreeIter`-struct
-<!-- trait TreeModelExt::fn connect_row_changed -->
+<!-- trait TreeModelExt::fn row-changed -->
 This signal is emitted when a row in the model has changed.
 ## `path`
 a `TreePath`-struct identifying the changed row
 ## `iter`
 a valid `TreeIter`-struct pointing to the changed row
-<!-- trait TreeModelExt::fn connect_row_deleted -->
+<!-- trait TreeModelExt::fn row-deleted -->
 This signal is emitted when a row has been deleted.
 
 Note that no iterator is passed to the signal handler,
@@ -39910,14 +40029,14 @@ The location pointed to by `path` should be the location that
 the row previously was at. It may not be a valid location anymore.
 ## `path`
 a `TreePath`-struct identifying the row
-<!-- trait TreeModelExt::fn connect_row_has_child_toggled -->
+<!-- trait TreeModelExt::fn row-has-child-toggled -->
 This signal is emitted when a row has gotten the first child
 row or lost its last child row.
 ## `path`
 a `TreePath`-struct identifying the row
 ## `iter`
 a valid `TreeIter`-struct pointing to the row
-<!-- trait TreeModelExt::fn connect_row_inserted -->
+<!-- trait TreeModelExt::fn row-inserted -->
 This signal is emitted when a new row has been inserted in
 the model.
 
@@ -39928,7 +40047,7 @@ then fill it with the desired values.
 a `TreePath`-struct identifying the new row
 ## `iter`
 a valid `TreeIter`-struct pointing to the new row
-<!-- trait TreeModelExt::fn connect_rows_reordered -->
+<!-- trait TreeModelExt::fn rows-reordered -->
 This signal is emitted when the children of a node in the
 `TreeModel` have been reordered.
 
@@ -40773,7 +40892,7 @@ inclusive.
 The initial node of the range.
 ## `end_path`
 The initial node of the range.
-<!-- trait TreeSelectionExt::fn connect_changed -->
+<!-- trait TreeSelectionExt::fn changed -->
 Emitted whenever the selection has (possibly) changed. Please note that
 this signal is mostly a hint. It may only be emitted once when a range
 of rows are selected, and it may occasionally be emitted when nothing
@@ -40864,7 +40983,7 @@ User data to pass to `sort_func`, or `None`
 Destroy notifier of `user_data`, or `None`
 <!-- trait TreeSortableExt::fn sort_column_changed -->
 Emits a `TreeSortable::sort-column-changed` signal on `self`.
-<!-- trait TreeSortableExt::fn connect_sort_column_changed -->
+<!-- trait TreeSortableExt::fn sort-column-changed -->
 The ::sort-column-changed signal is emitted when the sort column
 or sort order of `sortable` is changed. The signal is emitted before
 the contents of `sortable` are resorted.
@@ -42161,11 +42280,11 @@ Undoes the effect of
 Undoes the effect of
 `TreeView::enable_model_drag_source`. Calling this method sets
 `TreeView:reorderable` to `false`.
-<!-- trait TreeViewExt::fn connect_columns_changed -->
+<!-- trait TreeViewExt::fn columns-changed -->
 The number of columns of the treeview has changed.
-<!-- trait TreeViewExt::fn connect_cursor_changed -->
+<!-- trait TreeViewExt::fn cursor-changed -->
 The position of the cursor (focused cell) has changed.
-<!-- trait TreeViewExt::fn connect_move_cursor -->
+<!-- trait TreeViewExt::fn move-cursor -->
 The `TreeView::move-cursor` signal is a [keybinding
 signal][`BindingSignal`] which gets emitted when the user
 presses one of the cursor keys.
@@ -42190,7 +42309,7 @@ undefined for all other values.
 # Returns
 
 `true` if `step` is supported, `false` otherwise.
-<!-- trait TreeViewExt::fn connect_row_activated -->
+<!-- trait TreeViewExt::fn row-activated -->
 The "row-activated" signal is emitted when the method
 `TreeViewExt::row_activated` is called, when the user double
 clicks a treeview row with the "activate-on-single-click"
@@ -42206,19 +42325,19 @@ as well as `TreeSelection`.
 the `TreePath` for the activated row
 ## `column`
 the `TreeViewColumn` in which the activation occurred
-<!-- trait TreeViewExt::fn connect_row_collapsed -->
+<!-- trait TreeViewExt::fn row-collapsed -->
 The given row has been collapsed (child nodes are hidden).
 ## `iter`
 the tree iter of the collapsed row
 ## `path`
 a tree path that points to the row
-<!-- trait TreeViewExt::fn connect_row_expanded -->
+<!-- trait TreeViewExt::fn row-expanded -->
 The given row has been expanded (child nodes are shown).
 ## `iter`
 the tree iter of the expanded row
 ## `path`
 a tree path that points to the row
-<!-- trait TreeViewExt::fn connect_test_collapse_row -->
+<!-- trait TreeViewExt::fn test-collapse-row -->
 The given row is about to be collapsed (hide its children nodes). Use this
 signal if you need to control the collapsibility of individual rows.
 ## `iter`
@@ -42229,7 +42348,7 @@ a tree path that points to the row
 # Returns
 
 `false` to allow collapsing, `true` to reject
-<!-- trait TreeViewExt::fn connect_test_expand_row -->
+<!-- trait TreeViewExt::fn test-expand-row -->
 The given row is about to be expanded (show its children nodes). Use this
 signal if you need to control the expandability of individual rows.
 ## `iter`
@@ -44145,7 +44264,7 @@ the use case for the modifier mask
 # Returns
 
 the modifier mask used for `intent`.
-<!-- trait WidgetExt::fn get_name -->
+<!-- trait WidgetExt::fn get_widget_name -->
 Retrieves the name of a widget. See `WidgetExt::set_name` for the
 significance of widget names.
 
@@ -44817,7 +44936,7 @@ direction of focus movement
  navigation attempt in its parent container(s).
 <!-- trait WidgetExt::fn list_accel_closures -->
 Lists the closures used by `self` for accelerator group connections
-with `AccelGroupExt::connect_by_path` or `AccelGroupExt::connect`.
+with `AccelGroup::connect_by_path` or `AccelGroup::connect`.
 The closures can be used to monitor accelerator changes on `self`,
 by connecting to the `AccelGroup::accel-changed` signal of the
 `AccelGroup` of a closure which can be found out with
@@ -44942,7 +45061,7 @@ the color to use for primary cursor (does not need to be
 the color to use for secondary cursor (does not
  need to be allocated), or `None` to undo the effect of previous
  calls to of `WidgetExt::override_cursor`.
-<!-- trait WidgetExtManual::fn override_font -->
+<!-- trait WidgetExt::fn override_font -->
 Sets the font to use for a widget. All other style values are
 left untouched. See `WidgetExt::override_color`.
 
@@ -44954,7 +45073,7 @@ This function is not useful in the context of CSS-based
  `StyleProvider` and a CSS style class.
 ## `font_desc`
 the font description to use, or `None` to undo
- the effect of previous calls to `Widget::override_font`
+ the effect of previous calls to `WidgetExt::override_font`
 <!-- trait WidgetExt::fn override_symbolic_color -->
 Sets a symbolic color for a widget.
 
@@ -45437,7 +45556,7 @@ Sets the top margin of `self`.
 See the `Widget:margin-top` property.
 ## `margin`
 the top margin
-<!-- trait WidgetExt::fn set_name -->
+<!-- trait WidgetExt::fn set_widget_name -->
 Widgets can be named, which allows you to refer to them from a
 CSS file. You can apply a style to widgets with a particular name
 in the CSS file. See the documentation for the CSS syntax (on the
@@ -45809,7 +45928,7 @@ values for the current widget state (insensitive, prelighted, etc.).
 See `WidgetExt::set_state_flags`.
 ## `flags`
 State flags to turn off
-<!-- trait WidgetExt::fn connect_button_press_event -->
+<!-- trait WidgetExt::fn button-press-event -->
 The ::button-press-event signal will be emitted when a button
 (typically from a mouse) is pressed.
 
@@ -45825,7 +45944,7 @@ the `gdk::EventButton` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_button_release_event -->
+<!-- trait WidgetExt::fn button-release-event -->
 The ::button-release-event signal will be emitted when a button
 (typically from a mouse) is released.
 
@@ -45841,7 +45960,7 @@ the `gdk::EventButton` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_can_activate_accel -->
+<!-- trait WidgetExt::fn can-activate-accel -->
 Determines whether an accelerator that activates the signal
 identified by `signal_id` can currently be activated.
 This signal is present to allow applications and derived
@@ -45853,13 +45972,13 @@ the ID of a signal installed on `widget`
 # Returns
 
 `true` if the signal can be activated.
-<!-- trait WidgetExt::fn connect_child_notify -->
+<!-- trait WidgetExt::fn child-notify -->
 The ::child-notify signal is emitted for each
 [child property][child-properties] that has
 changed on an object. The signal's detail holds the property name.
 ## `child_property`
 the `gobject::ParamSpec` of the changed child property
-<!-- trait WidgetExt::fn connect_composited_changed -->
+<!-- trait WidgetExt::fn composited-changed -->
 The ::composited-changed signal is emitted when the composited
 status of `widgets` screen changes.
 See `gdk::Screen::is_composited`.
@@ -45867,7 +45986,7 @@ See `gdk::Screen::is_composited`.
 # Deprecated since 3.22
 
 Use `gdk::Screen`::composited-changed instead.
-<!-- trait WidgetExt::fn connect_configure_event -->
+<!-- trait WidgetExt::fn configure-event -->
 The ::configure-event signal will be emitted when the size, position or
 stacking of the `widget`'s window has changed.
 
@@ -45882,7 +46001,7 @@ the `gdk::EventConfigure` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_damage_event -->
+<!-- trait WidgetExt::fn damage-event -->
 Emitted when a redirected window belonging to `widget` gets drawn into.
 The region/area members of the event shows what area of the redirected
 drawable was drawn into.
@@ -45893,7 +46012,7 @@ the `gdk::EventExpose` event
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_delete_event -->
+<!-- trait WidgetExt::fn delete-event -->
 The ::delete-event signal is emitted if a user requests that
 a toplevel window is closed. The default handler for this signal
 destroys the window. Connecting `WidgetExt::hide_on_delete` to
@@ -45906,13 +46025,13 @@ the event which triggered this signal
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_destroy -->
+<!-- trait WidgetExt::fn destroy -->
 Signals that all holders of a reference to the widget should release
 the reference that they hold. May result in finalization of the widget
 if all references are released.
 
 This signal is not suitable for saving widget state.
-<!-- trait WidgetExt::fn connect_destroy_event -->
+<!-- trait WidgetExt::fn destroy-event -->
 The ::destroy-event signal is emitted when a `gdk::Window` is destroyed.
 You rarely get this signal, because most widgets disconnect themselves
 from their window before they destroy it, so no widget owns the
@@ -45928,12 +46047,12 @@ the event which triggered this signal
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_direction_changed -->
+<!-- trait WidgetExt::fn direction-changed -->
 The ::direction-changed signal is emitted when the text direction
 of a widget changes.
 ## `previous_direction`
 the previous text direction of `widget`
-<!-- trait WidgetExt::fn connect_drag_begin -->
+<!-- trait WidgetExt::fn drag-begin -->
 The ::drag-begin signal is emitted on the drag source when a drag is
 started. A typical reason to connect to this signal is to set up a
 custom drag icon with e.g. `WidgetExt::drag_source_set_icon_pixbuf`.
@@ -45943,14 +46062,14 @@ this signal, so you may have to use `g_signal_connect_after` to
 override what the default handler did.
 ## `context`
 the drag context
-<!-- trait WidgetExt::fn connect_drag_data_delete -->
+<!-- trait WidgetExt::fn drag-data-delete -->
 The ::drag-data-delete signal is emitted on the drag source when a drag
 with the action `gdk::DragAction::Move` is successfully completed. The signal
 handler is responsible for deleting the data that has been dropped. What
 "delete" means depends on the context of the drag operation.
 ## `context`
 the drag context
-<!-- trait WidgetExt::fn connect_drag_data_get -->
+<!-- trait WidgetExt::fn drag-data-get -->
 The ::drag-data-get signal is emitted on the drag source when the drop
 site requests the data which is dragged. It is the responsibility of
 the signal handler to fill `data` with the data in the format which
@@ -45965,7 +46084,7 @@ the info that has been registered with the target in the
  `TargetList`
 ## `time`
 the timestamp at which the data was requested
-<!-- trait WidgetExt::fn connect_drag_data_received -->
+<!-- trait WidgetExt::fn drag-data-received -->
 The ::drag-data-received signal is emitted on the drop site when the
 dragged data has been received. If the data was received in order to
 determine whether the drop will be accepted, the handler is expected
@@ -46040,7 +46159,7 @@ the info that has been registered with the target in the
  `TargetList`
 ## `time`
 the timestamp at which the data was received
-<!-- trait WidgetExt::fn connect_drag_drop -->
+<!-- trait WidgetExt::fn drag-drop -->
 The ::drag-drop signal is emitted on the drop site when the user drops
 the data onto the widget. The signal handler must determine whether
 the cursor position is in a drop zone or not. If it is not in a drop
@@ -46063,13 +46182,13 @@ the timestamp of the motion event
 # Returns
 
 whether the cursor position is in a drop zone
-<!-- trait WidgetExt::fn connect_drag_end -->
+<!-- trait WidgetExt::fn drag-end -->
 The ::drag-end signal is emitted on the drag source when a drag is
 finished. A typical reason to connect to this signal is to undo
 things done in `Widget::drag-begin`.
 ## `context`
 the drag context
-<!-- trait WidgetExt::fn connect_drag_failed -->
+<!-- trait WidgetExt::fn drag-failed -->
 The ::drag-failed signal is emitted on the drag source when a drag has
 failed. The signal handler may hook custom code to handle a failed DnD
 operation based on the type of error, it returns `true` is the failure has
@@ -46083,7 +46202,7 @@ the result of the drag operation
 # Returns
 
 `true` if the failed drag operation has been already handled.
-<!-- trait WidgetExt::fn connect_drag_leave -->
+<!-- trait WidgetExt::fn drag-leave -->
 The ::drag-leave signal is emitted on the drop site when the cursor
 leaves the widget. A typical reason to connect to this signal is to
 undo things done in `Widget::drag-motion`, e.g. undo highlighting
@@ -46097,7 +46216,7 @@ created in the `Widget::drag-motion` signal handler.
 the drag context
 ## `time`
 the timestamp of the motion event
-<!-- trait WidgetExt::fn connect_drag_motion -->
+<!-- trait WidgetExt::fn drag-motion -->
 The ::drag-motion signal is emitted on the drop site when the user
 moves the cursor over the widget during a drag. The signal handler
 must determine whether the cursor position is in a drop zone or not.
@@ -46197,7 +46316,7 @@ the timestamp of the motion event
 # Returns
 
 whether the cursor position is in a drop zone
-<!-- trait WidgetExt::fn connect_draw -->
+<!-- trait WidgetExt::fn draw -->
 This signal is emitted when a widget is supposed to render itself.
 The `widget`'s top left corner must be painted at the origin of
 the passed in context and be sized to the values returned by
@@ -46222,7 +46341,7 @@ the cairo context to draw to
 
 `true` to stop other handlers from being invoked for the event.
 `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_enter_notify_event -->
+<!-- trait WidgetExt::fn enter-notify-event -->
 The ::enter-notify-event will be emitted when the pointer enters
 the `widget`'s window.
 
@@ -46238,7 +46357,7 @@ the `gdk::EventCrossing` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_event -->
+<!-- trait WidgetExt::fn event -->
 The GTK+ main loop will emit three signals for each GDK event delivered
 to a widget: one generic ::event signal, another, more specific,
 signal that matches the type of event delivered (e.g.
@@ -46254,18 +46373,18 @@ and to cancel the emission of the second specific ::event signal.
  `false` to propagate the event further and to allow the emission of
  the second signal. The ::event-after signal is emitted regardless of
  the return value.
-<!-- trait WidgetExt::fn connect_event_after -->
+<!-- trait WidgetExt::fn event-after -->
 After the emission of the `Widget::event` signal and (optionally)
 the second more specific signal, ::event-after will be emitted
 regardless of the previous two signals handlers return values.
 ## `event`
 the ``GdkEvent`` which triggered this signal
-<!-- trait WidgetExt::fn connect_focus -->
+<!-- trait WidgetExt::fn focus -->
 
 # Returns
 
 `true` to stop other handlers from being invoked for the event. `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_focus_in_event -->
+<!-- trait WidgetExt::fn focus-in-event -->
 The ::focus-in-event signal will be emitted when the keyboard focus
 enters the `widget`'s window.
 
@@ -46279,7 +46398,7 @@ the `gdk::EventFocus` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_focus_out_event -->
+<!-- trait WidgetExt::fn focus-out-event -->
 The ::focus-out-event signal will be emitted when the keyboard focus
 leaves the `widget`'s window.
 
@@ -46293,7 +46412,7 @@ the `gdk::EventFocus` which triggered this
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_grab_broken_event -->
+<!-- trait WidgetExt::fn grab-broken-event -->
 Emitted when a pointer or keyboard grab on a window belonging
 to `widget` gets broken.
 
@@ -46307,7 +46426,7 @@ the `gdk::EventGrabBroken` event
 
 `true` to stop other handlers from being invoked for
  the event. `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_grab_notify -->
+<!-- trait WidgetExt::fn grab-notify -->
 The ::grab-notify signal is emitted when a widget becomes
 shadowed by a GTK+ grab (not a pointer or keyboard grab) on
 another widget, or when it becomes unshadowed due to a grab
@@ -46319,10 +46438,10 @@ its ancestor.
 ## `was_grabbed`
 `false` if the widget becomes shadowed, `true`
  if it becomes unshadowed
-<!-- trait WidgetExt::fn connect_hide -->
+<!-- trait WidgetExt::fn hide -->
 The ::hide signal is emitted when `widget` is hidden, for example with
 `WidgetExt::hide`.
-<!-- trait WidgetExt::fn connect_hierarchy_changed -->
+<!-- trait WidgetExt::fn hierarchy-changed -->
 The ::hierarchy-changed signal is emitted when the
 anchored state of a widget changes. A widget is
 “anchored” when its toplevel
@@ -46331,7 +46450,7 @@ a widget changes from un-anchored to anchored or vice-versa.
 ## `previous_toplevel`
 the previous toplevel ancestor, or `None`
  if the widget was previously unanchored
-<!-- trait WidgetExt::fn connect_key_press_event -->
+<!-- trait WidgetExt::fn key-press-event -->
 The ::key-press-event signal is emitted when a key is pressed. The signal
 emission will reoccur at the key-repeat rate when the key is kept pressed.
 
@@ -46346,7 +46465,7 @@ the `gdk::EventKey` which triggered this signal.
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_key_release_event -->
+<!-- trait WidgetExt::fn key-release-event -->
 The ::key-release-event signal is emitted when a key is released.
 
 To receive this signal, the `gdk::Window` associated to the widget needs
@@ -46360,7 +46479,7 @@ the `gdk::EventKey` which triggered this signal.
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_keynav_failed -->
+<!-- trait WidgetExt::fn keynav-failed -->
 Gets emitted if keyboard navigation fails.
 See `WidgetExt::keynav_failed` for details.
 ## `direction`
@@ -46371,7 +46490,7 @@ the direction of movement
 `true` if stopping keyboard navigation is fine, `false`
  if the emitting widget should try to handle the keyboard
  navigation attempt in its parent container(s).
-<!-- trait WidgetExt::fn connect_leave_notify_event -->
+<!-- trait WidgetExt::fn leave-notify-event -->
 The ::leave-notify-event will be emitted when the pointer leaves
 the `widget`'s window.
 
@@ -46387,7 +46506,7 @@ the `gdk::EventCrossing` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_map -->
+<!-- trait WidgetExt::fn map -->
 The ::map signal is emitted when `widget` is going to be mapped, that is
 when the widget is visible (which is controlled with
 `WidgetExt::set_visible`) and all its parents up to the toplevel widget
@@ -46397,7 +46516,7 @@ be emitted.
 The ::map signal can be used to determine whether a widget will be drawn,
 for instance it can resume an animation that was stopped during the
 emission of `Widget::unmap`.
-<!-- trait WidgetExtManual::fn connect_map_event -->
+<!-- trait WidgetExtManual::fn map-event -->
 The ::map-event signal will be emitted when the `widget`'s window is
 mapped. A window is mapped when it becomes visible on the screen.
 
@@ -46411,7 +46530,7 @@ the `gdk::EventAny` which triggered this signal.
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_mnemonic_activate -->
+<!-- trait WidgetExt::fn mnemonic-activate -->
 The default handler for this signal activates `widget` if `group_cycling`
 is `false`, or just makes `widget` grab focus if `group_cycling` is `true`.
 ## `group_cycling`
@@ -46421,7 +46540,7 @@ is `false`, or just makes `widget` grab focus if `group_cycling` is `true`.
 
 `true` to stop other handlers from being invoked for the event.
 `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_motion_notify_event -->
+<!-- trait WidgetExt::fn motion-notify-event -->
 The ::motion-notify-event signal is emitted when the pointer moves
 over the widget's `gdk::Window`.
 
@@ -46437,13 +46556,13 @@ the `gdk::EventMotion` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_parent_set -->
+<!-- trait WidgetExt::fn parent-set -->
 The ::parent-set signal is emitted when a new parent
 has been set on a widget.
 ## `old_parent`
 the previous parent, or `None` if the widget
  just got its initial parent.
-<!-- trait WidgetExt::fn connect_popup_menu -->
+<!-- trait WidgetExt::fn popup-menu -->
 This signal gets emitted whenever a widget should pop up a context
 menu. This usually happens through the standard key binding mechanism;
 by pressing a certain key while a widget is focused, the user can cause
@@ -46455,7 +46574,7 @@ for an example of how to use this signal.
 # Returns
 
 `true` if a menu was activated
-<!-- trait WidgetExt::fn connect_property_notify_event -->
+<!-- trait WidgetExt::fn property-notify-event -->
 The ::property-notify-event signal will be emitted when a property on
 the `widget`'s window has been changed or deleted.
 
@@ -46469,7 +46588,7 @@ the `gdk::EventProperty` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_proximity_in_event -->
+<!-- trait WidgetExt::fn proximity-in-event -->
 To receive this signal the `gdk::Window` associated to the widget needs
 to enable the `gdk::EventMask::ProximityInMask` mask.
 
@@ -46482,7 +46601,7 @@ the `gdk::EventProximity` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_proximity_out_event -->
+<!-- trait WidgetExt::fn proximity-out-event -->
 To receive this signal the `gdk::Window` associated to the widget needs
 to enable the `gdk::EventMask::ProximityOutMask` mask.
 
@@ -46495,7 +46614,7 @@ the `gdk::EventProximity` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_query_tooltip -->
+<!-- trait WidgetExt::fn query-tooltip -->
 Emitted when `Widget:has-tooltip` is `true` and the hover timeout
 has expired with the cursor hovering "above" `widget`; or emitted when `widget` got
 focus in keyboard mode.
@@ -46522,17 +46641,17 @@ a `Tooltip`
 # Returns
 
 `true` if `tooltip` should be shown right now, `false` otherwise.
-<!-- trait WidgetExt::fn connect_realize -->
+<!-- trait WidgetExt::fn realize -->
 The ::realize signal is emitted when `widget` is associated with a
 `gdk::Window`, which means that `WidgetExt::realize` has been called or the
 widget has been mapped (that is, it is going to be drawn).
-<!-- trait WidgetExt::fn connect_screen_changed -->
+<!-- trait WidgetExt::fn screen-changed -->
 The ::screen-changed signal gets emitted when the
 screen of a widget has changed.
 ## `previous_screen`
 the previous screen, or `None` if the
  widget was not associated with a screen before
-<!-- trait WidgetExt::fn connect_scroll_event -->
+<!-- trait WidgetExt::fn scroll-event -->
 The ::scroll-event signal is emitted when a button in the 4 to 7
 range is pressed. Wheel mice are usually configured to generate
 button press events for buttons 4 and 5 when the wheel is turned.
@@ -46549,7 +46668,7 @@ the `gdk::EventScroll` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_selection_clear_event -->
+<!-- trait WidgetExt::fn selection-clear-event -->
 The ::selection-clear-event signal will be emitted when the
 the `widget`'s window has lost ownership of a selection.
 ## `event`
@@ -46560,12 +46679,12 @@ the `gdk::EventSelection` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_selection_notify_event -->
+<!-- trait WidgetExt::fn selection-notify-event -->
 
 # Returns
 
 `true` to stop other handlers from being invoked for the event. `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_selection_request_event -->
+<!-- trait WidgetExt::fn selection-request-event -->
 The ::selection-request-event signal will be emitted when
 another client requests ownership of the selection owned by
 the `widget`'s window.
@@ -46577,39 +46696,39 @@ the `gdk::EventSelection` which triggered
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_show -->
+<!-- trait WidgetExt::fn show -->
 The ::show signal is emitted when `widget` is shown, for example with
 `WidgetExt::show`.
-<!-- trait WidgetExt::fn connect_show_help -->
+<!-- trait WidgetExt::fn show-help -->
 
 # Returns
 
 `true` to stop other handlers from being invoked for the event.
 `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_size_allocate -->
+<!-- trait WidgetExt::fn size-allocate -->
 ## `allocation`
 the region which has been
  allocated to the widget.
-<!-- trait WidgetExt::fn connect_state_flags_changed -->
+<!-- trait WidgetExt::fn state-flags-changed -->
 The ::state-flags-changed signal is emitted when the widget state
 changes, see `WidgetExt::get_state_flags`.
 ## `flags`
 The previous state flags.
-<!-- trait WidgetExt::fn connect_style_updated -->
+<!-- trait WidgetExt::fn style-updated -->
 The ::style-updated signal is a convenience signal that is emitted when the
 `StyleContext::changed` signal is emitted on the `widget`'s associated
 `StyleContext` as returned by `WidgetExt::get_style_context`.
 
 Note that style-modifying functions like `WidgetExt::override_color` also
 cause this signal to be emitted.
-<!-- trait WidgetExt::fn connect_unmap -->
+<!-- trait WidgetExt::fn unmap -->
 The ::unmap signal is emitted when `widget` is going to be unmapped, which
 means that either it or any of its parents up to the toplevel widget have
 been set as hidden.
 
 As ::unmap indicates that a widget will not be shown any longer, it can be
 used to, for example, stop an animation on the widget.
-<!-- trait WidgetExtManual::fn connect_unmap_event -->
+<!-- trait WidgetExtManual::fn unmap-event -->
 The ::unmap-event signal will be emitted when the `widget`'s window is
 unmapped. A window is unmapped when it becomes invisible on the screen.
 
@@ -46623,12 +46742,12 @@ the `gdk::EventAny` which triggered this signal
 
 `true` to stop other handlers from being invoked for the event.
  `false` to propagate the event further.
-<!-- trait WidgetExt::fn connect_unrealize -->
+<!-- trait WidgetExt::fn unrealize -->
 The ::unrealize signal is emitted when the `gdk::Window` associated with
 `widget` is destroyed, which means that `WidgetExt::unrealize` has been
 called or the widget has been unmapped (that is, it is going to be
 hidden).
-<!-- trait WidgetExt::fn connect_window_state_event -->
+<!-- trait WidgetExt::fn window-state-event -->
 The ::window-state-event will be emitted when the state of the
 toplevel window associated to the `widget` changes.
 
@@ -48011,6 +48130,10 @@ geometry string
 
 `true` if string was parsed successfully
 <!-- trait GtkWindowExtManual::fn present -->
+Presents a window to the user. This function should not be used
+as when it is called, it is too late to gather a valid timestamp
+to allow focus stealing prevention to work correctly.
+<!-- trait GtkWindowExt::fn present_with_time -->
 Presents a window to the user. This may mean raising the window
 in the stacking order, deiconifying it, moving it to the current
 desktop, and/or giving it the keyboard focus, possibly dependent
@@ -48025,12 +48148,10 @@ currently open, and the user chooses Preferences from the menu
 a second time; use `Window::present` to move the already-open dialog
 where the user can see it.
 
-If you are calling this function in response to a user interaction,
-it is preferable to use `GtkWindowExt::present_with_time`.
-<!-- trait GtkWindowExt::fn present_with_time -->
-Presents a window to the user in response to a user interaction.
-If you need to present a window without a timestamp, use
-`Window::present`. See `Window::present` for details.
+Presents a window to the user in response to a user interaction. The
+timestamp should be gathered when the window was requested to be shown
+(when clicking a link for example), rather than once the window is
+ready to be shown.
 ## `timestamp`
 the timestamp of the user interaction (typically a
  button or key press event) which triggered this call
@@ -48614,17 +48735,17 @@ end up stuck. Just don’t write code that crashes if not.
 
 You can track stickiness via the “window-state-event” signal
 on `Widget`.
-<!-- trait GtkWindowExt::fn connect_activate_default -->
+<!-- trait GtkWindowExt::fn activate-default -->
 The ::activate-default signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user activates the default widget
 of `window`.
-<!-- trait GtkWindowExt::fn connect_activate_focus -->
+<!-- trait GtkWindowExt::fn activate-focus -->
 The ::activate-focus signal is a
 [keybinding signal][`BindingSignal`]
 which gets emitted when the user activates the currently
 focused widget of `window`.
-<!-- trait GtkWindowExt::fn connect_enable_debugging -->
+<!-- trait GtkWindowExt::fn enable-debugging -->
 The ::enable-debugging signal is a [keybinding signal][`BindingSignal`]
 which gets emitted when the user enables or disables interactive
 debugging. When `toggle` is `true`, interactive debugging is toggled
@@ -48639,7 +48760,7 @@ toggle the debugger
 # Returns
 
 `true` if the key binding was handled
-<!-- trait GtkWindowExt::fn connect_keys_changed -->
+<!-- trait GtkWindowExt::fn keys-changed -->
 The ::keys-changed signal gets emitted when the set of accelerators
 or mnemonics that are associated with `window` changes.
 <!-- trait GtkWindowExt::fn get_property_accept_focus -->

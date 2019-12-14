@@ -456,6 +456,25 @@ A list of
 ``GdkPixbufFormats`` describing the supported image formats. The list should
 be freed when it is no longer needed, but the structures themselves are
 owned by `Pixbuf` and should not be freed.
+<!-- impl Pixbuf::fn init_modules -->
+Initalizes the gdk-pixbuf loader modules referenced by the loaders.cache
+file present inside that directory.
+
+This is to be used by applications that want to ship certain loaders
+in a different location from the system ones.
+
+This is needed when the OS or runtime ships a minimal number of loaders
+so as to reduce the potential attack surface of carefully crafted image
+files, especially for uncommon file types. Applications that require
+broader image file types coverage, such as image viewers, would be
+expected to ship the gdk-pixbuf modules in a separate location, bundled
+with the application in a separate directory from the OS or runtime-
+provided modules.
+
+Feature: `v2_40`
+
+## `path`
+Path to directory where the loaders.cache is installed
 <!-- impl Pixbuf::fn new_from_stream_async -->
 Creates a new pixbuf by asynchronously loading an image from an input stream.
 
@@ -1780,12 +1799,12 @@ The image data as a `glib::Bytes`
 
 `true` if the write was successful, or `false` if the loader
 cannot parse the buffer.
-<!-- trait PixbufLoaderExt::fn connect_area_prepared -->
+<!-- trait PixbufLoaderExt::fn area-prepared -->
 This signal is emitted when the pixbuf loader has allocated the
 pixbuf in the desired size. After this signal is emitted,
 applications can call `PixbufLoaderExt::get_pixbuf` to fetch
 the partially-loaded pixbuf.
-<!-- trait PixbufLoaderExt::fn connect_area_updated -->
+<!-- trait PixbufLoaderExt::fn area-updated -->
 This signal is emitted when a significant area of the image being
 loaded has been updated. Normally it means that a complete
 scanline has been read in, but it could be a different area as
@@ -1799,12 +1818,12 @@ Y offset of upper-left corner of the updated area.
 Width of updated area.
 ## `height`
 Height of updated area.
-<!-- trait PixbufLoaderExt::fn connect_closed -->
+<!-- trait PixbufLoaderExt::fn closed -->
 This signal is emitted when `PixbufLoaderExt::close` is called.
 It can be used by different parts of an application to receive
 notification when an image loader is closed by the code that
 drives it.
-<!-- trait PixbufLoaderExt::fn connect_size_prepared -->
+<!-- trait PixbufLoaderExt::fn size-prepared -->
 This signal is emitted when the pixbuf loader has been fed the
 initial amount of data that is required to figure out the size
 of the image that it will create. Applications can call
