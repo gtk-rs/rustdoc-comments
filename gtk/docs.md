@@ -366,3 +366,74 @@ let dialog = FileChooserDialog::with_buttons::<Window>(
     &[("_Cancel", ResponseType::Cancel), ("_Open", ResponseType::Accept)]
 );
 ```
+# DrawingArea
+<!-- struct DrawingArea -->
+The `DrawingArea` widget is used for creating custom user interface
+elements. It’s essentially a blank widget; you can draw on it. After
+creating a drawing area, the application may want to connect to:
+
+- Mouse and button press signals to respond to input from
+ the user. (Use `Widget::add_events` to enable events
+ you wish to receive.)
+
+- The `Widget::realize` signal to take any necessary actions
+ when the widget is instantiated on a particular display.
+ (Create GDK resources in response to this signal.)
+
+- The `Widget::size-allocate` signal to take any necessary
+ actions when the widget changes size.
+
+- The `Widget::draw` signal to handle redrawing the
+ contents of the widget.
+
+The following code portion demonstrates using a drawing
+area to display a circle in the normal widget foreground
+color.
+
+Note that GDK automatically clears the exposed area before sending
+the expose event, and that drawing is implicitly clipped to the exposed
+area. If you want to have a theme-provided background, you need
+to call `gtk_render_background` in your ::draw method.
+
+## Simple `DrawingArea` usage
+
+
+```Rust
+let drawing_area = DrawingArea::new();
+drawing_area.set_size_request(100,100);
+drawing_area.connect_draw(|widget,cairo_context| {
+    let context = widget.get_style_context();
+    let width = widget.get_allocated_width();
+    let height = widget.get_allocated_height();
+    let color = context.get_color(context.get_state());
+    gtk::render_background(&context,cairo_context, 0.0, 0.0, width as f64, height as f64);
+    cairo_context.arc((width/2) as f64, (height/2) as f64, 
+                      50.0, 0.0, 2.0*std::f64::consts::PI);
+    cairo_context.set_source_rgba(color.red, color.green, color.blue, 1.0);             
+    cairo_context.fill();
+    return Inhibit(false);      
+});
+```
+
+Draw signals are normally delivered when a drawing area first comes
+onscreen, or when it’s covered by another window and then uncovered.
+You can also force an expose event by adding to the “damage region”
+of the drawing area’s window; `WidgetExt::queue_draw_area` and
+`gdk::WindowExt::invalidate_rect` are equally good ways to do this.
+You’ll then get a draw signal for the invalid region.
+
+The available routines for drawing are documented on the
+[GDK Drawing Primitives][gdk3-Cairo-Interaction] page
+and the cairo documentation.
+
+To receive mouse events on a drawing area, you will need to enable
+them with `Widget::add_events`. To receive keyboard events, you
+will need to set the “can-focus” property on the drawing area, and you
+should probably draw some user-visible indication that the drawing
+area is focused. Use `WidgetExt::has_focus` in your expose event
+handler to decide whether to draw the focus indicator. See
+`gtk_render_focus` for one way to draw focus.
+
+# Implements
+
+[`WidgetExt`](trait.WidgetExt.html), [`glib::object::ObjectExt`](../glib/object/trait.ObjectExt.html), [`BuildableExt`](trait.BuildableExt.html), [`WidgetExtManual`](prelude/trait.WidgetExtManual.html), [`BuildableExtManual`](prelude/trait.BuildableExtManual.html)
